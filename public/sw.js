@@ -1,0 +1,1 @@
+console.warn("Inside server worker file in public")
