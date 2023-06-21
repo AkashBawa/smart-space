@@ -1,8 +1,4 @@
 
-// import  { initializeApp } from "firebase/app";
-// import "firebase/firestore";
-// import {getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; 
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -12,7 +8,6 @@ const firebaseConfig = {
 
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 const db = firebase.firestore();
 
