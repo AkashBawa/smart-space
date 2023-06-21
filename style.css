@@ -223,6 +223,10 @@ footer {
 }
 
 /* Booking Style ================= */
+main {
+  background-color: #E9ECEF;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -233,15 +237,20 @@ p:hover,
   background-color: rgba(255, 105, 180, 0.5);
 }
 
-.option {
-  background-color: black;
-  color: white;
+#step1 p,
+#step2 p {
+  margin-top: 2rem;
+  background-color: white;
+  color: #212529;
+  font-family: DM Sans;
+  font-weight: 800;
   margin: 0.5rem auto;
   width: 90%;
   text-align: center;
   align-items: center;
-  font-size: xx-large;
+  font-size: 29px;
   padding: 0.25rem 0.1rem;
+  border-radius: 20px;
 }
 
 #stepOne {
@@ -298,12 +307,25 @@ p:hover,
 }
 
 #next1,
-#next2,
+#next2 {
+  grid-column: span 2;
+  background-color: #EE5922;
+  color: white;
+  margin: 0.5rem auto;
+  margin-left: 2rem;
+  width: 20%;
+  text-align: center;
+  align-items: center;
+  font-size: xx-large;
+  padding: 0.25rem 0.1rem;
+}
+
 #cancel1,
 #cancel2 {
   grid-column: span 2;
-  background-color: black;
-  color: white;
+  background-color: #fff;
+  color: #EE5922;
+  border: #EE5922 1px solid;
   margin: 0.5rem auto;
   width: 20%;
   text-align: center;
@@ -356,6 +378,23 @@ p:hover,
   background-position: center center;
   aspect-ratio: 16/6;
   /* Set the desired aspect ratio (e.g., 16:9) */
+}
+
+.booking-content p {
+  background-color: rgba(255, 166, 0, 0.4);
+  border-radius: 30px;
+}
+
+#s26,
+#s27,
+#s28,
+#s30,
+#s31,
+#s32,
+#s33,
+#s34,
+#s35 {
+  background-color: rgba(255, 166, 0, 0.05);
 }
 
 #s1 {
