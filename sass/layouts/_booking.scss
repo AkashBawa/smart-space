@@ -121,18 +121,28 @@ p:hover,
     justify-content: space-around;
 }
 
+
+
+
 /* Maps */
 .booking-content {
     border: 1px solid black;
     margin: auto auto;
+    position: relative;
     max-width: 1600px;
+    width: 100%;
     height: 600px;
+    // padding-bottom: 37.5%;
     display: grid;
     grid-template-columns: repeat(23, 1fr);
     grid-template-rows: repeat(10, 1fr);
     background-image: url(../../Images/Layout/w.jpg);
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    aspect-ratio: 16 / 6;
+    /* Set the desired aspect ratio (e.g., 16:9) */
+
 }
 
 
