@@ -232,6 +232,11 @@ img {
   height: auto;
 }
 
+p {
+  font-family: serif;
+  font-size: 20px;
+}
+
 p:hover,
 #next1:hover {
   background-color: rgba(255, 105, 180, 0.5);
@@ -313,6 +318,7 @@ p:hover,
   align-items: center;
   font-size: xx-large;
   padding: 0.25rem 0.1rem;
+  border-radius: 20px;
 }
 
 #cancel1,
@@ -327,6 +333,7 @@ p:hover,
   align-items: center;
   font-size: xx-large;
   padding: 0.25rem 0.1rem;
+  border-radius: 20px;
 }
 
 #filters h2,
@@ -337,19 +344,30 @@ p:hover,
   font-size: xx-large;
 }
 
-#filters,
-#timing {
+#filters {
   width: 80%;
   margin: auto auto;
-  display: flex;
-  flex-flow: row nowrap;
+  display: grid;
   justify-content: space-around;
   gap: 1rem;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: repeat(2, 1fr);
 }
 
-#filters h3 {
-  width: 20%;
-  font-size: xx-large;
+#filters article {
+  grid-row: 1/-1;
+}
+
+#filters div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 0.5rem;
+}
+
+#filters h3,
+#timing h3 {
+  font-size: x-large;
+  font-weight: bold;
 }
 
 #filters form {
@@ -374,6 +392,36 @@ p:hover,
   flex-flow: row nowrap;
   justify-content: space-around;
   background-color: #fff;
+}
+
+/* Timing Section Style */
+#timing {
+  margin: auto;
+  width: 80%;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 1rem;
+}
+
+#timing article {
+  grid-row: 1/-1;
+}
+
+#timing div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+}
+
+#timing p {
+  background-color: #fff;
+  border: 1px black solid;
+  border-radius: 20px;
+  text-align: center;
+  margin: auto 1rem;
+  max-width: 150px;
 }
 
 /* Maps Styling */
