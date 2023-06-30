@@ -418,7 +418,7 @@ header ul li #book2 {
 }
 
 #filters form label {
-  text-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .bookingFilter p {
