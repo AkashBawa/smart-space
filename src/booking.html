@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <script src="../main.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>Smart Space</title>
 </head>
@@ -64,78 +65,78 @@
         </div>
         <div id="secondBooking">
             <h2>Available Selection</h2>
+                <section id="filters">
+                    <article>
+                        <h3>Equipment</h3>
+                        <p>Additional needs</p>
+                    </article>
+                    <div id="filterSection">
 
-            <section id="filters">
-                <article>
-                    <h3>Equipment</h3>
-                    <p>Additional needs</p>
-                </article>
-                <div id="filterSection">
+                        <form action="get">
+                            <label for="filter1">Power Outlet</label>
+                            <Section class="bookingFilter" id="filter1">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter2">Computers</label>
+                            <Section class="bookingFilter" id="filter2">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter3">Monitor</label>
+                            <Section class="bookingFilter" id="filter3">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter4">Projector</label>
+                            <Section class="bookingFilter" id="filter4">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter5">Chairs</label>
+                            <Section class="bookingFilter" id="filter5">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                    </div>
+                </section>
 
-                    <form action="get">
-                        <label for="filter1">Power Outlet</label>
-                        <Section class="bookingFilter" id="filter1">
-                            <p class="neg">-</p>
-                            <p class="counter">0</p>
-                            <p class="pos">+</p>
-                        </Section>
-                    </form>
-                    <form action="get">
-                        <label for="filter2">Computers</label>
-                        <Section class="bookingFilter" id="filter2">
-                            <p class="neg">-</p>
-                            <p class="counter">0</p>
-                            <p class="pos">+</p>
-                        </Section>
-                    </form>
-                    <form action="get">
-                        <label for="filter3">Monitor</label>
-                        <Section class="bookingFilter" id="filter3">
-                            <p class="neg">-</p>
-                            <p class="counter">0</p>
-                            <p class="pos">+</p>
-                        </Section>
-                    </form>
-                    <form action="get">
-                        <label for="filter4">Projector</label>
-                        <Section class="bookingFilter" id="filter4">
-                            <p class="neg">-</p>
-                            <p class="counter">0</p>
-                            <p class="pos">+</p>
-                        </Section>
-                    </form>
-                    <form action="get">
-                        <label for="filter5">Chairs</label>
-                        <Section class="bookingFilter" id="filter5">
-                            <p class="neg">-</p>
-                            <p class="counter">0</p>
-                            <p class="pos">+</p>
-                        </Section>
-                    </form>
-                </div>
-            </section>
+                <section id="timing">
+                    <article>
+                        <h3>Booking Time</h3>
+                        <h4>Maximum 3 Hours</h4>
+                    </article>
+                    <div>
+                        <p class="timeSelect">8am - 9am</p>
+                        <p class="timeSelect">9am - 10am</p>
+                        <p class="timeSelect">10am - 11am</p>
+                        <p class="timeSelect">11am - 12pm</p>
+                        <p class="timeSelect">12pm - 1pm</p>
+                        <p class="timeSelect">1pm - 2pm</p>
+                        <p class="timeSelect">2pm - 3pm</p>
+                        <p class="timeSelect">3pm - 4pm</p>
+                        <p class="timeSelect">4pm - 5pm</p>
+                        <p class="timeSelect">5pm - 6pm</p>
+                        <p class="timeSelect">6pm - 7pm</p>
+                        <p class="timeSelect">7pm - 8pm</p>
 
-            <section id="timing">
-                <article>
-                    <h3>Booking Time</h3>
-                    <h4>Maximum 3 Hours</h4>
-                </article>
-                <div>
-                    <p>8am - 9am</p>
-                    <p>9am - 10am</p>
-                    <p>10am - 11am</p>
-                    <p>11am - 12pm</p>
-                    <p>12pm - 1pm</p>
-                    <p>1pm - 2pm</p>
-                    <p>2pm - 3pm</p>
-                    <p>3pm - 4pm</p>
-                    <p>4pm - 5pm</p>
-                    <p>5pm - 6pm</p>
-                    <p>6pm - 7pm</p>
-                    <p>7pm - 8pm</p>
-
-                </div>
-            </section>
+                    </div>
+                </section>
+            </div>
             <section class="buttons">
                 <button id="cancel2">Cancel</button>
                 <button id="next2">Next</button>
@@ -212,7 +213,6 @@
                 <p class="n4" id="s63"></p>
 
             </div>
-        </div>
     </main>
     <footer>
         <h2>2023 (C) Smart@Space</h2>

@@ -185,19 +185,19 @@ header ul li #book2 {
     gap: 1rem;
     text-align: center;
     margin: auto 1rem;
-    max-width: 150px;
+    flex: 0 0 calc(15% - 1rem);
 }
 
 #filterSection {
     display: flex;
     flex-flow: row nowrap;
     gap: .5rem;
+    justify-content: space-between;
+
 }
 
 #filters form label {
-    white-space: pre-wrap;
-    // word-wrap: break-word;
-    // color: red;
+    text-wrap: nowrap;
 }
 
 .bookingFilter p {
@@ -212,6 +212,8 @@ header ul li #book2 {
     flex-flow: row nowrap;
     justify-content: space-around;
     background-color: #fff;
+    flex: 1 0 calc(15% - 1rem);
+
 }
 
 /* Timing Section Style */
@@ -230,20 +232,26 @@ header ul li #book2 {
 }
 
 #timing div {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 1rem;
-
+    display: flex;
+    flex-flow: row wrap;
+    grid-gap: .5rem;
+    justify-content: space-between;
 }
 
-#timing p {
+#timing div p {
     background-color: #fff;
     border: 1px black solid;
     border-radius: 20px;
     text-align: center;
     margin: auto 1rem;
-    max-width: 150px;
+    flex: 0 0 calc(15% - 1rem);
+}
 
+#timing div p:hover,
+.bookingFilter:hover {
+    background-color: c.$contrast-l;
+    color: c.$base-l;
+    cursor: pointer;
 }
 
 /* Maps Styling */
