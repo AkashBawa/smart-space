@@ -1,8 +1,30 @@
+@use '../abstracts/variables/colors' as c;
 /* header footer ================= */
 
 header {
     display: flex;
     flex-flow: row nowrap;
     gap: 1rem;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 2px solid c.$typo-d;
+}
+
+.profile{
+    height: 50px;
+    width: 50px;
+    background-color: c.$accent-m;
+    border-radius: 50%;
+    color: c.$base-l;
+    display: flex;
+    flex-flow: row nowrap ;
+    justify-content: center;
+    align-items: center;
+}
+header span{
+font-size: xx-large;
+}
+.logo{
+    width: 15vw;
+    height: auto;
 }

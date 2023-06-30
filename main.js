@@ -50,11 +50,16 @@ next2.addEventListener('click', function (e) {
 
 window.addEventListener('resize', function () {
     var div = document.querySelector('.booking-content');
-    div.style.height = div.offsetWidth * (6 / 16) + 'px'; // Calculate the height based on the width and aspect ratio
+    div.style.height = div.offsetWidth * (6 / 16) + 'px';
+     // Calculate the height based on the width and aspect ratio
 });
 
 // Trigger the resize event initially to set the initial height
 window.dispatchEvent(new Event('resize'));
+
+
+
+
 
 next1.addEventListener('click', function (e) {
     e.preventDefault();
@@ -62,31 +67,40 @@ next1.addEventListener('click', function (e) {
     if (noPeople > 0) {
         let resetBackGround = document.querySelectorAll('.booking-content p');
         for (let r = 0; r < resetBackGround.length; r++) {
-            resetBackGround[r].style.backgroundColor = ' rgba(255, 166, 0, 0.4)';
+            resetBackGround[r].style.opacity = 0;
+
         }
     }
     if (noPeople === 8) {
         let spacenumber = document.querySelectorAll('.n8');
         for (let n = 0; n < spacenumber.length; n++) {
             spacenumber[n].style.backgroundColor = 'lightgreen';
+            spacenumber[n].style.opacity = .7;
+
         }
     }
     else if (noPeople === 4) {
         let spacenumber = document.querySelectorAll('.n4');
         for (let n = 0; n < spacenumber.length; n++) {
             spacenumber[n].style.backgroundColor = 'hotpink';
+            spacenumber[n].style.opacity = .7;
+
         }
     }
     else if (noPeople === 2) {
         let spacenumber = document.querySelectorAll('.n2');
         for (let n = 0; n < spacenumber.length; n++) {
             spacenumber[n].style.backgroundColor = 'lightblue';
+            spacenumber[n].style.opacity = .7;
+
         }
     }
     else if (noPeople === 1) {
         let spacenumber = document.querySelectorAll('.n1');
         for (let n = 0; n < spacenumber.length; n++) {
             spacenumber[n].style.backgroundColor = 'grey';
+            spacenumber[n].style.opacity = .7;
+
         }
     }
 }

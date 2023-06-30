@@ -100,15 +100,7 @@ a {
   font-family: DM Sans;
   font-weight: bold;
   font-size: 2rem;
-  color: #D95525;
 }
-a:visited {
-  color: #D95525;
-}
-a:hover {
-  color: #F5D9D3;
-}
-
 /* Media ==============================*/
 img {
   max-width: 100%;
@@ -149,7 +141,6 @@ nav a {
   text-align: center;
   display: block;
   padding: 0.25rem 0.5rem;
-  color: #D95525;
 }
 
 /* header footer ================= */
@@ -157,7 +148,30 @@ header {
   display: flex;
   flex-flow: row nowrap;
   gap: 1rem;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 2px solid #212529;
+}
+
+.profile {
+  height: 50px;
+  width: 50px;
+  background-color: #EE5922;
+  border-radius: 50%;
+  color: #F8F9FA;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+header span {
+  font-size: xx-large;
+}
+
+.logo {
+  width: 15vw;
+  height: auto;
 }
 
 /* Content ======================= */
@@ -237,9 +251,12 @@ p {
   font-size: 20px;
 }
 
-p:hover,
-#next1:hover {
-  background-color: rgba(255, 105, 180, 0.5);
+header ul li a {
+  color: #D95525;
+}
+
+header ul li #book2 {
+  color: #D95525;
 }
 
 #step1 p,
@@ -256,6 +273,14 @@ p:hover,
   font-size: 29px;
   padding: 0.25rem 0.1rem;
   border-radius: 20px;
+}
+
+#step1 p:hover,
+#step2 p:hover {
+  background-color: #ADB5BD;
+  color: #F8F9FA;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 #stepOne {
@@ -310,7 +335,7 @@ p:hover,
 #next2 {
   grid-column: span 2;
   background-color: #EE5922;
-  color: white;
+  color: #F8F9FA;
   margin: 0.5rem auto;
   margin-left: 2rem;
   width: 20%;
@@ -321,10 +346,15 @@ p:hover,
   border-radius: 20px;
 }
 
+#next1:hover,
+#next2:hover {
+  background-color: #D92525;
+}
+
 #cancel1,
 #cancel2 {
   grid-column: span 2;
-  background-color: #fff;
+  background-color: #F8F9FA;
   color: #EE5922;
   border: #EE5922 1px solid;
   margin: 0.5rem auto;
@@ -334,6 +364,12 @@ p:hover,
   font-size: xx-large;
   padding: 0.25rem 0.1rem;
   border-radius: 20px;
+}
+
+#cancel1:hover,
+#cancel2:hover {
+  background-color: #D92525;
+  color: #F8F9FA;
 }
 
 #filters h2,
@@ -351,7 +387,7 @@ p:hover,
   justify-content: space-around;
   gap: 1rem;
   grid-template-columns: 20% 80%;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
 }
 
 #filters article {
@@ -401,7 +437,7 @@ p:hover,
   justify-content: center;
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   grid-gap: 1rem;
 }
 
@@ -425,9 +461,14 @@ p:hover,
 }
 
 /* Maps Styling */
+.map {
+  width: 90%;
+  margin: auto auto;
+}
+
 .booking-content {
   border: 1px solid black;
-  margin: auto auto;
+  margin: auto;
   position: relative;
   max-width: 1600px;
   width: 100%;
@@ -435,12 +476,11 @@ p:hover,
   display: grid;
   grid-template-columns: repeat(23, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  background-image: url(../../Images/Layout/w.jpg);
+  background-image: url(../../Images/Layout/Jasmine.PNG);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   aspect-ratio: 16/6;
-  /* Set the desired aspect ratio (e.g., 16:9) */
 }
 
 .booking-content p {

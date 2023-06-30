@@ -1,3 +1,4 @@
+@use '../abstracts/variables/colors' as c;
 /* Booking General Style ================= */
 
 main {
@@ -8,13 +9,22 @@ img {
     max-width: 100%;
     height: auto;
 }
-p{
+
+p {
     font-family: serif;
     font-size: 20px;
 }
-p:hover,
-#next1:hover {
-    background-color: rgba(255, 105, 180, 0.5);
+
+
+
+
+header ul li a {
+    color: c.$accent-d;
+}
+
+header ul li #book2 {
+    color: c.$accent-d;
+    // background-color: red;
 }
 
 // Steps Main buttons 
@@ -36,6 +46,13 @@ p:hover,
 }
 
 // Bookind step 1 and 2 style 
+#step1 p:hover,
+#step2 p:hover {
+    background-color: c.$contrast-l;
+    color: c.$base-l;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
 
 #stepOne {
     display: grid;
@@ -91,8 +108,8 @@ p:hover,
 #next1,
 #next2 {
     grid-column: span 2;
-    background-color: $accent-m;
-    color: white;
+    background-color: c.$accent-m;
+    color: c.$base-l;
     margin: .5rem auto;
     margin-left: 2rem;
     width: 20%;
@@ -103,12 +120,17 @@ p:hover,
     border-radius: 20px;
 }
 
+#next1:hover,
+#next2:hover {
+    background-color: c.$accent-danger;
+}
+
 #cancel1,
 #cancel2 {
     grid-column: span 2;
-    background-color: #fff;
-    color: $accent-m;
-    border: $accent-m 1px solid;
+    background-color: c.$base-l;
+    color: c.$accent-m;
+    border: c.$accent-m 1px solid;
     margin: .5rem auto;
     width: 20%;
     text-align: center;
@@ -116,6 +138,12 @@ p:hover,
     font-size: xx-large;
     padding: .25rem .1rem;
     border-radius: 20px;
+}
+
+#cancel1:hover,
+#cancel2:hover {
+    background-color: c.$accent-danger;
+    color: c.$base-l;
 
 }
 
@@ -135,22 +163,17 @@ p:hover,
     justify-content: space-around;
     gap: 1rem;
     grid-template-columns: 20% 80%;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
 }
 
 #filters article {
     grid-row: 1/-1;
 }
 
-#filters div {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: .5rem;
-}
 
 #filters h3,
 #timing h3 {
-    
+
     font-size: x-large;
     font-weight: bold;
 }
@@ -163,6 +186,18 @@ p:hover,
     text-align: center;
     margin: auto 1rem;
     max-width: 150px;
+}
+
+#filterSection {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: .5rem;
+}
+
+#filters form label {
+    white-space: pre-wrap;
+    // word-wrap: break-word;
+    // color: red;
 }
 
 .bookingFilter p {
@@ -186,7 +221,7 @@ p:hover,
     justify-content: center;
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-gap: 1rem;
 }
 
@@ -212,10 +247,14 @@ p:hover,
 }
 
 /* Maps Styling */
+.map {
+    width: 90%;
+    margin: auto auto;
+}
 
 .booking-content {
     border: 1px solid black;
-    margin: auto auto;
+    margin: auto;
     position: relative;
     max-width: 1600px;
     width: 100%;
@@ -223,13 +262,11 @@ p:hover,
     display: grid;
     grid-template-columns: repeat(23, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    background-image: url(../../Images/Layout/w.jpg);
+    background-image: url(../../Images/Layout/Jasmine.PNG);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
     aspect-ratio: 16 / 6;
-    /* Set the desired aspect ratio (e.g., 16:9) */
-    // padding-bottom: 37.5%;
 }
 
 .booking-content p {
