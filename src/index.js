@@ -1,26 +1,17 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-
-const firebaseConfig = {
-
-};
-
-firebase.initializeApp(firebaseConfig)
-const db = firebase.firestore();
-
-const getFirestoreData = async () => {
-    db.collection('users').get().then((querySnapshot) => {
-        querySnapshot.docs.map(doc => {
-            console.log(doc.data());
-            return doc.data();
-            });
-    }).catch(err => {
-        console.log(err)
-    })
-
-}
-
-getFirestoreData()
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
