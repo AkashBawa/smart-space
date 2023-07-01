@@ -26,7 +26,7 @@ function functionInitApp() {
   return app;
 }
 
-const app = initializeApp(firebaseConfig);
+const app = functionInitApp();
 const auth = getAuth(app);
 export const firestore = getFirestore(app)
 
