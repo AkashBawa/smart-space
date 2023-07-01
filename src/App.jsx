@@ -10,9 +10,30 @@ import NotFound from './pages/notFound';
 import ProtectedRoute from './utils/protectedRoutes';
 import Home from './pages/home';
 
+import { addDoc, collection } from "@firebase/firestore"
+import { firestore } from "./utils/fireStore";
+
 function App() {
+
+  const handleSubmit = async () => {
+    console.log("indide handle submit")
+    const ref = collection(firestore, "users") // Firebase creates this automatically
+ 
+    let data = {
+        name: "from firebase",
+        email: "akash@firebase.com"
+    }
+    debugger;
+    try {
+        const add = await addDoc(ref, data);
+        console.log(add);
+    } catch(err) {
+        console.log(err)
+    }
+  }
   return (
     <div className="App">
+      <button onClick={handleSubmit}>aDD</button>
         <Routes>
           <Route path='login' element={ <Login/>} />
           <Route path='signup' element={ <Signup/>}/>
