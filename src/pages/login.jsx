@@ -1,7 +1,8 @@
 import topView from "./../public/Images/top-view-coworkers-team-working-office 1.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { addDataToCollection, firebaseAuth } from "./../utils/fireStore";
+
+import fireStore from './../utils/fireStore'
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
@@ -11,15 +12,15 @@ function Login() {
 
   const login = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
-      const user = userCredential.user;
+      const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
+      // const user = userCredential.user;
 
       // Get the current date and time
       const currentDate = new Date();
       const timestamp = currentDate.getTime();
 
       // Update the user data in the database
-      const newUser = await addDataToCollection('users', { email, loginDate: currentDate, loginTime: timestamp });
+      const newUser = await fireStore.addDataToCollection('users', { email, loginDate: currentDate, loginTime: timestamp });
 
       console.log(email);
       console.log(password);

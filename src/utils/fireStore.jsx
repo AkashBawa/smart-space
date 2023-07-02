@@ -27,13 +27,14 @@ function functionInitApp() {
 }
 
 const app = functionInitApp();
-export const firebaseAuth = getAuth(app);
+
+const firebaseAuth = getAuth(app);
 
 
-export const firestore = getFirestore(app)
+const firestore = getFirestore(app)
 
 
-export const  addDataToCollection = async (collectionName, data) => {
+const  addDataToCollection = async (collectionName, data) => {
 
   try {
     const ref = collection(firestore, collectionName) 
@@ -45,7 +46,7 @@ export const  addDataToCollection = async (collectionName, data) => {
   }
 } 
 
-export const  getAllDataFromCollection = async (collectionName) => {
+const  getAllDataFromCollection = async (collectionName) => {
 
   try {
     const ref = collection(firestore, collectionName) 
@@ -56,3 +57,10 @@ export const  getAllDataFromCollection = async (collectionName) => {
   }
   
 } 
+
+export default {
+  firebaseAuth,
+  firestore,
+  addDataToCollection,
+  getAllDataFromCollection
+}

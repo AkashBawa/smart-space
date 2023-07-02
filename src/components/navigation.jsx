@@ -1,6 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
 import siteLogo from "./../public/Images/Logo/logo-Orange.png";
-import Home from "../pages/home";
 import { useNavigate } from "react-router-dom";
 
 

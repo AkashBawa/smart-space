@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/pages/qr-page.jsx
 import qrScan from "./../public/Images/qr-scan.png";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
@@ -11,6 +12,9 @@ const extractUrlFromData = (data) => {
     return null;
   }
 };
+=======
+import qrScan from "./../../public/Images/qr-scan.png"
+>>>>>>> 695efc808c20ae945bebae89c6d9c6f6ad0c051e:src/pages/booking/qr-page.jsx
 
 const Qrpage = () => {
   const [qrData, setQrData] = useState("");

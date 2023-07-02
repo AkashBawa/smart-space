@@ -1,7 +1,7 @@
 import topView from "./../public/Images/top-view-coworkers-team-working-office 1.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { addDataToCollection, firebaseAuth } from "./../utils/fireStore";
+import fireStore from "./../utils/fireStore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
@@ -12,12 +12,12 @@ const Signup = () => {
   const navigator = useNavigate();
 
   const signup = () => {
-    createUserWithEmailAndPassword(firebaseAuth, email, password)
+    createUserWithEmailAndPassword(fireStore.firebaseAuth, email, password)
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         debugger
-        const newUser = await addDataToCollection("users", { name, lName, email, id: user.uid });
+        const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid });
         alert("Sign up successful");
         navigator("/login");
         // ...
