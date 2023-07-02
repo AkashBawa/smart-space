@@ -19,7 +19,7 @@ const Signup = () => {
         debugger
         const newUser = await addDataToCollection("users", { name, lName, email, id: user.uid });
         alert("Sign up successful");
-        // navigator("/login");
+        navigator("/login");
         // ...
       })
       .catch((error) => {

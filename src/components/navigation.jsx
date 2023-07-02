@@ -11,6 +11,7 @@ const Navigation = () => {
                   <li>  <Link to="/reschedule">Reschedule</Link></li>
                   <li>  <Link to="/login">login</Link></li>
                   <li>  <Link to="/signup">signup</Link></li>
+                  <li>  <Link to="/qr-page">QR-SCAN</Link></li>
               </ul>
         </div>
         <div className="main">

@@ -1,35 +1,35 @@
 import topView from "./../public/Images/top-view-coworkers-team-working-office 1.png";
-import { useNavigate } from "react-router-dom"
-import { useState } from 'react';
-import  {addDataToCollection} from './../utils/fireStore'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { addDataToCollection, firebaseAuth } from "./../utils/fireStore";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigator = useNavigate();
 
-  const login =  () => {
-    // const auth = getAuth();
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then( async (userCredential) => {
-    //     // Signed in
-    //     const user = userCredential.user;
+  const login = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
+      const user = userCredential.user;
 
-    //     const newUser = await addDataToCollection('users', {email, id: user} )
+      // Get the current date and time
+      const currentDate = new Date();
+      const timestamp = currentDate.getTime();
 
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // ..
-    //   });
+      // Update the user data in the database
+      const newUser = await addDataToCollection('users', { email, loginDate: currentDate, loginTime: timestamp });
 
-    // console.log(email);
-    // console.log(password);
-    navigator("/home");
+      console.log(email);
+      console.log(password);
+      navigator("/home");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+      // Handle error
+    }
   };
 
   return (
@@ -71,4 +71,3 @@ function Login() {
 }
 
 export default Login;
-

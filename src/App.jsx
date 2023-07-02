@@ -13,6 +13,7 @@ import Home from './pages/home';
 import { addDoc, collection, getDocs, doc } from "@firebase/firestore"
 import { firestore, addDataToCollection, getAllDataFromCollection } from "./utils/fireStore";
 import  collectionsName from './constants/firebaseCollection';
+import Qrpage from './pages/qr-page';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='signup' element={ <Signup/>}/>
           <Route path='*' element={<Navigation/>}>
             <Route path='home' element={<Home/>}/>
+            <Route path='qr-page' element={<Qrpage/>}/>
             <Route path='*' element={ <NotFound/> }/>
           </Route>
           <Route path='*' Component={NotFound}/>
