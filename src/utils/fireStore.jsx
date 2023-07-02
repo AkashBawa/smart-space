@@ -27,7 +27,9 @@ function functionInitApp() {
 }
 
 const app = functionInitApp();
-const auth = getAuth(app);
+export const firebaseAuth = getAuth(app);
+
+
 export const firestore = getFirestore(app)
 
 
