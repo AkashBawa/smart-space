@@ -1,4 +1,4 @@
-import qrScan from "./../public/Images/qr-scan.png"
+import qrScan from "./../../public/Images/qr-scan.png"
 
 const Qrpage = () => {
   return (
