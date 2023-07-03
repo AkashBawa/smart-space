@@ -3,7 +3,7 @@
 const Reschedule = () => {
     return (
       <div className="Reschedule">
-            <span>Reschedule</span>
+            <h1>Reschedule</h1>
       </div>
     );
   }

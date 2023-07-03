@@ -11,7 +11,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigator = useNavigate();
 
-  const signup = () => {
+  const signup = (event) => {
+    event.preventDefault()
     createUserWithEmailAndPassword(fireStore.firebaseAuth, email, password)
       .then(async (userCredential) => {
         // Signed in
@@ -40,7 +41,7 @@ const Signup = () => {
         <img src={topView} alt="" />
 
         <div className="formDiv">
-          <h1>User Log in</h1>
+          <h1>User Sign Up</h1>
           <form action="#" className="form">
             <input
               value={name}
@@ -78,7 +79,7 @@ const Signup = () => {
               required
               placeholder="password"
             />
-            <button id="log-in" onClick={signup}>
+            <button id="log-in-btn" onClick={signup}>
               Signup
             </button>
           </form>

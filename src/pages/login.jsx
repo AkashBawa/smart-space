@@ -61,7 +61,7 @@ function Login() {
               required
               placeholder="password"
             />
-            <button id="log-in" onClick={login}>
+            <button id="log-in-btn" onClick={login}>
               Login
             </button>
           </form>
