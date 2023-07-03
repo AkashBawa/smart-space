@@ -3,7 +3,7 @@
 const NewBooking = () => {
     return (
       <div className="NewBooking">
-            <span>NewBooking</span>
+            <h1>Booking</h1>
       </div>
     );
   }

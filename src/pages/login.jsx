@@ -1,7 +1,6 @@
 import topView from "./../public/Images/top-view-coworkers-team-working-office 1.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import fireStore from './../utils/fireStore'
 import { signInWithEmailAndPassword } from "firebase/auth";
 

@@ -1,5 +1,4 @@
-<<<<<<< HEAD:src/pages/qr-page.jsx
-import qrScan from "./../public/Images/qr-scan.png";
+import qrScan from "./../../public/Images/qr-scan.png";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 
@@ -12,9 +11,6 @@ const extractUrlFromData = (data) => {
     return null;
   }
 };
-=======
-import qrScan from "./../../public/Images/qr-scan.png"
->>>>>>> 695efc808c20ae945bebae89c6d9c6f6ad0c051e:src/pages/booking/qr-page.jsx
 
 const Qrpage = () => {
   const [qrData, setQrData] = useState("");
@@ -57,7 +53,7 @@ const Qrpage = () => {
           If you are booking for a group of students, please all the students
           have to scan the code to check-in
         </p>
-        <div>
+        <div className="btnQr">
           {scanning ? (
             <QrReader
               delay={300}
@@ -66,12 +62,11 @@ const Qrpage = () => {
               style={{ width: "100%" }}
             />
           ) : (
-            <button onClick={startScanning}>Start Scanning</button>
+            <button onClick={startScanning}>Start Scanning Here</button>
           )}
           <p>{qrData}</p>
         </div>
       </div>
-      <div></div>
     </div>
   );
 };
