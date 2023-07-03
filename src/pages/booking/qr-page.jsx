@@ -2,16 +2,6 @@ import qrScan from "./../../public/Images/qr-scan.png";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 
-const extractUrlFromData = (data) => {
-  try {
-    const parsedData = JSON.parse(data);
-    return parsedData.url;
-  } catch (error) {
-    console.error("Error parsing scanned data:", error);
-    return null;
-  }
-};
-
 const Qrpage = () => {
   const [qrData, setQrData] = useState("");
   const [scanning, setScanning] = useState(false);
