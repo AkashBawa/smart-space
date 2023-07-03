@@ -16,12 +16,12 @@ const Qrpage = () => {
   const [qrData, setQrData] = useState("");
   const [scanning, setScanning] = useState(false);
 
-  const handleScan = (data) => {
+  const handleScan = (data, err) => {
+    console.log("inside handle scan")
     if (data) {
-      setQrData(data);
-      alert(data);
+      setQrData(data.text);
 
-      const url = extractUrlFromData(data);
+      const url = data.text;
       if (url) {
         window.location.href = url;
         // console.log(url)
@@ -29,10 +29,6 @@ const Qrpage = () => {
 
       setScanning(false); // Stop scanning after a successful scan
     }
-  };
-
-  const handleError = (err) => {
-    alert(err);
   };
   const startScanning = () => {
     setScanning(true);
@@ -56,12 +52,11 @@ const Qrpage = () => {
         <div className="btnQr">
           {scanning ? (
             <QrReader
-              delay={300}
-              onError={handleError}
-              onScan={handleScan}
-              style={{ width: "100%" }}
-            />
-          ) : (
+            delay={300}
+            onResult={handleScan}
+            style={{ width: '100%' }}
+          />
+           ) : ( 
             <button onClick={startScanning}>Start Scanning Here</button>
           )}
           <p>{qrData}</p>
