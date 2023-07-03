@@ -2,15 +2,15 @@ import qrScan from "./../../public/Images/qr-scan.png";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 
-const extractUrlFromData = (data) => {
-  try {
-    const parsedData = JSON.parse(data);
-    return parsedData.url;
-  } catch (error) {
-    console.error("Error parsing scanned data:", error);
-    return null;
-  }
-};
+// const extractUrlFromData = (data) => {
+//   try {
+//     const parsedData = JSON.parse(data);
+//     return parsedData.url;
+//   } catch (error) {
+//     console.error("Error parsing scanned data:", error);
+//     return null;
+//   }
+// };
 
 const Qrpage = () => {
   const [qrData, setQrData] = useState("");
@@ -24,7 +24,6 @@ const Qrpage = () => {
       const url = data.text;
       if (url) {
         window.location.href = url;
-        // console.log(url)
       }
 
       setScanning(false); // Stop scanning after a successful scan
