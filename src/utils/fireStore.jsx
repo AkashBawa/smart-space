@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore } from "@firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -58,9 +58,20 @@ const  getAllDataFromCollection = async (collectionName) => {
   
 } 
 
+const getByQuery = async (collectionName, query) => {
+  try {
+    const ref = collection(firestore, collectionName) 
+    const docRef = await getDocs(ref, where(query));
+    return docRef;
+  } catch (err) {
+    console.log("Error in getting document by query", err)
+  }
+}
+
 export default {
   firebaseAuth,
   firestore,
   addDataToCollection,
-  getAllDataFromCollection
+  getAllDataFromCollection,
+  getByQuery
 }

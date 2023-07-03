@@ -12,6 +12,8 @@ import Qrpage from './pages/booking/qr-page';
 import Footer from './components/footer';
 import NewBooking from './pages/booking/newBooking';
 import Reschedule from './pages/booking/reschedule';
+import AddLocation from './pages/admin/addLocation';
+import AddTables from './pages/admin/addTables';
 
 function App() {
 
@@ -19,6 +21,9 @@ function App() {
     <div className="App">
         <Routes>
           <Route path='login' element={ <Login/>} />
+          <Route path='signup' element={ <Signup/>}/>
+          <Route path='admin/addLocation' element={ <AddLocation/>}/>
+          <Route path='admin/addTable' element={ <AddTables/>}/>
           <Route path='signup' element={ <Signup/>}/>
           <Route path='*' element={<Navigation/>}>
             <Route path='home' element={<Home/>}/>
