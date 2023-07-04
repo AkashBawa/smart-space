@@ -1,0 +1,30 @@
+body {
+  background-color: #e9ecef;
+}
+
+h1 {
+  text-align: center;
+  padding: 10px;
+}
+
+.qr-main {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  max-width: 1400px;
+  height: 500px;
+  margin: auto;
+  
+
+  .qr-scan {
+    width: 172px;
+    height: 200px;
+  }
+
+  p {
+    text-align: center;
+    width: 400px;
+  }
+}
