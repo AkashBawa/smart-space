@@ -59,7 +59,7 @@ window.dispatchEvent(new Event('resize'));
 
 
 
-
+// Changing Map Selection based on customer request 
 
 next1.addEventListener('click', function (e) {
     e.preventDefault();
