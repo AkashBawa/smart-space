@@ -3,8 +3,8 @@ import './scss/app.scss';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // Import components that required for routing here
-import Login from './pages/login';
-import  Signup from './pages/signup';
+import Login from './pages/auth/login';
+import  Signup from './pages/auth/signup';
 import Navigation from './components/navigation';
 import NotFound from './pages/notFound';
 import Home from './pages/home';

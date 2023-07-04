@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import fireStoreService from './../../utils/fireStore';
-
+import TableConstants from './../../constants/firebaseCollection';
 
 const AddTables = () => {
 
@@ -10,40 +10,68 @@ const AddTables = () => {
   const [hasPowerOutlet, setPowerOutlet] = useState();
   const [capacity, setCapacity] = useState();
 
-  useEffect(  () => {
-    
-     fetchLocations(); 
+  useEffect(() => {
+    fetchLocations();
   }, [])
 
-  const fetchLocations = async () =>{
-    const currectLocations = await fireStoreService.getAllDataFromCollection('locations');
+  const fetchLocations = async () => {
+    const currectLocations = await fireStoreService.getAllDataFromCollection(TableConstants.LOCATION);
     console.log(currectLocations);
     const newLocations = [];
     currectLocations.forEach((location) => {
-      newLocations.push(location.data());
+      newLocations.push({ ...location.data(), locationId: location.id });
     });
     setLocations(newLocations)
   }
 
   const addTable = async () => {
     console.log("add location")
-  }
-    return (
-      <div className="AddTables">
-            <span> Add tables</span>
+    console.log(name, locationId, hasPowerOutlet, capacity);
+    const newTable = {
+      name,
+      locationId,
+      hasPowerOutlet,
+      capacity
+    }
+    const table = await fireStoreService.addDataToCollection(TableConstants.TABLE, newTable)
+    console.log(table)
 
-            <form>
-                <input placeholder="name" onChange={(e) => { setName(e.target.value)}}/>
-                <select placeholder='setLocationId'>
-                  {locations.map((location) => {
-                    return <option value={location.name}>{location.name}</option>
-                  })}
-                </select>
-            </form>
-            <button onClick={addTable}> Add Tables </button>
-      </div>
-    );
+    setCapacity('');
+    setName('');
+    setPowerOutlet('');
+    setlocationId('');
   }
-  
-  export default AddTables;
-  
+  return (
+    <div className="AddTables">
+      <span> Add tables</span>
+
+      <form>
+
+        <label>Name</label>
+        <input placeholder="name" value={name} onChange={(e) => { setName(e.target.value) }} />
+
+        <label>Location</label>
+        <select placeholder='setLocationId' value={locationId} onChange={(e) => { setlocationId(e.target.value) }}>
+          <option disabled defaultValue>Choose One</option>
+          { locations.map((location, index) => {
+            return <option key={`loc-${index}`} value={location.locationId}>{location.name}</option>
+          })}
+        </select>
+
+        <label >Has power outlet</label>
+        <select name="outlet" id="powerOutlet" value={hasPowerOutlet} onChange={(e) => { setPowerOutlet(e.target.value) }} >
+          <option value={true}> Yes</option>
+          <option value={false}> No</option>
+        </select>
+
+        <label>Total Capacity</label>
+        <input type='number' value={capacity} onChange={(e) => { setCapacity(e.target.value) }} placeholder='capacity' min={1} />
+
+      </form>
+
+      <button onClick={addTable}> Add Tables </button>
+    </div>
+  );
+}
+
+export default AddTables;
