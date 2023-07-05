@@ -1,56 +1,46 @@
-const BookingS1 =  (props) => {
+const BookingS1 = (props) => {
 
     const submit = () => {
         props.changePage(2);
     }
 
     return <div className="NewBooking">
-            <h1>Booking</h1>
-            <div className="bookingForm">
-                <div className="number">
-                    <label htmlFor="my-name">Number of people: </label>
-                    <div className="divForPeople">
-                        <span className="minus">-</span>
-                        <input id="my-name" className="dateBooking" type="text" value="1" />
-                        <span className="plus">+</span>
-                    </div>
-
-                </div>
-                <div className="number">
-                    <label htmlFor="dateBooking">Date: </label>
-                    <input
-                        id="dateBooking"
-                        className="dateBooking"
-                        type="date"
-                        value="1"
-                    />
-                </div>
-                <div className="number">
-                    <label for="floor">Choose a car: </label>
-                    <select id="floor" className="dateBooking" name="cars">
-                        <option value="volvo">Floor 1</option>
-                        <option value="saab">Floor 2</option>
-                        <option value="fiat">Floor 3</option>
-                        <option value="audi">Floor 4</option>
-                    </select>
-                </div>
-                <div className="number">
-                    <label for="floor">Choose a car: </label>
-                    <select id="floor" className="dateBooking" name="cars">
-                        <option value="volvo">Floor 1</option>
-                        <option value="saab">Floor 2</option>
-                        <option value="fiat">Floor 3</option>
-                        <option value="audi">Floor 4</option>
-                    </select>
-                </div>
-
-
-            </div>
-            <div className="booking-btn-page">
-                <button>Cancel</button>
-                <button onClick={submit}>Next</button>
-            </div>
+        <h1>Booking</h1>
+        <div class="option" id="step1">
+            <p>Step 1</p>
         </div>
+
+        <div id="stepOne">
+            <section id="booking1">
+                <h2>Basic Information</h2>
+                <label for="people">No. of People</label>
+                <input type="number" id="people" min="1" max="8" />
+                <label for="bookDate">Date</label>
+                <input type="date" id="bookDate" />
+            </section>
+            <section id="booking2">
+                <h2>Space Information</h2>
+                <label for="building">Building</label>
+                <select name="building" id="building">
+                    <option value="Library Building">Library Building</option>
+                    <option value="A">A Building</option>
+                    <option value="B">B Building</option>
+                    <option value="T">T Building</option>
+                </select>
+                <label for="level">Level</label>
+                <select name="level" id="level">
+                    <option value="l1">Level 1</option>
+                    <option value="l2">Level 2</option>
+                    <option value="l3">Level 3</option>
+                </select>
+            </section>
+            <section class="buttons">
+                <button id="cancel1">Cancel</button>
+                <button id="next1" onClick={submit}>Next</button>
+            </section>
+
+        </div>
+    </div>
 }
 
 export default BookingS1;
