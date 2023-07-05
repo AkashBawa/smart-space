@@ -8,6 +8,9 @@ const AddTables = () => {
   const [name, setName] = useState([]);
   const [locationId, setlocationId] = useState();
   const [hasPowerOutlet, setPowerOutlet] = useState();
+  const [hasComputer, setComputer] = useState();
+  const [hasProjector, setProjector] = useState();
+  const [hasMonitor, setMonitor] = useState();
   const [capacity, setCapacity] = useState();
 
   useEffect(() => {
@@ -27,12 +30,16 @@ const AddTables = () => {
   const addTable = async () => {
     console.log("add location")
     console.log(name, locationId, hasPowerOutlet, capacity);
+    console.log(hasComputer,hasMonitor,hasPowerOutlet,hasProjector)
     const newTable = {
       name,
       locationId,
       hasPowerOutlet,
+      hasComputer,
+      hasMonitor,
+      hasProjector,
       capacity
-    }
+    };
     const table = await fireStoreService.addDataToCollection(TableConstants.TABLE, newTable)
     console.log(table)
 
@@ -60,6 +67,24 @@ const AddTables = () => {
 
         <label >Has power outlet</label>
         <select name="outlet" id="powerOutlet" value={hasPowerOutlet} onChange={(e) => { setPowerOutlet(e.target.value) }} >
+          <option value={true}> Yes</option>
+          <option value={false}> No</option>
+        </select>
+
+        <label >Has computer</label>
+        <select name="computer" id="computer" value={hasComputer} onChange={(e) => { setComputer(e.target.value) }} >
+          <option value={true}> Yes</option>
+          <option value={false}> No</option>
+        </select>
+
+        <label >projector</label>
+        <select name="projector" id="projector" value={hasProjector} onChange={(e) => { setProjector(e.target.value) }} >
+          <option value={true}> Yes</option>
+          <option value={false}> No</option>
+        </select>
+
+        <label >Has monitor</label>
+        <select name="monitor" id="monitor" value={hasMonitor} onChange={(e) => { setMonitor(e.target.value) }} >
           <option value={true}> Yes</option>
           <option value={false}> No</option>
         </select>
