@@ -14,7 +14,6 @@ import NewBooking from './pages/booking/newBooking';
 import Reschedule from './pages/booking/reschedule';
 import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
-
 function App() {
 
   return (
