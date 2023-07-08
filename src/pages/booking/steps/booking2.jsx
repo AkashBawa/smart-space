@@ -13,6 +13,13 @@ const Booking2 = (props) => {
 
     }, [])
 
+    useEffect(() => {
+        console.log(props.userOptions);
+        console.log("inside use effect")
+        fetchTables();
+    }, [])
+
+
     // Trigger the resize event initially to set the initial height
     window.dispatchEvent(new Event('resize'));
 
@@ -23,17 +30,12 @@ const Booking2 = (props) => {
         console.log("Click")
     }
 
-    useEffect(() => {
-        console.log("inside use effect")
-        fetchTables();
-    }, [])
 
     const fetchTables = async () => {
         const tables = await fireStore.getAllDataFromCollection('tables');
         console.log(tables)
         const newArray = []
         tables.forEach((table) => {
-            // console.log(table.data())
             newArray.push({ tableId: table.id, ...table.data() })
         })
         console.log(newArray)
@@ -78,27 +80,27 @@ const Booking2 = (props) => {
                         <form action="get">
                             <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
-                                <label class="switch">
+                                <label className="switch">
                                     <input type="checkbox" />
-                                    <span class="slider round"></span>
+                                    <span className="slider round"></span>
                                 </label>
                             </section>
                         </form>
                         <form action="get">
                             <label htmlFor="filter3">Monitor</label>
                             <section className="bookingFilter" id="filter3">
-                                <label class="switch">
+                                <label className="switch">
                                     <input type="checkbox" />
-                                    <span class="slider round"></span>
+                                    <span className="slider round"></span>
                                 </label>
                             </section>
                         </form>
                         <form action="get">
                             <label htmlFor="filter4">Projector</label>
                             <section className="bookingFilter" id="filter4">
-                                <label class="switch">
+                                <label className="switch">
                                     <input type="checkbox" />
-                                    <span class="slider round"></span>
+                                    <span className="slider round"></span>
                                 </label>
                             </section>
                         </form>

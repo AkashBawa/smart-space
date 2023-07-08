@@ -5,14 +5,16 @@ import { useState } from "react";
 const NewBooking = () => {
 
   const [currentStep, setCurrentStep] = useState(1);
+  const [userOptions, setUserOptions] = useState();
 
-  const setPage = (pageNumber) => {
-    setCurrentStep(pageNumber)
+  const setPage = (pageNumber, userOptions) => {
+    setUserOptions(userOptions);
+    setCurrentStep(pageNumber);
   }
 
   return    <div>
     {
-      currentStep == 1 ? <BookingS1 changePage={setPage}/> : <Booking2 changePage={setPage}/>
+      currentStep == 1 ? <BookingS1 changePage={setPage}/> : <Booking2 changePage={setPage} userOptions={userOptions}/>
     }
     
     {/* <BookingS1/> */}
