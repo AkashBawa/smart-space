@@ -1,6 +1,6 @@
 
 import './scss/app.scss';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Import components that required for routing here
 import Login from './pages/auth/login';
@@ -14,7 +14,23 @@ import NewBooking from './pages/booking/newBooking';
 import Reschedule from './pages/booking/reschedule';
 import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
+import { useEffect } from 'react';
+import fireStore from './utils/fireStore';
 function App() {
+
+  // const implementQuery = async () => {
+  //   const data = await fireStore.getByQuery('tables',[
+  //     {propertyName: 'locationId', operation: '==', value:'aRcQTIOekeElB2Za0Ja1'},
+  //     {propertyName: 'capacity', operation: '==', value: 4},
+  //   ]);
+  //   data.forEach((table) => {
+  //     console.log(table.data())
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   implementQuery()
+  // }, [])
 
   return (
     <div className="App">

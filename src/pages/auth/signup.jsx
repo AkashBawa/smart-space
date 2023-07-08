@@ -17,7 +17,6 @@ const Signup = () => {
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        debugger
         const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid });
         alert("Sign up successful");
         navigator("/login");

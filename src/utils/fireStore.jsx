@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, where } from "@firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, where, query, doc, updateDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -58,14 +58,49 @@ const  getAllDataFromCollection = async (collectionName) => {
   
 } 
 
-const getByQuery = async (collectionName, query) => {
+/**
+ * 
+ * @param {name of the collection} collectionName 
+ * @param { It is in array of object with properties {propertyName, operation, value}} querys
+ * @returns 
+ */
+const getByQuery = async (collectionName, querys) => {
   try {
     const ref = collection(firestore, collectionName) 
-    const docRef = await getDocs(ref, where(query));
+
+    const queryArray = [];
+    querys.forEach((q) => {
+      queryArray.push(where(`${q.propertyName}`, q.operation, q.value));
+    })
+
+    const myQuery = query(ref, ...queryArray);
+    
+    const docRef = await getDocs(myQuery);
     return docRef;
   } catch (err) {
     console.log("Error in getting document by query", err)
   }
+}
+
+
+/**
+ * 
+ * @param {Name of collection} collectionName 
+ * @param {DocumentId that need to update} documentId 
+ * @param {It is in form of object with key value pair} dataToUpdate 
+ */
+const updateSingleData = async (collectionName, documentId, dataToUpdate ) => {
+
+  try {
+
+    const singleUpdateQuery = doc(firestore, collectionName, documentId);
+    const afterUpdate = await updateDoc(singleUpdateQuery, dataToUpdate)
+  
+  } catch (err) {
+    console.log("error in updating single documet", err)
+  }
+ 
+
 }
 
 export default {
@@ -73,6 +108,7 @@ export default {
   firestore,
   addDataToCollection,
   getAllDataFromCollection,
-  getByQuery
+  getByQuery,
+  updateSingleData
 }
 
