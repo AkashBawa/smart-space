@@ -9,7 +9,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigator = useNavigate();
 
-  const login = async () => {
+  const login = async (event) => {
+    event.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
       // const user = userCredential.user;

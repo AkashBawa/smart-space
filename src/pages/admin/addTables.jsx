@@ -11,6 +11,7 @@ const AddTables = () => {
   const [hasProjector, setProjector] = useState("");
   const [hasMonitor, setMonitor] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [floor, setFloor] = useState("");
   const currentTime = new Date();
 
   useEffect(() => {
@@ -42,6 +43,8 @@ const AddTables = () => {
       hasProjector,
       capacity: parseInt(capacity),
       updateTime: currentTime,
+      floor: parseInt(floor)
+      
     };
     const table = await fireStoreService.addDataToCollection(
       TableConstants.TABLE,
@@ -149,6 +152,17 @@ const AddTables = () => {
           }}
           placeholder="capacity"
           min={1}
+        />
+
+        <label>floor</label>
+        <input
+          type="number"
+          value={floor}
+          onChange={(e) => {
+            setFloor(e.target.value);
+          }}
+          placeholder="floor"
+          min={0}
         />
       </form>
 
