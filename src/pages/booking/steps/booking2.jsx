@@ -1,57 +1,105 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import fireStore from '../../../utils/fireStore';
 
 const Booking2 = (props) => {
 
-    const goBack = () => {
+    /* Calculating the map height based on the screen width and aspect ration */
+    useEffect(() => {
+        window.addEventListener('resize', function () {
+            var div = document.querySelector('.booking-content');
+            div.style.height = div.offsetWidth * (6 / 16) + 'px';
+            // Calculate the height based on the width and aspect ratio
+        });
+
+    }, [])
+
+    // Trigger the resize event initially to set the initial height
+    window.dispatchEvent(new Event('resize'));
+
+
+
+    const [currentTables, setCurrentTables] = useState([])
+    const onclick = function () {
+        console.log("Click")
+    }
+
+    useEffect(() => {
+        console.log("inside use effect")
+        fetchTables();
+    }, [])
+
+    const fetchTables = async () => {
+        const tables = await fireStore.getAllDataFromCollection('tables');
+        console.log(tables)
+        const newArray = []
+        tables.forEach((table) => {
+            // console.log(table.data())
+            newArray.push({ tableId: table.id, ...table.data() })
+        })
+        console.log(newArray)
+        setCurrentTables(tables);
+
+    }
+
+
+    const navigateToPage1 = () => {
         props.changePage(1)
     }
+
     return (
         <div className='booking2'>
+            <button onClick={onclick}>Click me</button>
             <p>Booking2</p>
-            <button onClick={goBack}>Go back</button>
-
             <div className="option" id="step2">
                 <p>Step 2</p>
             </div>
             <div id="secondBooking">
-                <h2>Available Selection</h2>
+                <h2>Available Options</h2>
                 <section id="filters">
                     <article>
                         <h3>Equipment</h3>
-                        <p>Additional needs</p>
+                        <h4>Additional needs</h4>
                     </article>
                     <div id="filterSection">
 
                         <form action="get">
-                            <label for="filter1">Power Outlet</label>
-                            <section className="bookingFilter" id="filter1">
-                                <p className="neg">-</p>
-                                <p className="counter">0</p>
-                                <p className="pos">+</p>
-                            </section>
+                            <label htmlFor="filter1">Computers</label>
+                            <div className="bookingFilter" id="filter1">
+                                <input type="radio" id="c1" name="radioComputer" />
+                                <label htmlFor="c1">1</label>
+                                <input type="radio" id="c2" name="radioComputer" />
+                                <label htmlFor="c2">2</label>
+                                <input type="radio" id="c4" name="radioComputer" />
+                                <label htmlFor="c4">4</label>
+                                <input type="radio" id="c8" name="radioComputer" />
+                                <label htmlFor="c8">8</label>
+                            </div>
                         </form>
                         <form action="get">
-                            <label for="filter2">Computers</label>
+                            <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
-                                <p className="neg">-</p>
-                                <p className="counter">0</p>
-                                <p className="pos">+</p>
+                                <label class="switch">
+                                    <input type="checkbox" />
+                                    <span class="slider round"></span>
+                                </label>
                             </section>
                         </form>
                         <form action="get">
-                            <label for="filter3">Monitor</label>
+                            <label htmlFor="filter3">Monitor</label>
                             <section className="bookingFilter" id="filter3">
-                                <p className="neg">-</p>
-                                <p className="counter">0</p>
-                                <p className="pos">+</p>
+                                <label class="switch">
+                                    <input type="checkbox" />
+                                    <span class="slider round"></span>
+                                </label>
                             </section>
                         </form>
                         <form action="get">
-                            <label for="filter4">Projector</label>
+                            <label htmlFor="filter4">Projector</label>
                             <section className="bookingFilter" id="filter4">
-                                <p className="neg">-</p>
-                                <p className="counter">0</p>
-                                <p className="pos">+</p>
+                                <label class="switch">
+                                    <input type="checkbox" />
+                                    <span class="slider round"></span>
+                                </label>
                             </section>
                         </form>
                     </div>
@@ -79,17 +127,10 @@ const Booking2 = (props) => {
                     </div>
                 </section>
 
-                <section className="buttons">
-                    <button id="cancel2">Cancel</button>
-                    <button id="next2">Next</button>
-                </section>
             </div>
             <div className="map">
-                <h2>Library</h2>
-                <h3>Please select the space</h3>
-
+                <h2>Please select the space</h2>
                 <div className="booking-content">
-
                     <p className="n2" id="s1"></p>
                     <p className="n2" id="s2"></p>
                     <p className="n2" id="s3"></p>
@@ -156,11 +197,14 @@ const Booking2 = (props) => {
 
                 </div>
 
-
+                <section className="buttons">
+                    <button id="cancel2" onClick={navigateToPage1}>Cancel</button>
+                    <button id="next2">Next</button>
+                </section>
 
             </div>
         </div>
     )
 }
 
-            export default Booking2
+export default Booking2;
