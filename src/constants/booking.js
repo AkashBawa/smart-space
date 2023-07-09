@@ -6,7 +6,7 @@ const spaceType = [
                 name :'Library Building', 
                 id : 'aRcQTIOekeElB2Za0Ja1',
                 levels : [1,2 ,3]
-            },
+            }
         ],
         accommodate: 1,
         computer: false,

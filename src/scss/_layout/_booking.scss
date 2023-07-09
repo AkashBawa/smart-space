@@ -460,6 +460,19 @@ span {
     .booking-content p {
       background-color: rgba(255, 166, 0, 0.4);
       border-radius: 30px;
+      margin: 5px;
+      margin-left: 15px;
+      margin-right: 6px;
+    }
+
+    .booking-content .disabled-space {
+      background-color: gray;
+      opacity: 0.8;
+    }
+
+    .selectedTime {
+      background-color: gray !important;
+      color: white;
     }
 
 
