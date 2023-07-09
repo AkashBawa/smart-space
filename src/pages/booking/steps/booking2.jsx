@@ -52,7 +52,6 @@ const Booking2 = (props) => {
             return a.name - b.name
         })
         console.log(tables)
-
         setCurrentTables(tables)
     }
 
@@ -79,11 +78,14 @@ const Booking2 = (props) => {
         const newArray = []
         if (tables) {
             tables.forEach((table) => {
-                newArray.push({ tableId: table.id, ...table.data() })
+                newArray.push({ tableId: table.id, ...table.data(), disabled: false })
             })
             changeNameToInt(newArray)
-    
         }   
+    }
+
+    const applyFilter = () => {
+
     }
 
     const spaceSelected = (e, id) => {
@@ -114,6 +116,21 @@ const Booking2 = (props) => {
             }
         }
     }
+
+    const bookingSubmit = async () => {
+        const obj = {
+            userId: "1234",
+            tableId: selectedTable,
+            date: props.userOptions.bookingDate,
+            hours: bookingTime,
+            status: 'created',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+        const saveData = await fireStore.addDataToCollection('booking', obj);
+    }
+
+
 
     return (
         <div className='booking2'>
@@ -216,7 +233,7 @@ const Booking2 = (props) => {
                                     className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}`}
                                     id={'s'+ table.name} 
                                     key={table.id}
-                                    onClick={(e) => {spaceSelected(e, table.tableId)}} 
+                                    onClick={(e) => { spaceSelected(e, table.tableId) }}
                                 >
                                 </p>
                             )
@@ -290,7 +307,7 @@ const Booking2 = (props) => {
 
                 <section className="buttons">
                     <button id="cancel2" onClick={navigateToPage1}>Cancel</button>
-                    <button id="next2">Next</button>
+                    <button id="next2" onClick={bookingSubmit}>Submit</button>
                 </section>
 
             </div>
