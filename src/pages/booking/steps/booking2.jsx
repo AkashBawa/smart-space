@@ -7,7 +7,10 @@ const Booking2 = (props) => {
     useEffect(() => {
         window.addEventListener('resize', function () {
             var div = document.querySelector('.booking-content');
-            div.style.height = div.offsetWidth * (6 / 16) + 'px';
+            if(div) {
+                div.style.height = div.offsetWidth * (6 / 16) + 'px';
+            }
+           
             // Calculate the height based on the width and aspect ratio
         });
 
