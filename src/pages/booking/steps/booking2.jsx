@@ -10,7 +10,8 @@ const Booking2 = (props) => {
     const [projector, setProjector] = useState();
     const [bookingTime, setBookingTime] = useState([]);
     const [currentTables, setCurrentTables] = useState([])
-    
+    const [selectedTable, setSelectedTable] = useState(null);
+
     const [timeSlotes, setTimeSlotes] = useState ([
         {startTime: 8, display: '8am - 9am'},
         {startTime: 9, display: '9am - 10am'},
@@ -43,9 +44,18 @@ const Booking2 = (props) => {
 
     window.dispatchEvent(new Event('resize'));
 
-    const sortTablesByName = (tables) => {
-        
+    const changeNameToInt = (tables) => {
+        for(let i = 0; i < tables.length; i++) {
+            tables[i].name = parseInt(tables[i].name)
+        }
+        tables.sort((a, b) => {
+            return a.name - b.name
+        })
+        console.log(tables)
+
+        setCurrentTables(tables)
     }
+
 
     const fetchTables = async () => {
     
@@ -71,13 +81,14 @@ const Booking2 = (props) => {
             tables.forEach((table) => {
                 newArray.push({ tableId: table.id, ...table.data() })
             })
-            setCurrentTables(newArray);
+            changeNameToInt(newArray)
     
-        }
-        console.log("New array =====" , newArray)
-        
+        }   
     }
 
+    const spaceSelected = (e, id) => {
+        setSelectedTable(id)
+    }
 
     const changeComputers = (e) => {
         setComputers(e.target.value)
@@ -99,7 +110,7 @@ const Booking2 = (props) => {
                 const newArray = bookingTime;
                 newArray.push(startTIme);
                 setBookingTime(newArray);  
-                console.log(newArray);
+                // console.log(newArray);
             }
         }
     }
@@ -198,12 +209,20 @@ const Booking2 = (props) => {
             <div className="map">
                 <h2>Please select the space</h2>
                 <div className="booking-content">
-                    {/* {
+                    {
                         currentTables && currentTables.map((table) => {
-                            
+                            return (
+                                <p 
+                                    className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}`}
+                                    id={'s'+ table.name} 
+                                    key={table.id}
+                                    onClick={(e) => {spaceSelected(e, table.tableId)}} 
+                                >
+                                </p>
+                            )
                         })
-                    } */}
-                    <p className="n2" id="s1"></p>
+                    }
+                    {/* <p className="n2" id="s1"></p>
                     <p className="n2" id="s2"></p>
                     <p className="n2" id="s3"></p>
                     <p className="n2" id="s4"></p>
@@ -265,7 +284,7 @@ const Booking2 = (props) => {
                     <p className="n4" id="s60"></p>
                     <p className="n4" id="s61"></p>
                     <p className="n4" id="s62"></p>
-                    <p className="n4" id="s63"></p>
+                    <p className="n4" id="s63"></p> */}
 
                 </div>
 

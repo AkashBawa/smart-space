@@ -457,8 +457,18 @@ span {
       aspect-ratio: 16 / 6;
     }
 
-    .booking-content p {
-      background-color: rgba(255, 166, 0, 0.4);
+    .booking-content p:hover {
+      background-color: rgba(220,220,220, 0.6);
+      cursor: pointer;
+      border-radius: 30px;
+      margin: 5px;
+      margin-left: 15px;
+      margin-right: 6px;
+    }
+
+    .booking-content .selected {
+      background-color: rgba(255, 166, 0, 0.4) !important;
+      cursor: pointer;
       border-radius: 30px;
       margin: 5px;
       margin-left: 15px;
