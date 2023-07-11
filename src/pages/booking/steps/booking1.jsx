@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {spaceType as SpaceTypeConstant} from './../../../constants/booking'
 const BookingS1 = (props) => {
+    
     const submit = () => {
+        if(!people || !bookingDate || !spaceType || !building || !level) {
+            alert("Please choose all value");
+            return;
+        }
         const finalValues = {
             people,
             bookingDate,
