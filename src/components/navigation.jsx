@@ -30,6 +30,11 @@ const Navigation = () => {
               {" "}
               <Link to="/reschedule">Reschedule</Link>
             </li>
+            <li>
+              {" "}
+              <Link to="./contact-us">Contact Us</Link>
+            </li>
+            
             {/* <li>  <Link to="/login">login</Link></li>
                   <li>  <Link to="/signup">signup</Link></li>
                   <li>  <Link to="/qr-page">QR-SCAN</Link></li> */}
