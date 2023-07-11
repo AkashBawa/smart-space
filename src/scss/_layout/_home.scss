@@ -1,0 +1,41 @@
+.home-description {
+  text-align: center;
+  background-color: white;
+  width: 592px;
+  height: 379px;
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h2{
+    width: 50%;
+    margin-bottom: 10px;
+
+  }
+  p{
+    margin: 10px;
+  }
+}
+
+.booking-btn {
+  width: 180px;
+  height: 48px;
+  background-color: #ee5922;
+  border-radius: 10px;
+  color: white;
+}
+
+.home-container {
+  position: relative;
+
+  img{
+    height: 700px;
+    object-fit: cover;
+  }
+}

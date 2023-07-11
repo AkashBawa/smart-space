@@ -1,7 +1,7 @@
-import topView from "./../public/Images/top-view-coworkers-team-working-office 1.png";
+import topView from "./../../public/Images/top-view-coworkers-team-working-office 1.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import fireStore from "./../utils/fireStore";
+import fireStore from "../../utils/fireStore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
@@ -11,12 +11,12 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigator = useNavigate();
 
-  const signup = () => {
+  const signup = (event) => {
+    event.preventDefault()
     createUserWithEmailAndPassword(fireStore.firebaseAuth, email, password)
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        debugger
         const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid });
         alert("Sign up successful");
         navigator("/login");
@@ -40,7 +40,7 @@ const Signup = () => {
         <img src={topView} alt="" />
 
         <div className="formDiv">
-          <h1>User Log in</h1>
+          <h1>User Sign Up</h1>
           <form action="#" className="form">
             <input
               value={name}
@@ -78,7 +78,7 @@ const Signup = () => {
               required
               placeholder="password"
             />
-            <button id="log-in" onClick={signup}>
+            <button id="log-in-btn" onClick={signup}>
               Signup
             </button>
           </form>
