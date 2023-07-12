@@ -6,7 +6,7 @@ const Booking2 = (props) => {
     /* Calculating the map height based on the screen width and aspect ration */
     const [computers, setComputers] = useState();
     const [powerOutlet, setPowerOutlets] = useState();
-    const [monitor, setMonitor] = useState();
+    const [monitor, setMonitor] = useState(0);
     const [projector, setProjector] = useState();
     const [bookingTime, setBookingTime] = useState([]);
     const [currentTables, setCurrentTables] = useState([])
@@ -26,6 +26,7 @@ const Booking2 = (props) => {
         {startTime: 18, display: '6pm - 7pm'},
         {startTime: 19, display: '7pm - 8pm'},
     ]);
+
     useEffect(() => {
         window.addEventListener('resize', function () {
             var div = document.querySelector('.booking-content');
@@ -37,6 +38,46 @@ const Booking2 = (props) => {
         });
 
     }, [])
+
+    useEffect(() => {
+        if(monitor > 0) {
+            let newTables = currentTables;
+            // for(let i = 0; i < currentTables.length; i++) {
+            //     if(currentTables[i].comp)
+            // }
+        }
+    }, [monitor])
+
+
+    useEffect(() => {
+        console.log("projector");
+        console.log(projector)
+        let newTables = currentTables;
+        for(let i = 0; i < newTables.length; i++) {
+            if(projector == true) {
+                if(!newTables[i].hasProjector) {
+                    newTables[i].disabled = true;
+                } else {
+                    newTables[i].disabled = false;
+                }
+            } else {
+                newTables[i].disabled = false;
+            }
+        }
+        console.log(newTables)
+        setCurrentTables(newTables);
+        
+    }, [projector])
+
+    useEffect(() => {
+
+    }, [powerOutlet])
+
+    useEffect(() => {
+
+    }, [computers])
+
+
 
     useEffect(() => {
         fetchTables();
@@ -163,9 +204,9 @@ const Booking2 = (props) => {
                         <form>
                             <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
-                                <label className="switch">
-                                    <input type="checkbox" value={powerOutlet} onChange={(e) => {setPowerOutlets(e.target.value)}} />
-                                    <span className="slider round"></span>
+                                <label className="switch" htmlFor='powerOutlet'>
+                                    <input type="checkbox" id='powerOutlet' value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.value)}} />
+                                    {/* <span className="slider round"></span> */}
                                 </label>
                             </section>
                         </form>
@@ -182,7 +223,9 @@ const Booking2 = (props) => {
                             <label htmlFor="filter4">Projector</label>
                             <section className="bookingFilter" id="filter4">
                                 <label className="switch">
-                                    <input type="checkbox" value={projector} onChange={(e) => {setProjector(e.target.value)}} />
+                                    <input type="checkbox" value={projector} onChange={(e) => { 
+                                        console.log(e.target.checked);
+                                        setProjector(e.target.checked)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -197,9 +240,9 @@ const Booking2 = (props) => {
                     </article>
                     <div>
                         {
-                            timeSlotes && timeSlotes.map((time) => {
+                            timeSlotes && timeSlotes.map((time,index) => {
                                 return (
-                                    <p className='timeSelected' onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
+                                    <p className='timeSelected' key={`time${index}`} onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
                                         {time.display}
                                     </p>
                                 )
@@ -230,11 +273,13 @@ const Booking2 = (props) => {
                         currentTables && currentTables.map((table) => {
                             return (
                                 <p 
-                                    className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}`}
+                                    className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}` + " " + `${table.disabled == true ? "disabled" : "notDisabled"}`}
                                     id={'s'+ table.name} 
                                     key={table.id}
-                                    onClick={(e) => { spaceSelected(e, table.tableId) }}
+                                    onClick={(e) => { spaceSelected(e, table.tableId,) }}
+
                                 >
+                                   abc {table.disabled}
                                 </p>
                             )
                         })
