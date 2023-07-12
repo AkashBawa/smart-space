@@ -781,3 +781,40 @@ span {
   }
 
   // booking-list-page-style
+
+
+  .mainBookingList{
+    display: flex;
+    gap: 1rem;
+    max-width: 1300px;
+    margin: auto;
+    justify-content: center;
+  }
+
+  .message-div{
+    width: 280px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 5%;
+  }
+
+  .dateUpadte{
+    width: 500px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 5%;
+    padding: 5px;
+  }
+
+  .calender{
+    width: 280px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 5%;
+  }
+
+  .mainBookingList h3{
+    text-align: center;
+  }
+
+

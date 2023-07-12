@@ -122,12 +122,17 @@ const Booking2 = (props) => {
             userId: "1234",
             tableId: selectedTable,
             date: props.userOptions.bookingDate,
+            locationId:  props.userOptions.building,
+            people: props.userOptions.people,
+            spaceType: props.userOptions.spaceType,
             hours: bookingTime,
             status: 'created',
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+
         }
-        const saveData = await fireStore.addDataToCollection('booking', obj);
+        console.log('building',props);
+        const saveData = await fireStore.addDataToCollection('bookings', obj);
     }
 
 
