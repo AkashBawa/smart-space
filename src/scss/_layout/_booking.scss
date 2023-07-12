@@ -480,6 +480,20 @@ span {
       opacity: 0.8;
     }
 
+    .disabled {
+      background-color: gray !important;
+      opacity: 0.8;
+      cursor: not-allowed;
+      border-radius: 30px;
+      margin: 5px;
+      margin-left: 15px;
+      margin-right: 6px;
+    }
+
+    .disabled:hover {
+      cursor: not-allowed !important;
+    }
+
     .selectedTime {
       background-color: gray !important;
       color: white;

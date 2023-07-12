@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import fireStore from '../../../utils/fireStore';
 import { useNavigate } from "react-router-dom";
-
+import localStorage from '../../../utils/localStorage';
 
 const Booking2 = (props) => {
 
@@ -55,7 +55,7 @@ const Booking2 = (props) => {
     useEffect(() => {
         console.log("projector");
         console.log(projector)
-        let newTables = currentTables;
+        let newTables = [...currentTables];
         for(let i = 0; i < newTables.length; i++) {
             if(projector == true) {
                 if(!newTables[i].hasProjector) {
@@ -73,6 +73,22 @@ const Booking2 = (props) => {
     }, [projector])
 
     useEffect(() => {
+        console.log("power outlet")
+        let newTables = [...currentTables];
+        for(let i = 0; i < newTables.length; i++) {
+            if(powerOutlet == true) {
+                if(!newTables[i].hasPowerOutlet) {
+                    newTables[i].disabled = true;
+                } else {
+                    newTables[i].disabled = false;
+                }
+            } else {
+                newTables[i].disabled = false;
+            }
+        }
+        console.log(newTables)
+        setCurrentTables(newTables);
+        
 
     }, [powerOutlet])
 
@@ -162,8 +178,9 @@ const Booking2 = (props) => {
     }
 
     const bookingSubmit = async () => {
+        const userId = localStorage.getItem('userId');
         const obj = {
-            userId: "1234",
+            userId: userId ? userId : 'abcd',
             tableId: selectedTable,
             date: props.userOptions.bookingDate,
             locationId:  props.userOptions.building,
@@ -215,8 +232,8 @@ const Booking2 = (props) => {
                             <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
                                 <label className="switch" htmlFor='powerOutlet'>
-                                    <input type="checkbox" id='powerOutlet' value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.value)}} />
-                                    {/* <span className="slider round"></span> */}
+                                    <input type="checkbox" id='powerOutlet' value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked)}} />
+                                    <span className="slider round"></span>
                                 </label>
                             </section>
                         </form>
@@ -289,7 +306,6 @@ const Booking2 = (props) => {
                                     onClick={(e) => { spaceSelected(e, table.tableId,) }}
 
                                 >
-                                   abc {table.disabled}
                                 </p>
                             )
                         })

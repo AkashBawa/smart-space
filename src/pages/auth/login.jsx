@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import fireStore from './../../utils/fireStore'
 import { signInWithEmailAndPassword } from "firebase/auth";
+import LocalStorage from './../../utils/localStorage';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,17 +14,17 @@ function Login() {
     event.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
-      // const user = userCredential.user;
-
+      const user = userCredential.user;
+      debugger;
       // Get the current date and time
       const currentDate = new Date();
       const timestamp = currentDate.getTime();
 
       // Update the user data in the database
-      const newUser = await fireStore.addDataToCollection('users', { email, loginDate: currentDate, loginTime: timestamp });
-
-      console.log(email);
-      console.log(password);
+      // const newUser = await fireStore.updateSingleData('users', user ,{ email, loginDate: currentDate, loginTime: timestamp });
+      LocalStorage.setItem('userId', user.id)
+      // console.log(email);
+      // console.log(password);
       navigator("/home");
     } catch (error) {
       const errorCode = error.code;
@@ -64,6 +65,9 @@ function Login() {
             />
             <button id="log-in-btn" onClick={login}>
               Login
+            </button>
+            <button onClick={(e) => { navigator("/signup") }}>
+                Signup
             </button>
           </form>
         </div>

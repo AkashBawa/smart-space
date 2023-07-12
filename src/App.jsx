@@ -47,9 +47,9 @@ function App() {
             <Route path='qr-page' element={<Qrpage/>}/>
             <Route path='booking' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
-            <Route path='*' element={ <Home/>}/>
-            <Route path='contact-us' element={ <ContactUs/>}/>
-            <Route path='booking-list' element={ <BookingList/>}/>
+            <Route path='*' element={ <Login/>}/>
+          {/* <Route path='contact-us' element={ <ContactUs/>}/> */}
+          <Route path='booking-list' element={ <BookingList/>}/>
 
           </Route>
         </Routes>

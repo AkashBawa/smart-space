@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, where, query, doc, updateDoc } from "@firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, where, query, doc, updateDoc, setDoc, serverTimestamp } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -34,13 +34,19 @@ const firebaseAuth = getAuth(app);
 const firestore = getFirestore(app)
 
 
-const  addDataToCollection = async (collectionName, data) => {
-
+const  addDataToCollection = async (collectionName, data, customId = null) => {
   try {
-    const ref = collection(firestore, collectionName) 
-    const docRef = await addDoc(ref, data);
-    console.log(docRef.id);
-    return docRef;
+    
+    if (customId) {
+      const ref = doc(firestore, collectionName, customId);
+      const dataRef = await setDoc(ref, data);
+      return {id: customId};
+    } else {
+      const ref = collection(firestore, collectionName);
+      const docRef = await addDoc(ref, data);
+      return docRef;
+    }
+    
   } catch (err) {
     console.log("Error in adding new document", err)
   }
@@ -94,7 +100,7 @@ const updateSingleData = async (collectionName, documentId, dataToUpdate ) => {
   try {
 
     const singleUpdateQuery = doc(firestore, collectionName, documentId);
-    const afterUpdate = await updateDoc(singleUpdateQuery, dataToUpdate)
+    const afterUpdate = await updateDoc(singleUpdateQuery, {...dataToUpdate, timestamp: serverTimestamp()})
   
   } catch (err) {
     console.log("error in updating single documet", err)
