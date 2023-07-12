@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import fireStore from '../../../utils/fireStore';
+import { useNavigate } from "react-router-dom";
+
 
 const Booking2 = (props) => {
 
     /* Calculating the map height based on the screen width and aspect ration */
+    const navigator = useNavigate();
     const [computers, setComputers] = useState();
     const [powerOutlet, setPowerOutlets] = useState();
     const [monitor, setMonitor] = useState();
@@ -133,6 +136,8 @@ const Booking2 = (props) => {
         }
         console.log('building',props);
         const saveData = await fireStore.addDataToCollection('bookings', obj);
+        navigator("/booking-list")
+
     }
 
 
