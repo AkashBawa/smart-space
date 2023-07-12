@@ -12,12 +12,14 @@ const Signup = () => {
   const navigator = useNavigate();
 
   const signup = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    console.log(fireStore.firebaseAuth);
     createUserWithEmailAndPassword(fireStore.firebaseAuth, email, password)
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid });
+        console.log(newUser)
         alert("Sign up successful");
         navigator("/login");
         // ...
@@ -77,6 +79,10 @@ const Signup = () => {
               id="login-password"
               required
               placeholder="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <button id="log-in-btn" onClick={signup}>
               Signup

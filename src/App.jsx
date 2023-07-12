@@ -16,6 +16,8 @@ import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
 import { useEffect } from 'react';
 import fireStore from './utils/fireStore';
+import ContactUs from './pages/contact-us';
+import BookingList from './pages/booking/steps/booking-list';
 function App() {
 
   // const implementQuery = async () => {
@@ -46,6 +48,9 @@ function App() {
             <Route path='booking' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='*' element={ <Home/>}/>
+            <Route path='contact-us' element={ <ContactUs/>}/>
+            <Route path='booking-list' element={ <BookingList/>}/>
+
           </Route>
         </Routes>
 
