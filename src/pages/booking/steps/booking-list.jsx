@@ -22,7 +22,14 @@ const BookingList = () => {
         const tableRes = await fireStore.getByQuery('tables', []);
         const res = await fireStore.getByQuery('bookings', []);
         
-    
+        let query = {
+            propertyName: 'userId',
+            operation: "==",
+            value: "abcd"
+        }
+        const bookings = await fireStore.getByQuery('bookings', [query]);
+
+        
         let responseBookingList = res.docs.map(doc => {
             const bookingData = doc.data();
             const location = locationRes.docs.find(loc => loc.id == bookingData.locationId).data();

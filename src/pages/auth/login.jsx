@@ -15,7 +15,6 @@ function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
       const user = userCredential.user;
-      debugger;
       // Get the current date and time
       const currentDate = new Date();
       const timestamp = currentDate.getTime();
