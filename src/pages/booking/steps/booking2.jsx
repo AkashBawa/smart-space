@@ -7,10 +7,10 @@ const Booking2 = (props) => {
 
     /* Calculating the map height based on the screen width and aspect ration */
     const navigator = useNavigate();
-    const [computers, setComputers] = useState();
-    const [powerOutlet, setPowerOutlets] = useState();
-    const [monitor, setMonitor] = useState(0);
-    const [projector, setProjector] = useState();
+    const [computers, setComputers] = useState(false);
+    const [powerOutlet, setPowerOutlets] = useState(false);
+    const [monitor, setMonitor] = useState(false);
+    const [projector, setProjector] = useState(false);
     const [bookingTime, setBookingTime] = useState([]);
     const [currentTables, setCurrentTables] = useState([])
     const [selectedTable, setSelectedTable] = useState(null);
@@ -42,60 +42,130 @@ const Booking2 = (props) => {
 
     }, [])
 
-    useEffect(() => {
-        if(monitor > 0) {
-            let newTables = currentTables;
-            // for(let i = 0; i < currentTables.length; i++) {
-            //     if(currentTables[i].comp)
-            // }
+    // useEffect(() => {
+    //     if(monitor > 0) {
+    //         let newTables = currentTables;
+    //         // for(let i = 0; i < currentTables.length; i++) {
+    //         //     if(currentTables[i].comp)
+    //         // }
+    //     }
+    // }, [monitor])
+
+
+    // useEffect(() => {
+    //     console.log("projector");
+    //     console.log(projector)
+    //     let newTables = [...currentTables];
+    //     for(let i = 0; i < newTables.length; i++) {
+    //         if(projector == true) {
+    //             if(!newTables[i].hasProjector) {
+    //                 newTables[i].disabled = true;
+    //             } else {
+    //                 newTables[i].disabled = false;
+    //             }
+    //         } else {
+    //             newTables[i].disabled = false;
+    //         }
+    //     }
+    //     console.log(newTables)
+    //     setCurrentTables(newTables);
+        
+    // }, [projector])
+
+    // useEffect(() => {
+    //     console.log("power outlet")
+    //     let newTables = [...currentTables];
+    //     for(let i = 0; i < newTables.length; i++) {
+    //         if(powerOutlet == true) {
+    //             if(!newTables[i].hasPowerOutlet) {
+    //                 newTables[i].disabled = true;
+    //             } else {
+    //                 newTables[i].disabled = false;
+    //             }
+    //         } else {
+    //             newTables[i].disabled = false;
+    //         }
+    //     }
+    //     console.log(newTables)
+    //     setCurrentTables(newTables);
+        
+
+    // }, [powerOutlet])
+
+    const checkPowerOutlet = (currentTable) => {
+
+        if(powerOutlet == true && currentTable.hasPowerOutlet  && currentTable.hasPowerOutlet == true) {
+            return true;
+        } else if ( powerOutlet == false ) {
+            return true
+        } else {
+            return false;
         }
-    }, [monitor])
+    }
 
+    const checkMonitor = (currentTable) => {
 
-    useEffect(() => {
-        console.log("projector");
-        console.log(projector)
+        if(monitor && currentTable.hasComputer  && currentTable.hasComputer == true) {
+            return true;
+        } else if ( monitor == false ) {
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    const checkProjector = (currentTable) => {
+
+        if(projector && currentTable.hasProjector  && currentTable.hasProjector == true) {
+            return true;
+        } else if ( projector == false ) {
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    const checkCapacity = (currentTable) => {
+        // 
+    }
+
+    const checkPreviousBooking = () => {
+        // fetch booking of current date
+
+        // check if time is selected,
+        // if yes then check if time match with any booking time
+        // if time match then disabled that space
+    }
+
+    useEffect (() => {
         let newTables = [...currentTables];
-        for(let i = 0; i < newTables.length; i++) {
-            if(projector == true) {
-                if(!newTables[i].hasProjector) {
-                    newTables[i].disabled = true;
-                } else {
-                    newTables[i].disabled = false;
-                }
+        for(let i = 0; i < newTables.length; i++) { 
+
+            // check capacity
+
+
+            // check Power Outlet
+            const isPowerOutlet = checkPowerOutlet(newTables[i]);
+            
+            // Check monitor
+            const isMonitor = checkMonitor(newTables[i]);
+
+            // Check Projector
+            const projector = checkProjector(newTables[i]);
+
+            // Check computers
+
+            // Check previous booking
+
+            if(isPowerOutlet && isMonitor && projector) {
+                newTables[i].disabled = false
             } else {
-                newTables[i].disabled = false;
+                newTables[i].disabled = true 
             }
         }
-        console.log(newTables)
+
         setCurrentTables(newTables);
-        
-    }, [projector])
-
-    useEffect(() => {
-        console.log("power outlet")
-        let newTables = [...currentTables];
-        for(let i = 0; i < newTables.length; i++) {
-            if(powerOutlet == true) {
-                if(!newTables[i].hasPowerOutlet) {
-                    newTables[i].disabled = true;
-                } else {
-                    newTables[i].disabled = false;
-                }
-            } else {
-                newTables[i].disabled = false;
-            }
-        }
-        console.log(newTables)
-        setCurrentTables(newTables);
-        
-
-    }, [powerOutlet])
-
-    useEffect(() => {
-
-    }, [computers])
-
+    }, [monitor, projector, powerOutlet, computers])
 
 
     useEffect(() => {
@@ -201,11 +271,7 @@ const Booking2 = (props) => {
 
 
     return (
-        <div className='booking2'>
-            <p>Booking2</p>
-            <div className="option" id="step2">
-                <p>Step 2</p>
-            </div>
+        <div>
             <div id="secondBooking">
                 <h2>Available Options</h2>
                 <section id="filters">
@@ -241,7 +307,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter3">Monitor</label>
                             <section className="bookingFilter" id="filter3">
                                 <label className="switch">
-                                    <input type="checkbox" value={monitor} onChange={(e) => {setMonitor(e.target.value)}} />
+                                    <input type="checkbox" value={monitor} onChange={(e) => {setMonitor(e.target.checked)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -275,22 +341,9 @@ const Booking2 = (props) => {
                                 )
                             })
                         }
-                        {/* <p className="timeSelect">8am - 9am</p>
-                        <p className="timeSelect">9am - 10am</p>
-                        <p className="timeSelect">10am - 11am</p>
-                        <p className="timeSelect">11am - 12pm</p>
-                        <p className="timeSelect">12pm - 1pm</p>
-                        <p className="timeSelect">1pm - 2pm</p>
-                        <p className="timeSelect">2pm - 3pm</p>
-                        <p className="timeSelect">3pm - 4pm</p>
-                        <p className="timeSelect">4pm - 5pm</p>
-                        <p className="timeSelect">5pm - 6pm</p>
-                        <p className="timeSelect">6pm - 7pm</p>
-                        <p className="timeSelect">7pm - 8pm</p> */}
 
                     </div>
                 </section>
-
 
             </div>
             <div className="map">

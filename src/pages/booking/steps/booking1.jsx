@@ -94,11 +94,11 @@ const BookingS1 = (props) => {
     };
 
     return (
-        <div className="NewBooking">
-            <h1>New Booking</h1>
+        <div>
+            {/* <h1>New Booking</h1>
             <div className="option" id="step1">
                 <p>Step 1</p>
-            </div>
+            </div> */}
 
             <div id="stepOne">
                 <section id="booking1">
