@@ -1,22 +1,43 @@
+import React, { useEffect, useState } from 'react';
 import Booking2 from "./steps/booking2";
 import BookingS1 from "./steps/booking1";
-import { useState } from "react";
+import { useParams } from 'react-router';
+import fireStore from '../../utils/fireStore';
 
 const NewBooking = () => {
 
+  const { id } = useParams();
+
   const [currentStep, setCurrentStep] = useState(1);
   const [userOptions, setUserOptions] = useState();
+  const [existingBooking, setExistingBooking] = useState();
 
   const setPage = (pageNumber, userOptions) => {
     setUserOptions(userOptions);
     setCurrentStep(pageNumber);
   }
 
-  return    <div>
-    {
-      currentStep == 1 ? <BookingS1 changePage={setPage}/> : <Booking2 changePage={setPage} userOptions={userOptions}/>
+  useEffect(() => {
+    console.log(id);
+    loadExistingBooking();
+  }, [setExistingBooking]);
+
+
+  const loadExistingBooking = async () => {
+    if (id) {
+      const booking = await fireStore.getById('bookings', id);
+      if (!booking || !booking.data()) {
+        alert('Canot find bookin id ' + id);
+      } else {
+        setExistingBooking(booking.data());
+      }
     }
-    
+  }
+
+  return <div>
+    {
+      currentStep == 1 ? <BookingS1 changePage={setPage} existingBooking={existingBooking} bookingId={id} /> : <Booking2 changePage={setPage} userOptions={userOptions} existingBooking={existingBooking} bookingId={id} />
+    }
     {/* <BookingS1/> */}
   </div>
     // <div className="NewBooking">

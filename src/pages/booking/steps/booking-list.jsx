@@ -8,12 +8,38 @@ const BookingList = () => {
     const [bookingList, setBookingList] = useState([]);
 
     const handleNewBookingClick = () => {
-        navigate("/booking1");
+        navigate("/booking");
     };
 
-    const navigateToQr = () => {
-        navigate("/qr-page");
+    const navigateToQr = (bookingId) => {
+        navigate("/qr-page/" + bookingId);
     };
+
+    const canceledBooking = async (booking) => {
+        if (window.confirm("Are you sure you want to cancel this booking") == true) {
+            // text = "You pressed OK!";
+            booking.data.status = 'Cancelled';
+            await fireStore.updateSingleData('bookings', booking.bookingId, booking.data);
+            window.location.reload(); 
+        } else {
+            // text = "You canceled!";
+        }
+    }
+
+    const navigateToRechedule = (bookingId) => {
+        navigate("/booking/" + bookingId);
+    }
+
+    const checkoutBooking = async (booking) => {
+        if (window.confirm("Are you sure you want to checkout this booking") == true) {
+            // text = "You pressed OK!";
+            booking.data.status = 'Checkout';
+            await fireStore.updateSingleData('bookings', booking.bookingId, booking.data);
+            window.location.reload(); 
+        } else {
+            // text = "You canceled!";
+        }
+    }
 
     useEffect(() => {
         //const res = await fireStore.getByQuery('booking', []);
@@ -35,7 +61,8 @@ const BookingList = () => {
                 .find((tbl) => tbl.id == bookingData.tableId)
                 .data();
             return {
-                ...bookingData,
+                data: bookingData,
+                bookingId: doc.id,
                 location: location,
                 table: table,
             };
@@ -81,17 +108,20 @@ const BookingList = () => {
                 <div>
                     {bookingList.map((b) => {
                         return (
-                            <div className="dateUpadte">
+                            <div key={b.bookingId} className="dateUpadte">
                                 <h3>{b.date}</h3>
-                                <p>Location: {b.location.name}</p>
-                                <p>People: {b.people}</p>
+                                <p>Location: {b.location.name} (Level: {b.data.level})</p>
+                                <p>People: {b.data.people}</p>
                                 <p>Table No: {b.table.name}</p>
-                                <p>SpaceType: {b.spaceType}</p>
-                                <p>No Of Hours: {b.hours.join(",")}</p>
-                                <div className="btnBookingList">
-                                    <button onClick={navigateToQr}>Check In</button>
+                                <p>SpaceType: {b.data.spaceType}</p>
+                                <p>No Of Hours: {b.data.hours.join(",")}</p>
+                                <p>Status: {b.data.status}</p>
+                                <div>
+                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToQr(b.bookingId) }}>Check In</button> : ''}
+                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToRechedule(b.bookingId) }}>Rechedule</button> : ''}
+                                    { b.data.status == 'Booked' ? <button onClick={() => { canceledBooking(b) }}>Cancel</button> : ''}
+                                    { b.data.status == 'Confirmed' ? <button onClick={() => { checkoutBooking(b) }}>Checkout</button> : ''}
                                 </div>
-
                             </div>
                         );
                     })}

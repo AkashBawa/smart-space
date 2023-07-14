@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {spaceType as SpaceTypeConstant} from './../../../constants/booking'
 const BookingS1 = (props) => {
+
+    const existingBooking = props.existingBooking;
+    const bookingId = props.bookingId;
     
     const submit = () => {
         if(!people || !bookingDate || !spaceType || !building || !level) {
@@ -14,7 +17,6 @@ const BookingS1 = (props) => {
             building,
             level
         }
-
         console.log(finalValues)
         props.changePage(2, finalValues);
     };
@@ -47,6 +49,33 @@ const BookingS1 = (props) => {
             spaceTypeSelect.removeEventListener('change', handleSpaceTypeChange);
         };
     }, []);
+
+    useEffect(() => {
+        console.log('existingBooking', existingBooking);
+        if (existingBooking) {
+            setPeople(existingBooking.people);
+            setbookingDate(existingBooking.date);
+            setspaceType(existingBooking.spaceType);
+            setbuilding(existingBooking.locationId);
+            setlevel(existingBooking.level);
+
+            const buildingSelect = document.getElementById('building');
+            buildingSelect.disabled = false;
+            buildingSelect.options.length = 1;
+
+            const currentSelection = SpaceTypeConstant.find((element => element.name == existingBooking.spaceType));
+            currentSelection.building.forEach((b) => {
+                addBuildingOption(buildingSelect, `${b.name}`, b.id);
+            });
+
+            const selectedLevel = document.getElementById('level');
+            selectedLevel.disabled = false;
+            selectedLevel.options.length = 1;
+            currentSelection.building[0].levels.forEach((level) => {
+                addBuildingOption(selectedLevel, `level ${level}`, level);
+            })
+        }
+    }, [existingBooking]);
 
     const handleSpaceTypeChange = () => {
         const spaceTypeSelect = document.getElementById('spaceType');
@@ -95,7 +124,7 @@ const BookingS1 = (props) => {
 
     return (
         <div className="NewBooking">
-            <h1>New Booking</h1>
+            <h1>{ bookingId ? 'Edit Booking' : 'New Booking' }</h1>
             <div className="option" id="step1">
                 <p>Step 1</p>
             </div>
@@ -106,7 +135,7 @@ const BookingS1 = (props) => {
                     <label htmlFor="people">No. of People</label>
                     <input type="number" id="people" min="1" max="8" value={people} onChange={(e) => {setPeople(e.target.value)}} />
                     <label htmlFor="bookDate">Booking Date</label>
-                    <input type="date" id="bookDate" onChange={(e) => {setbookingDate(e.target.value)}} />
+                    <input type="date" value={bookingDate} id="bookDate" onChange={(e) => {setbookingDate(e.target.value)}} />
                 </section>
                 <section id="booking2">
                     <h2>Space Information</h2>

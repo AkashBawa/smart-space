@@ -45,8 +45,9 @@ function App() {
           <Route path='*' element={<Navigation/>}>
           <Route path='contact-us' element={<ContactUs/>}/>
             <Route path='home' element={<Home/>}/>
-            <Route path='qr-page' element={<Qrpage/>}/>
+            <Route path='qr-page/:id' element={<Qrpage/>}/>
             <Route path='booking' element={<NewBooking/>}/>
+            <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='*' element={ <Login/>}/>
           <Route path='booking-list' element={ <BookingList/>}/>

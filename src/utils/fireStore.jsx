@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, where, query, doc, updateDoc, setDoc, serverTimestamp } from "@firebase/firestore";
+import { addDoc, collection, getDocs, getDoc, getFirestore, where, query, doc, updateDoc, setDoc, serverTimestamp } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -88,6 +88,16 @@ const getByQuery = async (collectionName, querys) => {
   }
 }
 
+const getById = async (collectionName, id) => {
+  try {
+    const docRef = doc(firestore, collectionName, id);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+  } catch (err) {
+    console.log("Error in getting document by id", err)
+  }
+}
+
 
 /**
  * 
@@ -110,6 +120,7 @@ const updateSingleData = async (collectionName, documentId, dataToUpdate ) => {
 }
 
 export default {
+  getById,
   firebaseAuth,
   firestore,
   addDataToCollection,

@@ -8,12 +8,14 @@ const Booking2 = (props) => {
     /* Calculating the map height based on the screen width and aspect ration */
     const navigator = useNavigate();
     const [computers, setComputers] = useState();
-    const [powerOutlet, setPowerOutlets] = useState();
+    const [powerOutlet, setPowerOutlets] = useState(false);
     const [monitor, setMonitor] = useState(0);
-    const [projector, setProjector] = useState();
+    const [projector, setProjector] = useState(false);
     const [bookingTime, setBookingTime] = useState([]);
     const [currentTables, setCurrentTables] = useState([])
     const [selectedTable, setSelectedTable] = useState(null);
+
+    const existingBooking = props.existingBooking;
 
     const [timeSlotes, setTimeSlotes] = useState ([
         {startTime: 8, display: '8am - 9am'},
@@ -96,11 +98,30 @@ const Booking2 = (props) => {
 
     }, [computers])
 
-
-
     useEffect(() => {
         fetchTables();
     }, [])
+
+    useEffect(() => {
+        console.log('existingBooking', existingBooking);
+        if (existingBooking) {
+            setComputers(existingBooking.computers);
+            setPowerOutlets(existingBooking.powerOutlet);
+            setMonitor(existingBooking.monitor);
+            setProjector(existingBooking.projector);
+            setSelectedTable(existingBooking.tableId);
+            if (existingBooking.hours) {
+                setBookingTime(existingBooking.hours);
+                existingBooking.hours.forEach(h => {
+                    const elm = document.getElementById(`time-${h}`);
+                    if (!elm.classList.contains('selectedTime')) {
+                        elm.classList.add('selectedTime');
+                    }
+                    
+                })
+            }
+        }
+    }, [existingBooking]);
 
     window.dispatchEvent(new Event('resize'));
 
@@ -178,27 +199,48 @@ const Booking2 = (props) => {
     }
 
     const bookingSubmit = async () => {
-        const userId = localStorage.getItem('userId');
-        const obj = {
-            userId: userId ? userId : 'abcd',
-            tableId: selectedTable,
-            date: props.userOptions.bookingDate,
-            locationId:  props.userOptions.building,
-            people: props.userOptions.people,
-            spaceType: props.userOptions.spaceType,
-            hours: bookingTime,
-            status: 'created',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-
+        console.log('props', props);
+        if (validateSubmit()) {
+            const userId = localStorage.getItem('userId');
+            const obj = {
+                userId: userId ? userId : 'abcd',
+                tableId: selectedTable,
+                date: props.userOptions.bookingDate,
+                locationId:  props.userOptions.building,
+                level: props.userOptions.level,
+                people: props.userOptions.people,
+                spaceType: props.userOptions.spaceType,
+                hours: bookingTime,
+                computers: computers,
+                powerOutlet: powerOutlet,
+                monitor: monitor,
+                projector: projector,
+                status: 'Booked',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            }
+            console.log('obj', obj);
+            if (props.bookingId) {
+                const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
+            } else {
+                const saveData = await fireStore.addDataToCollection('bookings', obj);
+            }
+            
+            navigator("/booking-list");
         }
-        console.log('building',props);
-        const saveData = await fireStore.addDataToCollection('bookings', obj);
-        navigator("/booking-list")
-
     }
 
-
+    const validateSubmit = () => {
+        if (!bookingTime) {
+            alert('Please select Booking Time');
+            return false;
+        } 
+        if (!selectedTable) {
+            alert('Please select the Space');
+            return false;
+        }
+        return true;
+    }
 
     return (
         <div className='booking2'>
@@ -232,7 +274,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
                                 <label className="switch" htmlFor='powerOutlet'>
-                                    <input type="checkbox" id='powerOutlet' value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked)}} />
+                                    <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -241,7 +283,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter3">Monitor</label>
                             <section className="bookingFilter" id="filter3">
                                 <label className="switch">
-                                    <input type="checkbox" value={monitor} onChange={(e) => {setMonitor(e.target.value)}} />
+                                    <input type="checkbox" checked={monitor} value={monitor} onChange={(e) => {setMonitor(e.target.value)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -250,7 +292,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter4">Projector</label>
                             <section className="bookingFilter" id="filter4">
                                 <label className="switch">
-                                    <input type="checkbox" value={projector} onChange={(e) => { 
+                                    <input type="checkbox" checked={projector} value={projector} onChange={(e) => { 
                                         console.log(e.target.checked);
                                         setProjector(e.target.checked)}} />
                                     <span className="slider round"></span>
@@ -269,7 +311,7 @@ const Booking2 = (props) => {
                         {
                             timeSlotes && timeSlotes.map((time,index) => {
                                 return (
-                                    <p className='timeSelected' key={`time${index}`} onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
+                                    <p className='timeSelected' id={`time-${time.startTime}`} key={`time${index}`} onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
                                         {time.display}
                                     </p>
                                 )
@@ -299,7 +341,7 @@ const Booking2 = (props) => {
                     {
                         currentTables && currentTables.map((table) => {
                             return (
-                                <p 
+                                <p name={table.tableId}
                                     className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}` + " " + `${table.disabled == true ? "disabled" : "notDisabled"}`}
                                     id={'s'+ table.name} 
                                     key={table.id}
