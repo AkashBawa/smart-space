@@ -21,7 +21,7 @@ function Login() {
 
       // Update the user data in the database
       // const newUser = await fireStore.updateSingleData('users', user ,{ email, loginDate: currentDate, loginTime: timestamp });
-      LocalStorage.setItem('userId', user.id)
+      LocalStorage.setItem('userId', user.uid)
       // console.log(email);
       // console.log(password);
       navigator("/home");

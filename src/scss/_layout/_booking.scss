@@ -135,12 +135,16 @@ span {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: .5rem;
+      h2 {
+        font-size: large;
+      }
     }
 
     #stepOne h2,
     .buttons {
       grid-column: 1/-1;
       text-align: center;
+
     }
 
 
@@ -173,6 +177,11 @@ span {
       margin: 2rem auto;
     }
 
+    .option p {
+      color: $base-l;
+      background-color: $accent-m;
+    }
+
     #booking1 label,
     #booking1 input,
     #booking2 label,
@@ -183,7 +192,15 @@ span {
       display: inline;
       margin-top: .5rem;
       height: 2rem;
+      font-size: medium;
     }
+
+    .spaceInformation label {
+      height: 1rem;
+    }
+
+
+
 
     #next1,
     #next2 {
