@@ -43,12 +43,12 @@ function App() {
           <Route path='admin/addTable' element={ <AddTables/>}/>
           <Route path='signup' element={ <Signup/>}/>
           <Route path='*' element={<Navigation/>}>
+          <Route path='contact-us' element={<ContactUs/>}/>
             <Route path='home' element={<Home/>}/>
             <Route path='qr-page' element={<Qrpage/>}/>
             <Route path='booking' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='*' element={ <Login/>}/>
-          {/* <Route path='contact-us' element={ <ContactUs/>}/> */}
           <Route path='booking-list' element={ <BookingList/>}/>
 
           </Route>

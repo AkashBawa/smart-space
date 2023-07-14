@@ -813,22 +813,39 @@ span {
   }
 
   .dateUpadte{
-    width: 500px;
-    height: 250px;
+    width: 715px;
+    height: auto;
     background-color: #fff;
     border-radius: 5%;
     padding: 5px;
+    margin: 10px;
+
+    .btnBookingList{
+      text-align: center;
+      
+      button{
+        padding: 10px 5rem;
+        background-color: orange;
+        border: none;
+      }
+    }
   }
 
-  .calender{
-    width: 280px;
-    height: 450px;
-    background-color: #fff;
-    border-radius: 5%;
-  }
+ 
 
   .mainBookingList h3{
     text-align: center;
   }
 
+
+  .dateMonth{
+
+    text-align: center;
+    margin: 2rem 0;
+
+    button{
+      padding: 10px 20px;
+      margin: 5px;
+    }
+  }
 
