@@ -1,11 +1,12 @@
-const BookingMonth = () => {
-    return (
-      <div className="BookingMonth">
-            <h1>Your Booking</h1>
-            
-      </div>
-    );
-  }
-  
-  export default BookingMonth;
-  
+import React from 'react';
+import { Calendar } from 'antd';
+
+const App= () => {
+  const onPanelChange = (value, mode) => {
+    console.log(value.format('YYYY-MM-DD'), mode);
+  };
+
+  return <Calendar onPanelChange={onPanelChange} />;
+};
+
+export default App;

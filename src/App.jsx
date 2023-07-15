@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 import fireStore from './utils/fireStore';
 import ContactUs from './pages/contact-us';
 import BookingList from './pages/booking/steps/booking-list';
+import BookingMonth from './pages/booking/steps/booking-month';
 function App() {
 
   // const implementQuery = async () => {
@@ -49,6 +50,7 @@ function App() {
             <Route path='booking' element={<NewBooking/>}/>
             <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
+            <Route path='booking-month' element={<BookingMonth/>}/>
             <Route path='*' element={ <Login/>}/>
           <Route path='booking-list' element={ <BookingList/>}/>
 

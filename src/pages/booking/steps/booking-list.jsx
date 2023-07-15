@@ -74,11 +74,15 @@ const BookingList = () => {
 
     return (
         <div className="BookingList">
-            <div className="">
-                <h1>Your booking</h1>
-                <button className="newBooking-page" onClick={handleNewBookingClick}>
-                    New Booking
-                </button>
+            <div className="bookingListHeader">
+                <div>
+                    <h1>Your booking</h1>
+                </div>
+                <div>
+                    <button className="newBooking-page" onClick={handleNewBookingClick}>
+                        New Booking
+                    </button>
+                </div>
             </div>
 
 
@@ -110,17 +114,17 @@ const BookingList = () => {
                         return (
                             <div key={b.bookingId} className="dateUpadte">
                                 <h3>{b.date}</h3>
-                                <p>Location: {b.location.name} (Level: {b.data.level})</p>
-                                <p>People: {b.data.people}</p>
-                                <p>Table No: {b.table.name}</p>
-                                <p>SpaceType: {b.data.spaceType}</p>
-                                <p>No Of Hours: {b.data.hours.join(",")}</p>
-                                <p>Status: {b.data.status}</p>
-                                <div>
-                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToQr(b.bookingId) }}>Check In</button> : ''}
-                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToRechedule(b.bookingId) }}>Rechedule</button> : ''}
-                                    { b.data.status == 'Booked' ? <button onClick={() => { canceledBooking(b) }}>Cancel</button> : ''}
-                                    { b.data.status == 'Confirmed' ? <button onClick={() => { checkoutBooking(b) }}>Checkout</button> : ''}
+                                <p><span className="updateSpan">Location: </span>{b.location.name} (Level: {b.data.level})</p>
+                                <p><span className="updateSpan">People: </span>{b.data.people}</p>
+                                <p><span className="updateSpan">Table No: </span>{b.table.name}</p>
+                                <p><span className="updateSpan">SpaceType: </span>{b.data.spaceType}</p>
+                                <p><span className="updateSpan">No Of Hours: </span>{b.data.hours.join(",")}</p>
+                                <p><span className="updateSpan">Status: </span>{b.data.status}</p>
+                                <div className="btnDivBookingList">
+                                    { b.data.status == 'Booked' ? <button className="btnBookingList" onClick={() => { navigateToQr(b.bookingId) }}>Check In</button> : ''}
+                                    { b.data.status == 'Booked' ? <button className="btnBookingList" onClick={() => { navigateToRechedule(b.bookingId) }}>Rechedule</button> : ''}
+                                    { b.data.status == 'Booked' ? <button className="btnBookingList" onClick={() => { canceledBooking(b) }}>Cancel</button> : ''}
+                                    { b.data.status == 'Confirmed' ? <button className="btnBookingList" onClick={() => { checkoutBooking(b) }}>Checkout</button> : ''}
                                 </div>
                             </div>
                         );
