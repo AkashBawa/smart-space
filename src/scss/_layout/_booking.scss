@@ -834,6 +834,13 @@ span {
 
   // booking-list-page-style
 
+  .bookingListHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+  }
 
   .mainBookingList{
     display: flex;
@@ -848,6 +855,7 @@ span {
     height: 450px;
     background-color: #fff;
     border-radius: 5%;
+    margin: 10px;
   }
 
   .dateUpadte{
@@ -857,6 +865,11 @@ span {
     border-radius: 5%;
     padding: 5px;
     margin: 10px;
+
+    .updateSpan{
+      font-weight: bold;
+      padding-right: 2px;
+    }
 
     .btnBookingList{
       text-align: center;
@@ -890,5 +903,19 @@ span {
       padding: 10px 20px;
       margin: 5px;
     }
+  }
+
+
+  .btnBookingList{
+    background-color: orange;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  .btnDivBookingList{
+    text-align: center;
   }
 

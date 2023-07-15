@@ -75,6 +75,7 @@ function App() {
             <Route path='booking' element={<NewBooking/>}/>
             <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
+            <Route path='booking-month' element={<BookingMonth/>}/>
             <Route path='*' element={ <Login/>}/>
           <Route path='booking-list' element={ <BookingList/>}/>
 
