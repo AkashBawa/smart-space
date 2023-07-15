@@ -119,8 +119,18 @@ const Booking2 = (props) => {
 
 
             if(previousBook.tableId == table.tableId) {
-                console.log(previousBook.tableId , " not available")
-                return false
+
+                if(previousBook.hours && previousBook.hours.length > 0) {
+                    const currentLow = bookingTime[0];
+                    const currentHigh = bookingTime[bookingTime.length - 1];
+
+                    const preHours = previousBook.hours;
+                    const previousLow = previousBook.hours[0];
+                    // const previousHigh = prevBooking.hours[]
+                }  else {
+                    return true
+                }
+                
             }
         }
         return true;
@@ -265,6 +275,7 @@ const Booking2 = (props) => {
                 e.currentTarget.classList.toggle('selectedTime')
                 const newArray = bookingTime;
                 newArray.push(startTIme);
+                newArray.sort();
                 setBookingTime(newArray);  
             }
         }

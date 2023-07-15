@@ -14,8 +14,6 @@ import NewBooking from './pages/booking/newBooking';
 import Reschedule from './pages/booking/reschedule';
 import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
-import { useEffect } from 'react';
-import fireStore from './utils/fireStore';
 import ContactUs from './pages/contact-us';
 import BookingList from './pages/booking/steps/booking-list';
 import BookingMonth from './pages/booking/steps/booking-month';
