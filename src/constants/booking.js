@@ -116,6 +116,22 @@ const spaceType = [
     }
 ]
 
+const timeSlotes = [
+    {startTime: 8, display: '8am - 9am'},
+    {startTime: 9, display: '9am - 10am'},
+    {startTime: 10, display: '10am - 11am'},
+    {startTime: 11, display: '11am - 12pm'},
+    {startTime: 12, display: '12pm - 1pm'},
+    {startTime: 13, display: '1pm - 2pm'},
+    {startTime: 14, display: '2pm - 3pm'},
+    {startTime: 15, display: '3pm - 4pm'},
+    {startTime: 16, display: '4pm - 5pm'},
+    {startTime: 17, display: '5pm - 6pm'},
+    {startTime: 18, display: '6pm - 7pm'},
+    {startTime: 19, display: '7pm - 8pm'},
+]
+
 export {
-    spaceType
+    spaceType,
+    timeSlotes
 }

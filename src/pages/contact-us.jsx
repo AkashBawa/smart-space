@@ -1,11 +1,4 @@
-const ContactUs = () => {
-    return <div>
-        <h1>Contact Us</h1>
-        <div className="main-content">
-            
-        </div>
-    </div>
-}
+import { useState } from "react";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

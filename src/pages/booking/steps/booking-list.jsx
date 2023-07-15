@@ -118,7 +118,9 @@ const BookingList = () => {
                                 <p><span className="updateSpan">People: </span>{b.data.people}</p>
                                 <p><span className="updateSpan">Table No: </span>{b.table.name}</p>
                                 <p><span className="updateSpan">SpaceType: </span>{b.data.spaceType}</p>
-                                <p><span className="updateSpan">No Of Hours: </span>{b.data.hours.join(",")}</p>
+                                <p><span className="updateSpan">No Of Hours: </span>{b.data.hours.map((hour) => {
+                                    return <span>{`${hour}-${hour+1}`}</span>
+                                })}</p>
                                 <p><span className="updateSpan">Status: </span>{b.data.status}</p>
                                 <div className="btnDivBookingList">
                                     { b.data.status == 'Booked' ? <button className="btnBookingList" onClick={() => { navigateToQr(b.bookingId) }}>Check In</button> : ''}

@@ -50,7 +50,7 @@ const Booking2 = (props) => {
         if(powerOutlet == true && currentTable.hasPowerOutlet  && currentTable.hasPowerOutlet == true) {
             return true;
         } else if ( powerOutlet == false ) {
-            return true
+            return true;
         } else {
             return false;
         }
@@ -114,19 +114,26 @@ const Booking2 = (props) => {
 
     const checkPreviousBooking = (table, prevBooking) => {
         console.log("check previous booking")
+        // debugger;
         for(let i = 0; i < prevBooking.length; i++) {
+
             const previousBook = prevBooking[i];
-
-
             if(previousBook.tableId == table.tableId) {
 
-                if(previousBook.hours && previousBook.hours.length > 0) {
+                if(previousBook.hours && previousBook.hours.length > 0 && bookingTime && bookingTime.length > 0) {
+
                     const currentLow = bookingTime[0];
                     const currentHigh = bookingTime[bookingTime.length - 1];
 
                     const preHours = previousBook.hours;
-                    const previousLow = previousBook.hours[0];
-                    // const previousHigh = prevBooking.hours[]
+                    const previousLow = preHours[0];
+                    const previousHigh = preHours[preHours.length - 1];
+
+                    if( (currentLow < previousLow && currentHigh < previousLow) || ( currentLow > previousHigh && currentHigh > previousHigh )) {
+                        return true
+                    } else {
+                        return false;
+                    }
                 }  else {
                     return true
                 }
@@ -250,6 +257,9 @@ const Booking2 = (props) => {
     }
 
     const spaceSelected = (e, id, index) => {
+        if(bookingTime.length == 0) {
+            return alert("Please choose the time slot")
+        }
         if(currentTables[index] && currentTables[index].disabled && currentTables[index].disabled == true) {
             return;
         }
@@ -267,16 +277,19 @@ const Booking2 = (props) => {
     const changeBookingTime = (e, startTIme) => {
         
         const previousIndex = bookingTime.indexOf(startTIme);
+        const newArray = [...bookingTime];
         if(previousIndex != -1) {
-            bookingTime.splice(previousIndex);
-            e.currentTarget.classList.toggle('selectedTime')
+            newArray.splice(previousIndex);
+            e.currentTarget.classList.toggle('selectedTime');
+            setBookingTime(newArray);
         } else {
             if(bookingTime.length < 3) {
-                e.currentTarget.classList.toggle('selectedTime')
-                const newArray = bookingTime;
-                newArray.push(startTIme);
-                newArray.sort();
-                setBookingTime(newArray);  
+                if(newArray.length == 0 || (startTIme == newArray[0] - 1 || startTIme == newArray[newArray.length - 1] + 1)) {
+                    e.currentTarget.classList.toggle('selectedTime')
+                    newArray.push(startTIme);
+                    newArray.sort((a, b) => a-b)
+                    setBookingTime(newArray); 
+                }
             }
         }
     }
@@ -411,7 +424,7 @@ const Booking2 = (props) => {
                                     className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}` + " " + `${table.disabled == true ? "disabled" : "notDisabled"}`}
                                     id={'s'+ table.name} 
                                     key={table.id}
-                                    onClick={(e) => { console.log("clicked");  spaceSelected(e, table.tableId, index) }}
+                                    onClick={(e) => {  spaceSelected(e, table.tableId, index) }}
                                 >
                                 </p>
                             )
