@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {spaceType as SpaceTypeConstant} from './../../../constants/booking'
 const BookingS1 = (props) => {
+
+    const existingBooking = props.existingBooking;
+    const bookingId = props.bookingId;
     
     const submit = () => {
         if(!people || !bookingDate || !spaceType || !building || !level) {
@@ -8,19 +11,18 @@ const BookingS1 = (props) => {
             return;
         }
         const finalValues = {
-            people,
+            people: parseInt(people),
             bookingDate,
             spaceType,
             building,
             level
         }
-
         console.log(finalValues)
         props.changePage(2, finalValues);
     };
 
     const [people, setPeople] = useState(1);
-    const [bookingDate, setbookingDate] = useState();
+    const [bookingDate, setbookingDate] = useState('');
     const [spaceType, setspaceType] = useState();
     const [building, setbuilding] = useState();
     const [level, setlevel] = useState();
@@ -48,6 +50,33 @@ const BookingS1 = (props) => {
         };
     }, []);
 
+    useEffect(() => {
+        console.log('existingBooking', existingBooking);
+        if (existingBooking) {
+            setPeople(existingBooking.people);
+            setbookingDate(existingBooking.date);
+            setspaceType(existingBooking.spaceType);
+            setbuilding(existingBooking.locationId);
+            setlevel(existingBooking.level);
+
+            const buildingSelect = document.getElementById('building');
+            buildingSelect.disabled = false;
+            buildingSelect.options.length = 1;
+
+            const currentSelection = SpaceTypeConstant.find((element => element.name == existingBooking.spaceType));
+            currentSelection.building.forEach((b) => {
+                addBuildingOption(buildingSelect, `${b.name}`, b.id);
+            });
+
+            const selectedLevel = document.getElementById('level');
+            selectedLevel.disabled = false;
+            selectedLevel.options.length = 1;
+            currentSelection.building[0].levels.forEach((level) => {
+                addBuildingOption(selectedLevel, `level ${level}`, level);
+            })
+        }
+    }, [existingBooking]);
+
     const handleSpaceTypeChange = () => {
         const spaceTypeSelect = document.getElementById('spaceType');
         const buildingSelect = document.getElementById('building');
@@ -73,11 +102,11 @@ const BookingS1 = (props) => {
             addBuildingOption(selectedLevel, `level ${level}`, level);
         })
 
-        document.getElementById('accommodate').placeholder = `${currentSelection.accommodate} Person`;
-        document.getElementById('computer').placeholder = currentSelection.computer ? 'Yes': 'None' ;
-        document.getElementById('power').placeholder =  currentSelection.accommodate ? 'Yes': 'None' ;;
-        document.getElementById('projector').placeholder =  currentSelection.projector ? 'Yes': 'None' ;;
-        document.getElementById('screen').placeholder =  currentSelection.screen ? 'Yes': 'None' ;;
+        // document.getElementById('accommodate').placeholder = `${currentSelection.accommodate} Person`;
+        // document.getElementById('computer').placeholder = currentSelection.computer ? 'Yes': 'None' ;
+        // document.getElementById('power').placeholder =  currentSelection.accommodate ? 'Yes': 'None' ;;
+        // document.getElementById('projector').placeholder =  currentSelection.projector ? 'Yes': 'None' ;;
+        // document.getElementById('screen').placeholder =  currentSelection.screen ? 'Yes': 'None' ;;
 
     };
 
@@ -95,18 +124,13 @@ const BookingS1 = (props) => {
 
     return (
         <div>
-            {/* <h1>New Booking</h1>
-            <div className="option" id="step1">
-                <p>Step 1</p>
-            </div> */}
-
             <div id="stepOne">
                 <section id="booking1">
                     <h2>Basic Information</h2>
                     <label htmlFor="people">No. of People</label>
                     <input type="number" id="people" min="1" max="8" value={people} onChange={(e) => {setPeople(e.target.value)}} />
                     <label htmlFor="bookDate">Booking Date</label>
-                    <input type="date" id="bookDate" onChange={(e) => {setbookingDate(e.target.value)}} />
+                    <input type="date" value={bookingDate} id="bookDate" onChange={(e) => {setbookingDate(e.target.value)}} />
                 </section>
                 <section id="booking2">
                     <h2>Space Information</h2>
@@ -136,26 +160,7 @@ const BookingS1 = (props) => {
                         <option value="l3">Level 3</option> */}
                     </select>
                 </section>
-                <section className="spaceInformation">
-                    <fieldset>
-                        <legend>Selected Space Default Components</legend>
-                        <div id="spaceInformation">
-                            <label htmlFor="accommodate">Accommodates upto</label>
-                            <input type="text" id="accommodate" placeholder="4 People" disabled />
-                            <label htmlFor="computer">Computer Avaliability</label>
-                            <input type="text" id="computer" placeholder="4" disabled />
-                            <label htmlFor="power">Power Outlet Avaliability</label>
-                            <input type="text" id="power" placeholder="No" disabled />
-                            <label htmlFor="projector">Projector Avaliability</label>
-                            <input type="text" id="projector" placeholder="No" disabled />
-                            <label htmlFor="screen">Big Screen Avaliability</label>
-                            <input type="text" id="screen" placeholder="No" disabled />
-                            <label htmlFor="prefere">Kindly Select Your Prefered Equipment on The Next Step</label>
-                        </div>
-
-                    </fieldset>
-                </section>
-
+                
                 <section className="buttons">
                     <button id="cancel1">Cancel</button>
                     <button id="next1" onClick={submit}>Next</button>

@@ -1,6 +1,9 @@
 import qrScan from "./../../public/Images/qr-scan.png";
 import { QrReader } from "react-qr-reader";
-import { useState } from "react";
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router';
+import { useNavigate } from "react-router-dom";
+import fireStore from '../../utils/fireStore';
 
 // const extractUrlFromData = (data) => {
 //   try {
@@ -13,20 +16,46 @@ import { useState } from "react";
 // };
 
 const Qrpage = () => {
+  const { id } = useParams();
+
   const [qrData, setQrData] = useState("");
   const [scanning, setScanning] = useState(false);
+  const [existingBooking, setExistingBooking] = useState();
+  const lastResult = useRef();
 
-  const handleScan = (data, err) => {
-    console.log("inside handle scan")
-    if (data) {
-      setQrData(data.text);
+  const navigate = useNavigate();
 
-      const url = data.text;
-      if (url) {
-        window.location.href = url;
+
+  useEffect(() => {
+    console.log(id);
+    loadExistingBooking();
+  }, [setExistingBooking]);
+
+
+  const loadExistingBooking = async () => {
+    if (id) {
+      const booking = await fireStore.getById('bookings', id);
+      if (!booking || !booking.data()) {
+        alert('Canot find bookin id ' + id);
+      } else {
+        setExistingBooking(booking.data());
       }
+    }
+  }
 
-      setScanning(false); // Stop scanning after a successful scan
+  const handleScan = async (data, err) => {
+    if (data) {
+      if (lastResult.current === data.text) {
+        return;
+      }
+      console.log("data", data)
+      lastResult.current = data.text;
+      if (data.text == existingBooking.tableId) {
+        existingBooking.status = 'Confirmed';
+        await fireStore.updateSingleData('bookings', id, existingBooking);
+        window.location.href = '/booking-list'
+      }
+      // setScanning(false); // Stop scanning after a successful scan
     }
   };
   const startScanning = () => {

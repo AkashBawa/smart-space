@@ -33,6 +33,30 @@ function App() {
   // useEffect(() => {
   //   implementQuery()
   // }, [])
+  // const test = async() => {
+  //   const month = new Date().getMonth();
+  //   const day = new Date().getDate();
+  //   const year = new Date().getFullYear();
+  //   const toDayDate = `2023-07-15`
+
+  //   console.log(toDayDate);
+
+  //   const query = {
+  //       propertyName: 'date',
+  //       operation: "==",
+  //       value: toDayDate
+  //   }
+  //   const currentBooking = await fireStore.getByQuery("bookings", [query]);
+  //   // debugger;
+  //   if(currentBooking) {
+  //     currentBooking.forEach((booking) => {
+  //       console.log(booking.data())
+  //     })
+  //   } else {
+  //     console.log("No booking found")
+  //   }
+  // }
+  // test();
 
   return (
     <div className="App">
@@ -43,12 +67,13 @@ function App() {
           <Route path='admin/addTable' element={ <AddTables/>}/>
           <Route path='signup' element={ <Signup/>}/>
           <Route path='*' element={<Navigation/>}>
+          <Route path='contact-us' element={<ContactUs/>}/>
             <Route path='home' element={<Home/>}/>
-            <Route path='qr-page' element={<Qrpage/>}/>
+            <Route path='qr-page/:id' element={<Qrpage/>}/>
             <Route path='booking' element={<NewBooking/>}/>
+            <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='*' element={ <Login/>}/>
-          {/* <Route path='contact-us' element={ <ContactUs/>}/> */}
           <Route path='booking-list' element={ <BookingList/>}/>
 
           </Route>

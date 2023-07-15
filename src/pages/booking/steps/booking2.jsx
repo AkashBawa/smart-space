@@ -7,13 +7,16 @@ const Booking2 = (props) => {
 
     /* Calculating the map height based on the screen width and aspect ration */
     const navigator = useNavigate();
-    const [computers, setComputers] = useState(false);
+    const [computers, setComputers] = useState(null);
     const [powerOutlet, setPowerOutlets] = useState(false);
     const [monitor, setMonitor] = useState(false);
     const [projector, setProjector] = useState(false);
     const [bookingTime, setBookingTime] = useState([]);
     const [currentTables, setCurrentTables] = useState([])
     const [selectedTable, setSelectedTable] = useState(null);
+    const [previousBooking, setPreviousBooking] = useState([]);
+
+    const existingBooking = props.existingBooking;
 
     const [timeSlotes, setTimeSlotes] = useState ([
         {startTime: 8, display: '8am - 9am'},
@@ -41,56 +44,6 @@ const Booking2 = (props) => {
         });
 
     }, [])
-
-    // useEffect(() => {
-    //     if(monitor > 0) {
-    //         let newTables = currentTables;
-    //         // for(let i = 0; i < currentTables.length; i++) {
-    //         //     if(currentTables[i].comp)
-    //         // }
-    //     }
-    // }, [monitor])
-
-
-    // useEffect(() => {
-    //     console.log("projector");
-    //     console.log(projector)
-    //     let newTables = [...currentTables];
-    //     for(let i = 0; i < newTables.length; i++) {
-    //         if(projector == true) {
-    //             if(!newTables[i].hasProjector) {
-    //                 newTables[i].disabled = true;
-    //             } else {
-    //                 newTables[i].disabled = false;
-    //             }
-    //         } else {
-    //             newTables[i].disabled = false;
-    //         }
-    //     }
-    //     console.log(newTables)
-    //     setCurrentTables(newTables);
-        
-    // }, [projector])
-
-    // useEffect(() => {
-    //     console.log("power outlet")
-    //     let newTables = [...currentTables];
-    //     for(let i = 0; i < newTables.length; i++) {
-    //         if(powerOutlet == true) {
-    //             if(!newTables[i].hasPowerOutlet) {
-    //                 newTables[i].disabled = true;
-    //             } else {
-    //                 newTables[i].disabled = false;
-    //             }
-    //         } else {
-    //             newTables[i].disabled = false;
-    //         }
-    //     }
-    //     console.log(newTables)
-    //     setCurrentTables(newTables);
-        
-
-    // }, [powerOutlet])
 
     const checkPowerOutlet = (currentTable) => {
 
@@ -126,23 +79,64 @@ const Booking2 = (props) => {
     }
 
     const checkCapacity = (currentTable) => {
-        // 
+        const capacity = props.userOptions.people;
+        if(currentTable.capacity && currentTable.capacity == capacity ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    const checkPreviousBooking = () => {
-        // fetch booking of current date
+    const getPreviousBooking = async () => {
+        console.log("get previous booking")
+        const toDayDate = props.userOptions.bookingDate;
+        console.log(toDayDate);
 
-        // check if time is selected,
-        // if yes then check if time match with any booking time
-        // if time match then disabled that space
+        const query = {
+            propertyName: 'date',
+            operation: "==",
+            value: toDayDate
+        }
+
+        const currentBooking = await fireStore.getByQuery("bookings", [query]);
+        const newArray = [];
+        if(currentBooking) {
+            currentBooking.forEach((booking) => {
+                console.log(booking.data())
+                newArray.push({id: booking.id, ...booking.data()})
+            })
+            setPreviousBooking(newArray);
+        } else {
+            console.log("No booking found")
+        }   
+        return newArray;
     }
 
-    useEffect (() => {
-        let newTables = [...currentTables];
+    const checkPreviousBooking = (table, prevBooking) => {
+        console.log("check previous booking")
+        for(let i = 0; i < prevBooking.length; i++) {
+            const previousBook = prevBooking[i];
+
+
+            if(previousBook.tableId == table.tableId) {
+                console.log(previousBook.tableId , " not available")
+                return false
+            }
+        }
+        return true;
+    }
+
+    const applyFilter = (tables, previousBookingDirect = []) => {
+        const prevBooking = previousBooking.length > 0 ?  previousBooking : previousBookingDirect;
+        let newTables = tables ? [...tables] : [...currentTables];
         for(let i = 0; i < newTables.length; i++) { 
 
+            // Check previous booking
+            const isAvailable = checkPreviousBooking(newTables[i], prevBooking);
+            // console.log("is available ", newTables[i].tableId, )
+            // const isBooked =
             // check capacity
-
+            const isCapacityMatch = checkCapacity(newTables[i]);
 
             // check Power Outlet
             const isPowerOutlet = checkPowerOutlet(newTables[i]);
@@ -155,26 +149,55 @@ const Booking2 = (props) => {
 
             // Check computers
 
-            // Check previous booking
+            
 
-            if(isPowerOutlet && isMonitor && projector) {
+
+            if(isPowerOutlet && isMonitor && projector && isCapacityMatch && isAvailable) {
                 newTables[i].disabled = false
             } else {
                 newTables[i].disabled = true 
             }
         }
-
         setCurrentTables(newTables);
-    }, [monitor, projector, powerOutlet, computers])
+        
+    }
+
+    useEffect (() => {
+       applyFilter()
+
+    }, [powerOutlet, monitor, projector, bookingTime, computers ])
+
 
 
     useEffect(() => {
         fetchTables();
+        
     }, [])
+
+    useEffect(() => {
+        console.log('existingBooking', existingBooking);
+        if (existingBooking) {
+            setComputers(existingBooking.computers);
+            setPowerOutlets(existingBooking.powerOutlet);
+            setMonitor(existingBooking.monitor);
+            setProjector(existingBooking.projector);
+            setSelectedTable(existingBooking.tableId);
+            if (existingBooking.hours) {
+                setBookingTime(existingBooking.hours);
+                existingBooking.hours.forEach(h => {
+                    const elm = document.getElementById(`time-${h}`);
+                    if (!elm.classList.contains('selectedTime')) {
+                        elm.classList.add('selectedTime');
+                    }
+                    
+                })
+            }
+        }
+    }, [existingBooking]);
 
     window.dispatchEvent(new Event('resize'));
 
-    const changeNameToInt = (tables) => {
+    const changeNameToInt = (tables, previousBooking = []) => {
         for(let i = 0; i < tables.length; i++) {
             tables[i].name = parseInt(tables[i].name)
         }
@@ -182,7 +205,8 @@ const Booking2 = (props) => {
             return a.name - b.name
         })
         console.log(tables)
-        setCurrentTables(tables)
+        setCurrentTables(tables);
+        applyFilter(tables, previousBooking);
     }
 
 
@@ -210,15 +234,15 @@ const Booking2 = (props) => {
             tables.forEach((table) => {
                 newArray.push({ tableId: table.id, ...table.data(), disabled: false })
             })
-            changeNameToInt(newArray)
+            const previousBooking = await getPreviousBooking();
+            changeNameToInt(newArray, previousBooking)
         }   
     }
 
-    const applyFilter = () => {
-
-    }
-
-    const spaceSelected = (e, id) => {
+    const spaceSelected = (e, id, index) => {
+        if(currentTables[index] && currentTables[index].disabled && currentTables[index].disabled == true) {
+            return;
+        }
         setSelectedTable(id)
     }
 
@@ -242,33 +266,53 @@ const Booking2 = (props) => {
                 const newArray = bookingTime;
                 newArray.push(startTIme);
                 setBookingTime(newArray);  
-                // console.log(newArray);
             }
         }
     }
 
     const bookingSubmit = async () => {
-        const userId = localStorage.getItem('userId');
-        const obj = {
-            userId: userId ? userId : 'abcd',
-            tableId: selectedTable,
-            date: props.userOptions.bookingDate,
-            locationId:  props.userOptions.building,
-            people: props.userOptions.people,
-            spaceType: props.userOptions.spaceType,
-            hours: bookingTime,
-            status: 'created',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-
+        console.log('props', props);
+        if (validateSubmit()) {
+            const userId = localStorage.getItem('userId');
+            const obj = {
+                userId: userId ? userId : 'abcd',
+                tableId: selectedTable,
+                date: props.userOptions.bookingDate,
+                locationId:  props.userOptions.building,
+                level: props.userOptions.level,
+                people: props.userOptions.people,
+                spaceType: props.userOptions.spaceType,
+                hours: bookingTime,
+                computers: computers,
+                powerOutlet: powerOutlet,
+                monitor: monitor,
+                projector: projector,
+                status: 'Booked',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            }
+            console.log('obj', obj);
+            if (props.bookingId) {
+                const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
+            } else {
+                const saveData = await fireStore.addDataToCollection('bookings', obj);
+            }
+            
+            navigator("/booking-list");
         }
-        console.log('building',props);
-        const saveData = await fireStore.addDataToCollection('bookings', obj);
-        navigator("/booking-list")
-
     }
 
-
+    const validateSubmit = () => {
+        if (!bookingTime) {
+            alert('Please select Booking Time');
+            return false;
+        } 
+        if (!selectedTable) {
+            alert('Please select the Space');
+            return false;
+        }
+        return true;
+    }
 
     return (
         <div>
@@ -298,7 +342,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter2">Power Outlet</label>
                             <section className="bookingFilter" id="filter2">
                                 <label className="switch" htmlFor='powerOutlet'>
-                                    <input type="checkbox" id='powerOutlet' value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked)}} />
+                                    <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -307,7 +351,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter3">Monitor</label>
                             <section className="bookingFilter" id="filter3">
                                 <label className="switch">
-                                    <input type="checkbox" value={monitor} onChange={(e) => {setMonitor(e.target.checked)}} />
+                                    <input type="checkbox" checked={monitor} value={monitor} onChange={(e) => {setMonitor(e.target.checked)}} />
                                     <span className="slider round"></span>
                                 </label>
                             </section>
@@ -316,7 +360,7 @@ const Booking2 = (props) => {
                             <label htmlFor="filter4">Projector</label>
                             <section className="bookingFilter" id="filter4">
                                 <label className="switch">
-                                    <input type="checkbox" value={projector} onChange={(e) => { 
+                                    <input type="checkbox" checked={projector} value={projector} onChange={(e) => { 
                                         console.log(e.target.checked);
                                         setProjector(e.target.checked)}} />
                                     <span className="slider round"></span>
@@ -335,7 +379,7 @@ const Booking2 = (props) => {
                         {
                             timeSlotes && timeSlotes.map((time,index) => {
                                 return (
-                                    <p className='timeSelected' key={`time${index}`} onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
+                                    <p className='timeSelected' id={`time-${time.startTime}`} key={`time${index}`} onClick={ (e) => {changeBookingTime(e, time.startTime)}}>
                                         {time.display}
                                     </p>
                                 )
@@ -350,83 +394,18 @@ const Booking2 = (props) => {
                 <h2>Please select the space</h2>
                 <div className="booking-content">
                     {
-                        currentTables && currentTables.map((table) => {
+                        currentTables && currentTables.map((table, index) => {
                             return (
                                 <p 
                                     className={"n"+table.capacity + " " + `${selectedTable === table.tableId ? "selected" : ""}` + " " + `${table.disabled == true ? "disabled" : "notDisabled"}`}
                                     id={'s'+ table.name} 
                                     key={table.id}
-                                    onClick={(e) => { spaceSelected(e, table.tableId,) }}
-
+                                    onClick={(e) => { console.log("clicked");  spaceSelected(e, table.tableId, index) }}
                                 >
                                 </p>
                             )
                         })
                     }
-                    {/* <p className="n2" id="s1"></p>
-                    <p className="n2" id="s2"></p>
-                    <p className="n2" id="s3"></p>
-                    <p className="n2" id="s4"></p>
-                    <p className="n4" id="s5"></p>
-                    <p className="n4" id="s6"></p>
-                    <p className="n4" id="s7"></p>
-                    <p className="n4" id="s8"></p>
-                    <p className="n4" id="s9"></p>
-                    <p className="n4" id="s10"></p>
-                    <p className="n4" id="s11"></p>
-                    <p className="n1" id="s12"></p>
-                    <p className="n1" id="s13"></p>
-                    <p className="n1" id="s14"></p>
-                    <p className="n1" id="s15"></p>
-                    <p className="n4" id="s16"></p>
-                    <p className="n4" id="s17"></p>
-                    <p className="n4" id="s18"></p>
-                    <p className="n1" id="s19"></p>
-                    <p className="n1" id="s20"></p>
-                    <p className="n1" id="s21"></p>
-                    <p className="n1" id="s22"></p>
-                    <p className="n1" id="s23"></p>
-                    <p className="n1" id="s24"></p>
-                    <p className="n1" id="s25"></p>
-                    <p className="n1" id="s26"></p>
-                    <p className="n1" id="s27"></p>
-                    <p className="n1" id="s28"></p>
-                    <p className="n1" id="s29"></p>
-                    <p className="n1" id="s30"></p>
-                    <p className="n1" id="s31"></p>
-                    <p className="n1" id="s32"></p>
-                    <p className="n1" id="s33"></p>
-                    <p className="n1" id="s34"></p>
-                    <p className="n1" id="s35"></p>
-                    <p className="n8" id="s36"></p>
-                    <p className="n8" id="s37"></p>
-                    <p className="n4" id="s38"></p>
-                    <p className="n4" id="s39"></p>
-                    <p className="n4" id="s40"></p>
-                    <p className="n4" id="s41"></p>
-                    <p className="n4" id="s42"></p>
-                    <p className="n8" id="s43"></p>
-                    <p className="n4" id="s44"></p>
-                    <p className="n4" id="s45"></p>
-                    <p className="n4" id="s46"></p>
-                    <p className="n4" id="s47"></p>
-                    <p className="n16" id="s48"></p>
-                    <p className="n4" id="s49"></p>
-                    <p className="n4" id="s50"></p>
-                    <p className="n4" id="s51"></p>
-                    <p className="n8" id="s52"></p>
-                    <p className="n4" id="s53"></p>
-                    <p className="n4" id="s54"></p>
-                    <p className="n4" id="s55"></p>
-                    <p className="n4" id="s56"></p>
-                    <p className="n4" id="s57"></p>
-                    <p className="n4" id="s58"></p>
-                    <p className="n4" id="s59"></p>
-                    <p className="n4" id="s60"></p>
-                    <p className="n4" id="s61"></p>
-                    <p className="n4" id="s62"></p>
-                    <p className="n4" id="s63"></p> */}
-
                 </div>
 
                 <section className="buttons">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import fireStore from '../../../utils/fireStore';
+import fireStore from "../../../utils/fireStore";
 import { spaceType } from "../../../constants/booking";
 
 const BookingList = () => {
@@ -8,42 +8,69 @@ const BookingList = () => {
     const [bookingList, setBookingList] = useState([]);
 
     const handleNewBookingClick = () => {
-        navigate("/booking1");
+        navigate("/booking");
     };
+
+    const navigateToQr = (bookingId) => {
+        navigate("/qr-page/" + bookingId);
+    };
+
+    const canceledBooking = async (booking) => {
+        if (window.confirm("Are you sure you want to cancel this booking") == true) {
+            // text = "You pressed OK!";
+            booking.data.status = 'Cancelled';
+            await fireStore.updateSingleData('bookings', booking.bookingId, booking.data);
+            window.location.reload(); 
+        } else {
+            // text = "You canceled!";
+        }
+    }
+
+    const navigateToRechedule = (bookingId) => {
+        navigate("/booking/" + bookingId);
+    }
+
+    const checkoutBooking = async (booking) => {
+        if (window.confirm("Are you sure you want to checkout this booking") == true) {
+            // text = "You pressed OK!";
+            booking.data.status = 'Checkout';
+            await fireStore.updateSingleData('bookings', booking.bookingId, booking.data);
+            window.location.reload(); 
+        } else {
+            // text = "You canceled!";
+        }
+    }
 
     useEffect(() => {
         //const res = await fireStore.getByQuery('booking', []);
-       ///console.log('bookingList',res);
-       fetchBookingList();
-    }, [])
+        ///console.log('bookingList',res);
+        fetchBookingList();
+    }, []);
 
-    const fetchBookingList = async() => {
-        const locationRes = await fireStore.getByQuery('locations', []);
-        const tableRes = await fireStore.getByQuery('tables', []);
-        const res = await fireStore.getByQuery('bookings', []);
-        
-        let query = {
-            propertyName: 'userId',
-            operation: "==",
-            value: "abcd"
-        }
-        const bookings = await fireStore.getByQuery('bookings', [query]);
+    const fetchBookingList = async () => {
+        const locationRes = await fireStore.getByQuery("locations", []);
+        const tableRes = await fireStore.getByQuery("tables", []);
+        const res = await fireStore.getByQuery("bookings", []);
 
-        
-        let responseBookingList = res.docs.map(doc => {
+        let responseBookingList = res.docs.map((doc) => {
             const bookingData = doc.data();
-            const location = locationRes.docs.find(loc => loc.id == bookingData.locationId).data();
-            const table = tableRes.docs.find(tbl => tbl.id == bookingData.tableId).data();
+            const location = locationRes.docs
+                .find((loc) => loc.id == bookingData.locationId)
+                .data();
+            const table = tableRes.docs
+                .find((tbl) => tbl.id == bookingData.tableId)
+                .data();
             return {
-                ...bookingData,
+                data: bookingData,
+                bookingId: doc.id,
                 location: location,
-                table: table
+                table: table,
             };
         });
 
-        console.log('responseBookingList',responseBookingList);
+        console.log("responseBookingList", responseBookingList);
         setBookingList(responseBookingList);
-    }
+    };
 
     return (
         <div className="BookingList">
@@ -53,48 +80,54 @@ const BookingList = () => {
                     New Booking
                 </button>
             </div>
+
+
             <div className="mainBookingList">
                 <div className="message-div">
+                    <div className="dateMonth">
+                    <button>day</button>
+                    <button>weeks</button>
+                    <button>Month</button>
+                    </div>
+                  
+                    <div className="calender">
+
+                        <input type="date" />
+                    </div>
                     <div>
                         <h3>Message</h3>
                     </div>
                     <div>
                         <ul>
-                            <li>
-                                type the messge here
-                            </li>
-                            <li>
-                                the library will be close on sunday
-                            </li>
+                            <li>type the messge here</li>
+                            <li>the library will be close on sunday</li>
                         </ul>
                     </div>
                 </div>
 
-                {bookingList.map(b => {
-                    return (
-                        <div className="dateUpadte">
-                            <h3></h3>
-                            <p>date: {b.date}</p>
-                            <p>Location: {b.location.name}</p>
-                            <p>People: {b.people}</p>
-                            <p>Table No: {b.table.name}</p>
-                            <p>SpaceType: {b.spaceType}</p>
-                            <p>No Of Hours: {b.hours.join(",")}</p>
-                            {/* <button>cancel</button>
-                            <button>Reschedule</button> */}
-                        </div>
-                    )
-                })}
-
-                
-
-                <div className="calender">
-                    <h3>Month</h3>
-                    <input type="date" />
-
+                <div>
+                    {bookingList.map((b) => {
+                        return (
+                            <div key={b.bookingId} className="dateUpadte">
+                                <h3>{b.date}</h3>
+                                <p>Location: {b.location.name} (Level: {b.data.level})</p>
+                                <p>People: {b.data.people}</p>
+                                <p>Table No: {b.table.name}</p>
+                                <p>SpaceType: {b.data.spaceType}</p>
+                                <p>No Of Hours: {b.data.hours.join(",")}</p>
+                                <p>Status: {b.data.status}</p>
+                                <div>
+                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToQr(b.bookingId) }}>Check In</button> : ''}
+                                    { b.data.status == 'Booked' ? <button onClick={() => { navigateToRechedule(b.bookingId) }}>Rechedule</button> : ''}
+                                    { b.data.status == 'Booked' ? <button onClick={() => { canceledBooking(b) }}>Cancel</button> : ''}
+                                    { b.data.status == 'Confirmed' ? <button onClick={() => { checkoutBooking(b) }}>Checkout</button> : ''}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
-            </div>
 
+            </div>
         </div>
     );
 };
