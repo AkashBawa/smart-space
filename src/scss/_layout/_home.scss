@@ -12,14 +12,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 10px;
 
   h2{
     width: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 
   }
   p{
-    margin: 10px;
+    margin: 20px 0px 30px;
   }
 }
 
@@ -28,7 +29,11 @@
   height: 48px;
   background-color: #ee5922;
   border-radius: 10px;
+  border:0px;
+  font-size: 16px;
+  font-weight: 600;
   color: white;
+  cursor: pointer;
 }
 
 .home-container {

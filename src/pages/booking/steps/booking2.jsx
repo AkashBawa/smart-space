@@ -426,6 +426,7 @@ const Booking2 = (props) => {
                                     key={table.id}
                                     onClick={(e) => {  spaceSelected(e, table.tableId, index) }}
                                 >
+                                    <img src=''/>
                                 </p>
                             )
                         })
