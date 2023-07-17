@@ -498,7 +498,8 @@ span {
     }
 
     .booking-content .selected {
-      background-color: rgba(255, 166, 0, 0.4) !important;
+      // background-color: rgba(255, 166, 0, 0.4) !important;
+      filter: invert(29%) sepia(93%) saturate(1106%) hue-rotate(89deg) brightness(94%) contrast(107%);
       cursor: pointer;
       border-radius: 30px;
       margin: 5px;
@@ -516,11 +517,13 @@ span {
       margin: 5px;
       margin-left: 15px;
       margin-right: 6px;
+      margin-bottom: 0;
     }
 
     .disabled {
-      background-color: gray !important;
-      opacity: 0.8;
+      // background-color: gray !important;
+      opacity: 1;
+      filter: grayscale(100%);
       cursor: not-allowed;
       // border-radius: 30px;
       // margin: 5px;

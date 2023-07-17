@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import fireStore from "../../../utils/fireStore";
 import { spaceType } from "../../../constants/booking";
 
-const BookingList = () => {
+const BookingList = (props) => {
     const navigate = useNavigate();
-    const [bookingList, setBookingList] = useState([]);
+    const [bookingList, setBookingList] = useState(props.bookingList);
 
     const handleNewBookingClick = () => {
         navigate("/booking");
@@ -41,36 +41,36 @@ const BookingList = () => {
         }
     }
 
-    useEffect(() => {
-        //const res = await fireStore.getByQuery('booking', []);
-        ///console.log('bookingList',res);
-        fetchBookingList();
-    }, []);
+    // useEffect(() => {
+    //     //const res = await fireStore.getByQuery('booking', []);
+    //     ///console.log('bookingList',res);
+    //     fetchBookingList();
+    // }, []);
 
-    const fetchBookingList = async () => {
-        const locationRes = await fireStore.getByQuery("locations", []);
-        const tableRes = await fireStore.getByQuery("tables", []);
-        const res = await fireStore.getByQuery("bookings", []);
+    // const fetchBookingList = async () => {
+    //     const locationRes = await fireStore.getByQuery("locations", []);
+    //     const tableRes = await fireStore.getByQuery("tables", []);
+    //     const res = await fireStore.getByQuery("bookings", []);
 
-        let responseBookingList = res.docs.map((doc) => {
-            const bookingData = doc.data();
-            const location = locationRes.docs
-                .find((loc) => loc.id == bookingData.locationId)
-                .data();
-            const table = tableRes.docs
-                .find((tbl) => tbl.id == bookingData.tableId)
-                .data();
-            return {
-                data: bookingData,
-                bookingId: doc.id,
-                location: location,
-                table: table,
-            };
-        });
+    //     let responseBookingList = res.docs.map((doc) => {
+    //         const bookingData = doc.data();
+    //         const location = locationRes.docs
+    //             .find((loc) => loc.id == bookingData.locationId)
+    //             .data();
+    //         const table = tableRes.docs
+    //             .find((tbl) => tbl.id == bookingData.tableId)
+    //             .data();
+    //         return {
+    //             data: bookingData,
+    //             bookingId: doc.id,
+    //             location: location,
+    //             table: table,
+    //         };
+    //     });
 
-        console.log("responseBookingList", responseBookingList);
-        setBookingList(responseBookingList);
-    };
+    //     console.log("responseBookingList", responseBookingList);
+    //     setBookingList(responseBookingList);
+    // };
 
     return (
         <div className="BookingList">

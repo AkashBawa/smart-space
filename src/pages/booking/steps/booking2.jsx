@@ -3,6 +3,12 @@ import fireStore from '../../../utils/fireStore';
 import { useNavigate } from "react-router-dom";
 import localStorage from '../../../utils/localStorage';
 
+// logoImages;
+import singleLogo from './../../../Images/icon_png_map/ICON2-23.png';
+import TwoLogo from './../../../Images/icon_png_map/ICON2-21.png';
+import FourLogo from './../../../Images/icon_png_map/ICON2-22.png';
+import MultipleLogo from './../../../Images/icon_png_map/ICON2-25.png'
+
 const Booking2 = (props) => {
 
     /* Calculating the map height based on the screen width and aspect ration */
@@ -322,7 +328,7 @@ const Booking2 = (props) => {
                 const saveData = await fireStore.addDataToCollection('bookings', obj);
             }
             
-            navigator("/booking-list");
+            navigator("/home");
         }
     }
 
@@ -426,7 +432,15 @@ const Booking2 = (props) => {
                                     key={table.id}
                                     onClick={(e) => {  spaceSelected(e, table.tableId, index) }}
                                 >
-                                    <img src=''/>
+                                    {
+                                        table.capacity == 1 ? <img src={singleLogo}/> : (
+                                            table.capacity == 2 ? <img src={TwoLogo}/>: (
+                                                table.capacity == 4 ? <img src={FourLogo}/> : <img src={MultipleLogo}/>
+                                            )
+                                            
+                                            )
+                                    }
+                                    
                                 </p>
                             )
                         })
