@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import fireStore from "../../utils/fireStore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import LocalStorage from './../../utils/localStorage';
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -12,13 +13,16 @@ const Signup = () => {
   const navigator = useNavigate();
 
   const signup = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    console.log(fireStore.firebaseAuth);
     createUserWithEmailAndPassword(fireStore.firebaseAuth, email, password)
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        debugger
-        const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid });
+        const newUser = await fireStore.addDataToCollection("users", { name, lName, email, id: user.uid }, user.uid);
+        // debugger;
+        LocalStorage.setItem('userId', newUser.id);
+        console.log("get value from local Storage ", LocalStorage.getItem("userId"))
         alert("Sign up successful");
         navigator("/login");
         // ...
@@ -78,9 +82,16 @@ const Signup = () => {
               id="login-password"
               required
               placeholder="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <button id="log-in-btn" onClick={signup}>
               Signup
+            </button>
+            <button onClick={(e) => { navigator("/login") }}>
+                Login
             </button>
           </form>
         </div>

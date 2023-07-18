@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, where } from "@firebase/firestore";
+import { addDoc, collection, getDocs, getDoc, getFirestore, where, query, doc, updateDoc, setDoc, serverTimestamp } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -34,13 +34,19 @@ const firebaseAuth = getAuth(app);
 const firestore = getFirestore(app)
 
 
-const  addDataToCollection = async (collectionName, data) => {
-
+const  addDataToCollection = async (collectionName, data, customId = null) => {
   try {
-    const ref = collection(firestore, collectionName) 
-    const docRef = await addDoc(ref, data);
-    console.log(docRef.id);
-    return docRef;
+    
+    if (customId) {
+      const ref = doc(firestore, collectionName, customId);
+      const dataRef = await setDoc(ref, data);
+      return {id: customId};
+    } else {
+      const ref = collection(firestore, collectionName);
+      const docRef = await addDoc(ref, data);
+      return docRef;
+    }
+    
   } catch (err) {
     console.log("Error in adding new document", err)
   }
@@ -58,21 +64,68 @@ const  getAllDataFromCollection = async (collectionName) => {
   
 } 
 
-const getByQuery = async (collectionName, query) => {
+/**
+ * 
+ * @param {name of the collection} collectionName 
+ * @param { It is in array of object with properties {propertyName, operation, value}} querys
+ * @returns 
+ */
+const getByQuery = async (collectionName, querys) => {
   try {
     const ref = collection(firestore, collectionName) 
-    const docRef = await getDocs(ref, where(query));
+
+    const queryArray = [];
+    querys.forEach((q) => {
+      queryArray.push(where(`${q.propertyName}`, q.operation, q.value));
+    })
+
+    const myQuery = query(ref, ...queryArray);
+
+    const docRef = await getDocs(myQuery);
     return docRef;
   } catch (err) {
     console.log("Error in getting document by query", err)
   }
 }
 
+const getById = async (collectionName, id) => {
+  try {
+    const docRef = doc(firestore, collectionName, id);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+  } catch (err) {
+    console.log("Error in getting document by id", err)
+  }
+}
+
+
+/**
+ * 
+ * @param {Name of collection} collectionName 
+ * @param {DocumentId that need to update} documentId 
+ * @param {It is in form of object with key value pair} dataToUpdate 
+ */
+const updateSingleData = async (collectionName, documentId, dataToUpdate ) => {
+
+  try {
+
+    const singleUpdateQuery = doc(firestore, collectionName, documentId);
+    const afterUpdate = await updateDoc(singleUpdateQuery, {...dataToUpdate, timestamp: serverTimestamp()})
+  
+  } catch (err) {
+    console.log("error in updating single documet", err)
+  }
+ 
+
+}
+
 export default {
+  getById,
   firebaseAuth,
   firestore,
   addDataToCollection,
   getAllDataFromCollection,
-  getByQuery
+  getByQuery,
+  updateSingleData
 }
 

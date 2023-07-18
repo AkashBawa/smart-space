@@ -1,6 +1,6 @@
 
 import './scss/app.scss';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Import components that required for routing here
 import Login from './pages/auth/login';
@@ -14,7 +14,48 @@ import NewBooking from './pages/booking/newBooking';
 import Reschedule from './pages/booking/reschedule';
 import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
+import ContactUs from './pages/contact-us';
+import BookingList from './pages/booking/steps/booking-list';
+import BookingMonth from './pages/booking/steps/booking-month';
 function App() {
+
+  // const implementQuery = async () => {
+  //   const data = await fireStore.getByQuery('tables',[
+  //     {propertyName: 'locationId', operation: '==', value:'aRcQTIOekeElB2Za0Ja1'},
+  //     {propertyName: 'capacity', operation: '==', value: 4},
+  //   ]);
+  //   data.forEach((table) => {
+  //     console.log(table.data())
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   implementQuery()
+  // }, [])
+  // const test = async() => {
+  //   const month = new Date().getMonth();
+  //   const day = new Date().getDate();
+  //   const year = new Date().getFullYear();
+  //   const toDayDate = `2023-07-15`
+
+  //   console.log(toDayDate);
+
+  //   const query = {
+  //       propertyName: 'date',
+  //       operation: "==",
+  //       value: toDayDate
+  //   }
+  //   const currentBooking = await fireStore.getByQuery("bookings", [query]);
+  //   // debugger;
+  //   if(currentBooking) {
+  //     currentBooking.forEach((booking) => {
+  //       console.log(booking.data())
+  //     })
+  //   } else {
+  //     console.log("No booking found")
+  //   }
+  // }
+  // test();
 
   return (
     <div className="App">
@@ -25,11 +66,17 @@ function App() {
           <Route path='admin/addTable' element={ <AddTables/>}/>
           <Route path='signup' element={ <Signup/>}/>
           <Route path='*' element={<Navigation/>}>
+          <Route path='contact-us' element={<ContactUs/>}/>
             <Route path='home' element={<Home/>}/>
-            <Route path='qr-page' element={<Qrpage/>}/>
+            <Route path='booking-month' element={<BookingMonth/>}/>
+            <Route path='qr-page/:id' element={<Qrpage/>}/>
             <Route path='booking' element={<NewBooking/>}/>
+            <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
-            <Route path='*' element={ <Home/>}/>
+            <Route path='booking-month' element={<BookingMonth/>}/>
+            <Route path='*' element={ <Login/>}/>
+          <Route path='booking-list' element={ <BookingList/>}/>
+
           </Route>
         </Routes>
 
