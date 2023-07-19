@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import fireStore from "../utils/fireStore";
 import { useEffect, useState } from "react";
 import BookingList from "./booking/steps/booking-list";
+import BookingListDemo from "./booking/steps/bookig-list-demo";
 
 const Home = () => {
 
@@ -63,7 +64,7 @@ const Home = () => {
           </div>
 
         ) : (
-            <BookingList bookingList = {bookingList}/>
+            <BookingListDemo bookingList = {bookingList}/>
         )
       }
     </div>
