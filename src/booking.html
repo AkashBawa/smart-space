@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <script src="../main.js" defer></script>
+    <title>Smart Space</title>
+</head>
+
+<body>
+    <header>
+        <img src="./public/Images/Langara.png" alt="Langara" class="logo">
+        <nav>
+            <ul>
+                <li><a href="../src/index.html">Home</a></li>
+                <li id="book2"><a href="./booking.html">Booking</a></li>
+                <li><a href="">Reschedule</a></li>
+            </ul>
+        </nav>
+        <section class="profile"><span>A</span></section>
+    </header>
+    <main>
+        <div class="option" id="step1">
+            <p>Step 1</p>
+        </div>
+
+        <div id="stepOne">
+            <section id="booking1">
+                <h2>Basic Information</h2>
+                <label for="people">No. of People</label>
+                <input type="number" id="people" min="1" max="8">
+                <label for="bookDate">Date</label>
+                <input type="date" id="bookDate">
+            </section>
+            <section id="booking2">
+                <h2>Space Information</h2>
+                <label for="building">Building</label>
+                <select name="building" id="building">
+                    <option value="Library Building">Library Building</option>
+                    <option value="A">A Building</option>
+                    <option value="B">B Building</option>
+                    <option value="T">T Building</option>
+                </select>
+                <label for="level">Level</label>
+                <select name="level" id="level">
+                    <option value="l1">Level 1</option>
+                    <option value="l2">Level 2</option>
+                    <option value="l3">Level 3</option>
+                </select>
+            </section>
+            <section class="buttons">
+                <button id="cancel1">Cancel</button>
+                <button id="next1">Next</button>
+            </section>
+
+        </div>
+
+
+        <div class="option" id="step2">
+            <p>Step 2</p>
+        </div>
+        <div id="secondBooking">
+            <h2>Available Selection</h2>
+                <section id="filters">
+                    <article>
+                        <h3>Equipment</h3>
+                        <p>Additional needs</p>
+                    </article>
+                    <div id="filterSection">
+
+                        <form action="get">
+                            <label for="filter1">Power Outlet</label>
+                            <Section class="bookingFilter" id="filter1">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter2">Computers</label>
+                            <Section class="bookingFilter" id="filter2">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter3">Monitor</label>
+                            <Section class="bookingFilter" id="filter3">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter4">Projector</label>
+                            <Section class="bookingFilter" id="filter4">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                        <form action="get">
+                            <label for="filter5">Chairs</label>
+                            <Section class="bookingFilter" id="filter5">
+                                <p class="neg">-</p>
+                                <p class="counter">0</p>
+                                <p class="pos">+</p>
+                            </Section>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="timing">
+                    <article>
+                        <h3>Booking Time</h3>
+                        <h4>Maximum 3 Hours</h4>
+                    </article>
+                    <div>
+                        <p class="timeSelect">8am - 9am</p>
+                        <p class="timeSelect">9am - 10am</p>
+                        <p class="timeSelect">10am - 11am</p>
+                        <p class="timeSelect">11am - 12pm</p>
+                        <p class="timeSelect">12pm - 1pm</p>
+                        <p class="timeSelect">1pm - 2pm</p>
+                        <p class="timeSelect">2pm - 3pm</p>
+                        <p class="timeSelect">3pm - 4pm</p>
+                        <p class="timeSelect">4pm - 5pm</p>
+                        <p class="timeSelect">5pm - 6pm</p>
+                        <p class="timeSelect">6pm - 7pm</p>
+                        <p class="timeSelect">7pm - 8pm</p>
+
+                    </div>
+                </section>
+            </div>
+            <section class="buttons">
+                <button id="cancel2">Cancel</button>
+                <button id="next2">Next</button>
+            </section>
+        </div>
+        <div class="map">
+            <h2>Library</h2>
+            <h3>Please select the space</h3>
+
+            <div class="booking-content">
+
+                <p class="n2" id="s1"></p>
+                <p class="n2" id="s2"></p>
+                <p class="n2" id="s3"></p>
+                <p class="n2" id="s4"></p>
+                <p class="n4" id="s5"></p>
+                <p class="n4" id="s6"></p>
+                <p class="n4" id="s7"></p>
+                <p class="n4" id="s8"></p>
+                <p class="n4" id="s9"></p>
+                <p class="n4" id="s10"></p>
+                <p class="n4" id="s11"></p>
+                <p class="n1" id="s12"></p>
+                <p class="n1" id="s13"></p>
+                <p class="n1" id="s14"></p>
+                <p class="n1" id="s15"></p>
+                <p class="n4" id="s16"></p>
+                <p class="n4" id="s17"></p>
+                <p class="n4" id="s18"></p>
+                <p class="n1" id="s19"></p>
+                <p class="n1" class="n1" id="s20"></p>
+                <p class="n1" id="s21"></p>
+                <p class="n1" id="s22"></p>
+                <p class="n1" id="s23"></p>
+                <p class="n1" id="s24"></p>
+                <p class="n1" id="s25"></p>
+                <p class="n1" id="s26"></p>
+                <p class="n1" id="s27"></p>
+                <p class="n1" id="s28"></p>
+                <p class="n1" id="s29"></p>
+                <p class="n1" id="s30"></p>
+                <p class="n1" id="s31"></p>
+                <p class="n1" id="s32"></p>
+                <p class="n1" id="s33"></p>
+                <p class="n1" id="s34"></p>
+                <p class="n1" id="s35"></p>
+                <p class="n8" id="s36"></p>
+                <p class="n8" id="s37"></p>
+                <p class="n4" id="s38"></p>
+                <p class="n4" id="s39"></p>
+                <p class="n4" id="s40"></p>
+                <p class="n4" id="s41"></p>
+                <p class="n4" id="s42"></p>
+                <p class="n8" id="s43"></p>
+                <p class="n4" id="s44"></p>
+                <p class="n4" id="s45"></p>
+                <p class="n4" id="s46"></p>
+                <p class="n4" id="s47"></p>
+                <p class="n8" id="s48"></p>
+                <p class="n4" id="s49"></p>
+                <p class="n4" id="s50"></p>
+                <p class="n4" id="s51"></p>
+                <p class="n8" id="s52"></p>
+                <p class="n4" id="s53"></p>
+                <p class="n4" id="s54"></p>
+                <p class="n4" id="s55"></p>
+                <p class="n4" id="s56"></p>
+                <p class="n4" id="s57"></p>
+                <p class="n4" id="s58"></p>
+                <p class="n4" id="s59"></p>
+                <p class="n4" id="s60"></p>
+                <p class="n4" id="s61"></p>
+                <p class="n4" id="s62"></p>
+                <p class="n4" id="s63"></p>
+
+            </div>
+    </main>
+    <footer>
+        <h2>2023 (C) Smart@Space</h2>
+        <img src="./public/Images/Logo/Logo Blue.png" alt="Footer Logo">
+    </footer>
+
+</body>
+
+</html>

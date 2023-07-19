@@ -1,0 +1,14 @@
+@import"navigation";
+@import "header";
+@import "main-content";
+@import "footer";
+@import "booking";
+
+body {
+    max-width: 2100px;
+    margin: auto auto;
+}
+
+main {
+    padding-top: 2rem;
+}

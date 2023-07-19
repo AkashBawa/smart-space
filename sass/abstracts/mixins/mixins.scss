@@ -1,0 +1,74 @@
+@mixin centered {
+    margin: unset auto;
+    display: block;
+}
+
+@mixin rounded {
+    border-radius: 50%;
+}
+
+@mixin centered-rounded {
+    @include centered;
+    @include rounded;
+}
+
+@mixin cornered($amt: 4px) {
+    border-radius: $amt;
+}
+
+@mixin border($w: 1px, $s: solid, $c: $accent-m) {
+    border: $w $s $c;
+}
+
+@mixin iFrameVideo($w: 560, $h: 315) {
+    height: auto;
+    width: 100%;
+    aspect-ratio: calc($w/$h);
+}
+
+@mixin iFrameVideoLegacy($w: 560, $h: 315) {
+    position: relative;
+    padding-bottom: calc($h/$w*100%);
+    height: 0;
+    padding-top: 25px;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin polyClip () {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 90%, 0 100%);
+}
+
+@mixin advancedPolyClip($edge:bottom, $amt:5%) {
+    $tl: 0 0;
+    $tm: 50% 0;
+    $tr: 100% 0;
+    $rm: 100% 50%;
+    $br: 100% 100%;
+    $bm: 50% 100%;
+    $bl: 0 100%;
+    $lm: 0 50%;
+
+    @if $edge == top {
+        $tm: 50% $amt;
+    }
+    @if $edge == bottom {
+        $bm: 50% calc(100% - $amt);
+    }
+    @if $edge == right {
+        $rm: calc(100% - $amt) 50% ;
+    }
+    @if $edge == left {
+        $lm:  $amt 50% ;
+    }
+
+    clip-path: polygon($tl, $tm, $tr, $rm, $br, $bm, $bl, $lm);
+
+}

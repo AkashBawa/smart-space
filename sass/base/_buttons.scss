@@ -1,0 +1,15 @@
+/* Buttons ======================= */
+button {
+    // bottom: 1px solid $contrast-ml;
+    @include cornered(2px);
+    @include border();
+}
+button.weird{
+    @include border(5px, solid, papayawhip)
+}
+
+button.ultra-round {
+    @include cornered();
+}
+
+
