@@ -891,7 +891,7 @@ span {
     margin-bottom: 15px;
 
     .updateSpan{
-      font-weight: bold;
+      // font-weight: bold;
       padding-right: 2px;
     }
 
@@ -1008,8 +1008,37 @@ body{
 
 .ant-picker-calendar-header {
   padding-inline-end: 0;
+  
+}
+
+.ant-collapse-header {
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 600px) {
-  
+
+  .bookingListHeader{
+    display: block;
+   text-align: center;
+  }
+  .mainBookingList{
+  display: block;
+  grid-template-columns: 0.3fr 1fr;
+  /* gap: 1rem; */
+  max-width: 600px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.message-div{
+  width: 100%;
+}
+
+.dateUpadte{
+  width: 100%;
+}
 }
