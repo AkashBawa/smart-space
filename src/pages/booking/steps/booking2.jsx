@@ -328,7 +328,8 @@ const Booking2 = (props) => {
                 const saveData = await fireStore.addDataToCollection('bookings', obj);
             }
             
-            navigator("/home");
+            // navigator("/home");
+            navigator("/booking-list-demo");
         }
     }
 

@@ -113,7 +113,7 @@ const BookingList = (props) => {
                     {bookingList.map((b) => {
                         return (
                             <div key={b.bookingId} className="dateUpadte">
-                                <h3>{b.date}</h3>
+                                <h3>{b.data.date}</h3>
                                 <p><span className="updateSpan">Location: </span>{b.location.name} (Level: {b.data.level})</p>
                                 <p><span className="updateSpan">People: </span>{b.data.people}</p>
                                 <p><span className="updateSpan">Table No: </span>{b.table.name}</p>

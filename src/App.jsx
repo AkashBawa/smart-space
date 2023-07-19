@@ -17,6 +17,8 @@ import AddTables from './pages/admin/addTables';
 import ContactUs from './pages/contact-us';
 import BookingList from './pages/booking/steps/booking-list';
 import BookingMonth from './pages/booking/steps/booking-month';
+import BookingListDemo from './pages/booking/steps/bookig-list-demo';
+import BookingWeek from './pages/booking/steps/booking-week';
 function App() {
 
   // const implementQuery = async () => {
@@ -74,8 +76,10 @@ function App() {
             <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='booking-month' element={<BookingMonth/>}/>
+            <Route path='booking-week' element={<BookingWeek/>}/>
             <Route path='*' element={ <Login/>}/>
           <Route path='booking-list' element={ <BookingList/>}/>
+          <Route path='booking-list-demo' element={ <BookingListDemo/>}/>
 
           </Route>
         </Routes>
