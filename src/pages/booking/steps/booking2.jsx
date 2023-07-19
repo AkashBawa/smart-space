@@ -226,7 +226,7 @@ const Booking2 = (props) => {
                 const saveData = await fireStore.addDataToCollection('bookings', obj);
             }
             
-            navigator("/booking-list");
+            navigator("/booking-list-demo");
         }
     }
 

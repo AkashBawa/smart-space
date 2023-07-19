@@ -128,19 +128,44 @@ span {
       background-color: c.$contrast-l;
       color: c.$base-l;
       cursor: pointer;
-      margin-bottom: 1rem;
+      // margin-bottom: 1rem;
+    }
+
+    .step1, .step2{
+      background: #eb5e36 !important;
+      color: #fff !important;
+      padding: 10px 0px !important;
+      margin-bottom: 40px !important;
     }
 
     #stepOne {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: .5rem;
+      h2 {
+        font-size: large;
+      }
+      .buttons {
+        button {
+          width: 180px;
+          height: 48px;
+          flex-shrink: 0;
+          border-radius: 8px;
+          :hover {
+            cursor: pointer !important;
+          }
+        }
+      }
     }
 
     #stepOne h2,
     .buttons {
       grid-column: 1/-1;
       text-align: center;
+
+    }
+    .mt15{
+      margin-top: 30px;
     }
 
 
@@ -173,6 +198,11 @@ span {
       margin: 2rem auto;
     }
 
+    .option p {
+      color: $base-l;
+      background-color: $accent-m;
+    }
+
     #booking1 label,
     #booking1 input,
     #booking2 label,
@@ -183,7 +213,15 @@ span {
       display: inline;
       margin-top: .5rem;
       height: 2rem;
+      font-size: medium;
     }
+
+    .spaceInformation label {
+      height: 1rem;
+    }
+
+
+
 
     #next1,
     #next2 {
@@ -193,16 +231,19 @@ span {
       margin: .5rem auto;
       margin-left: 2rem;
       width: 20%;
+      font-size: 16px;
       text-align: center;
       align-items: center;
-      font-size: xx-large;
+      // font-size: xx-large;
       padding: .25rem .1rem;
       border-radius: 20px;
+      border: none;
     }
 
     #next1:hover,
     #next2:hover {
-      background-color: green
+      // background-color: green;
+      cursor: pointer;
     }
 
     #cancel1,
@@ -213,17 +254,23 @@ span {
       border: c.$accent-m 1px solid;
       margin: .5rem auto;
       width: 20%;
+      font-size: 16px;
       text-align: center;
       align-items: center;
-      font-size: xx-large;
+      // font-size: xx-large;
       padding: .25rem .1rem;
       border-radius: 20px;
+    }
+    #cancel2, #next2{
+      height: 48px;
+      border-radius: 8px;
     }
 
     #cancel1:hover,
     #cancel2:hover {
-      background-color: c.$accent-danger;
-      color: c.$base-l;
+      cursor: pointer;
+      // background-color: c.$accent-danger;
+      // color: c.$base-l;
 
     }
 
@@ -413,14 +460,17 @@ span {
 
     #timing div p {
       background-color: #fff;
-      border: 1px black solid;
-      border-radius: 20px;
+      border: 1px #b0b0b0 solid;
+      border-radius: 8px;
       text-align: center;
       margin: auto 1rem;
       flex: 0 0 calc(20% - 1rem);
       margin-bottom: .5rem;
-      height: 2rem;
-
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
     }
 
     #timing div p:hover,
@@ -467,7 +517,8 @@ span {
     }
 
     .booking-content .selected {
-      background-color: rgba(255, 166, 0, 0.4) !important;
+      // background-color: rgba(255, 166, 0, 0.4) !important;
+      filter: invert(29%) sepia(93%) saturate(1106%) hue-rotate(89deg) brightness(94%) contrast(107%);
       cursor: pointer;
       border-radius: 30px;
       margin: 5px;
@@ -480,14 +531,23 @@ span {
       opacity: 0.8;
     }
 
-    .disabled {
-      background-color: gray !important;
-      opacity: 0.8;
-      cursor: not-allowed;
+    .booking-content P {
       border-radius: 30px;
       margin: 5px;
       margin-left: 15px;
       margin-right: 6px;
+      margin-bottom: 0;
+    }
+
+    .disabled {
+      // background-color: gray !important;
+      opacity: 1;
+      filter: grayscale(100%);
+      cursor: not-allowed;
+      // border-radius: 30px;
+      // margin: 5px;
+      // margin-left: 15px;
+      // margin-right: 6px;
     }
 
     .disabled:hover {
@@ -805,7 +865,8 @@ span {
   }
 
   .mainBookingList{
-    display: flex;
+    display: grid;
+    grid-template-columns: .3fr 1fr;
     gap: 1rem;
     max-width: 1300px;
     margin: auto;
@@ -814,19 +875,20 @@ span {
 
   .message-div{
     width: 280px;
-    height: 450px;
+    height: 100%;
     background-color: #fff;
-    border-radius: 5%;
-    margin: 10px;
+    border-radius: 8px;
+    padding: 0px 6px;
+    // margin: 10px;
   }
 
   .dateUpadte{
     width: 715px;
     height: auto;
     background-color: #fff;
-    border-radius: 5%;
-    padding: 5px;
-    margin: 10px;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 15px;
 
     .updateSpan{
       font-weight: bold;
@@ -840,7 +902,12 @@ span {
         padding: 10px 5rem;
         background-color: orange;
         border: none;
+
       }
+    }
+
+    #stepOne {
+      
     }
   }
 
@@ -855,24 +922,94 @@ span {
 
     text-align: center;
     margin: 2rem 0;
+    background: #efefef;
 
     button{
       padding: 10px 20px;
       margin: 5px;
+      background: transparent;
+      border: 0px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .active{
+      background: #eb5a33;
+      color: #fff;
+      border-radius: 8px;
     }
   }
 
 
   .btnBookingList{
-    background-color: orange;
+    background-color: #eb5a33;
     color: black;
     width: 100px;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
+    border: 0px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
   }
 
   .btnDivBookingList{
     text-align: center;
   }
 
+.mainTitle{
+  color: #000;
+  font-size: 36px;
+}
+#people, #bookDate{
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+#spaceType, #building, #level{
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 4px 6px;
+  height: 40px !important;
+}
+.bookingPage{
+  padding: 50px 0px;
+}
+.newBooking-page{
+  border: 1px solid #eb5a33;
+  background: #fff;
+  color: #eb5a33;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ant-collapse-header{
+  width: 100%;
+}
+
+body{
+  line-height: 1.5;
+}
+
+#dateDiv{
+  width: 20%;
+  margin: 0;
+  color: red;
+}
+
+.BookingList{
+  padding: 2rem;
+}
+
+.ant-picker-calendar-header {
+  padding-inline-end: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  
+}
