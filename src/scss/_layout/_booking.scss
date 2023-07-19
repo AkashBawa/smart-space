@@ -493,6 +493,7 @@ span {
     .booking-content {
       border: 1px solid black;
       margin: auto;
+      padding: 1rem 2rem;
       position: relative;
       max-width: 1600px;
       width: 100%;
@@ -500,30 +501,23 @@ span {
       display: grid;
       grid-template-columns: repeat(23, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      background-image: url(./../../Images/Jasmine.jpg);
-      background-size: contain;
+      // background-image: url(./../../Images/Jasmine.jpg);
+      background-image: url("./../../public/Images/background.png");
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
       aspect-ratio: 16 / 6;
     }
 
     .booking-content p:hover {
-      background-color: rgba(220,220,220, 0.6);
+      // background-color: rgba(220,220,220, 0.6);
       cursor: pointer;
-      border-radius: 30px;
-      margin: 5px;
-      margin-left: 15px;
-      margin-right: 6px;
     }
 
     .booking-content .selected {
       // background-color: rgba(255, 166, 0, 0.4) !important;
       filter: invert(29%) sepia(93%) saturate(1106%) hue-rotate(89deg) brightness(94%) contrast(107%);
       cursor: pointer;
-      border-radius: 30px;
-      margin: 5px;
-      margin-left: 15px;
-      margin-right: 6px;
     }
 
     .booking-content .disabled-space {
@@ -533,7 +527,7 @@ span {
 
     .booking-content P {
       border-radius: 30px;
-      margin: 5px;
+      margin: 40px;
       margin-left: 15px;
       margin-right: 6px;
       margin-bottom: 0;
@@ -569,7 +563,7 @@ span {
     #s33,
     #s34,
     #s35 {
-      background-color: rgba(255, 166, 0, 0.05);
+      // background-color: rgba(255, 166, 0, 0.05);
       ;
     }
 
