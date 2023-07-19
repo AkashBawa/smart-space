@@ -322,7 +322,7 @@ const Booking2 = (props) => {
                 updatedAt: new Date(),
             }
             console.log('obj', obj);
-            if (props.bookingId) {
+            if (props.existingBooking) {
                 const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
             } else {
                 const saveData = await fireStore.addDataToCollection('bookings', obj);

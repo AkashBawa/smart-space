@@ -37,7 +37,7 @@ const NewBooking = () => {
   useEffect(() => {
     console.log(id);
     loadExistingBooking();
-  }, [existingBooking]);
+  }, []);
 
 
   const loadExistingBooking = async () => {
@@ -58,7 +58,7 @@ const NewBooking = () => {
         <div className="option" id="step1">
           <p onClick={() => {setPage(1)}}>Step 1</p>
           {
-            currentStep == 1 ? <BookingS1 changePage={setPage}/> : ""
+            currentStep == 1 ? <BookingS1 bookingId={id ? id : null} existingBooking={existingBooking ? existingBooking : null} changePage={setPage}/> : ""
           }
         </div>
         <div className="booking2">
@@ -66,7 +66,7 @@ const NewBooking = () => {
               <p onClick={() => {setPage(2)}}>Step 2</p>
           </div>
           {
-            currentStep == 2 ? <Booking2 changePage={setPage} userOptions={userOptions} /> : ""
+            currentStep == 2 ? <Booking2 bookingId={id ? id : null} existingBooking={existingBooking ? existingBooking : null} changePage={setPage} userOptions={userOptions} /> : ""
           }
         </div>
       </div>
