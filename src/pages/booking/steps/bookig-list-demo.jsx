@@ -144,25 +144,26 @@ const BookingListDemo = () => {
                   <div key={b.bookingId} className="dateUpadte">
                     
                     <p>
-                      <span className="updateSpan">Location: </span>
-                      {b.location.name} (Level: {b.data.level})
+                      <span className="updateSpan">Time: </span>
+                      {b.data.hours.join(",")}
                     </p>
                     <p>
-                      <span className="updateSpan">People: </span>
+                      <span className="updateSpan">Building: </span>
+                      {b.location.name} / floor: {b.data.level} / Table No: {b.table.name}
+                    </p>
+                    <p>
+                      <span className="updateSpan">Number Of People: </span>
                       {b.data.people}
                     </p>
-                    <p>
+                     {/* <p>
                       <span className="updateSpan">Table No: </span>
                       {b.table.name}
                     </p>
                     <p>
                       <span className="updateSpan">SpaceType: </span>
                       {b.data.spaceType}
-                    </p>
-                    <p>
-                      <span className="updateSpan">No Of Hours: </span>
-                      {b.data.hours.join(",")}
-                    </p>
+                    </p> */}
+                    
                     <p>
                       <span className="updateSpan">Status: </span>
                       {b.data.status}

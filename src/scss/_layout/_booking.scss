@@ -891,7 +891,7 @@ span {
     margin-bottom: 15px;
 
     .updateSpan{
-      font-weight: bold;
+      // font-weight: bold;
       padding-right: 2px;
     }
 
@@ -1010,6 +1010,12 @@ body{
   padding-inline-end: 0;
 }
 
+.ant-collapse-header {
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 600px) {
-  
+    
 }
