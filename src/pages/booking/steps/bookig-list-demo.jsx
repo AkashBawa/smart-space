@@ -61,6 +61,16 @@ const BookingListDemo = () => {
     fetchBookingList();
   }, []);
 
+  const getTime = (number) => {
+    if(number < 12) {
+      return `${number} AM`
+    } else if (number == 12) {
+      return `${number} PM`
+    } else {
+      return `${number - 12} PM`
+    }
+  }
+
   const fetchBookingList = async () => {
     const locationRes = await fireStore.getByQuery("locations", []);
     const tableRes = await fireStore.getByQuery("tables", []);
@@ -68,6 +78,13 @@ const BookingListDemo = () => {
 
     let responseBookingList = res.docs.map((doc) => {
       const bookingData = doc.data();
+      const hours = bookingData.hours;
+
+      if(hours && hours.length > 0) {
+        bookingData['sTime'] = getTime(hours[0]);
+        bookingData['eTime'] = getTime(hours[hours.length - 1] + 1);
+      }
+      
       const location = locationRes.docs
         .find((loc) => loc.id == bookingData.locationId)
         .data();
@@ -145,7 +162,7 @@ const BookingListDemo = () => {
                     
                     <p>
                       <span className="updateSpan">Time: </span>
-                      {b.data.hours.join(",")}
+                      {b.data.sTime + " - " + b.data.eTime}
                     </p>
                     <p>
                       <span className="updateSpan">Building: </span>
