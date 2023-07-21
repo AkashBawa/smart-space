@@ -62,7 +62,7 @@ const BookingListDemo = () => {
   }, []);
 
   const getTime = (number) => {
-    if(number < 12) {
+    if (number < 12) {
       return `${number} AM`
     } else if (number == 12) {
       return `${number} PM`
@@ -80,11 +80,11 @@ const BookingListDemo = () => {
       const bookingData = doc.data();
       const hours = bookingData.hours;
 
-      if(hours && hours.length > 0) {
+      if (hours && hours.length > 0) {
         bookingData['sTime'] = getTime(hours[0]);
         bookingData['eTime'] = getTime(hours[hours.length - 1] + 1);
       }
-      
+
       const location = locationRes.docs
         .find((loc) => loc.id == bookingData.locationId)
         .data();
@@ -116,7 +116,10 @@ const BookingListDemo = () => {
         <div>
           <h1>Your booking</h1>
         </div>
-        <div>
+        <div className="booking-grid">
+          <button className="calender-button" onClick={handleNewBookingClick}>
+            Calender
+          </button>
           <button className="newBooking-page" onClick={handleNewBookingClick}>
             New Booking
           </button>
@@ -127,9 +130,9 @@ const BookingListDemo = () => {
       <div className="mainBookingList">
         <div className="message-div">
           <div className="dateMonth">
-            <button>day</button>
-            <button>weeks</button>
-            <button onClick={navigateToMonth}>Month</button>
+            <button className="dayview" >Day</button>
+            <button className="weekview">Week</button>
+            <button className="monthview" onClick={navigateToMonth}>Month</button>
           </div>
 
           <div className="calender">
@@ -159,7 +162,7 @@ const BookingListDemo = () => {
                 label: <h3 id="dateDiv">{b.data.date}</h3>,
                 children: (
                   <div key={b.bookingId} className="dateUpadte">
-                    
+
                     <p>
                       <span className="updateSpan">Time: </span>
                       {b.data.sTime + " - " + b.data.eTime}
@@ -172,7 +175,7 @@ const BookingListDemo = () => {
                       <span className="updateSpan">Number Of People: </span>
                       {b.data.people}
                     </p>
-                     {/* <p>
+                    {/* <p>
                       <span className="updateSpan">Table No: </span>
                       {b.table.name}
                     </p>
@@ -180,7 +183,7 @@ const BookingListDemo = () => {
                       <span className="updateSpan">SpaceType: </span>
                       {b.data.spaceType}
                     </p> */}
-                    
+
                     <p>
                       <span className="updateSpan">Status: </span>
                       {b.data.status}

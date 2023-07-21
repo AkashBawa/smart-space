@@ -143,14 +143,48 @@ nav a {
   padding: 0.25rem 0.5rem;
 }
 
-/* header footer ================= */
-header {
-  display: flex;
-  flex-flow: row nowrap;
+/* navigation style ================================== */
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 1rem;
+  text-align: center;
+  border-bottom: 1px solid black;
+  background-color: white;
+  padding: 10px;
+}
+
+
+.nav-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.25rem;
+
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+}
+
+p {
+  color: white;
+  padding: 10px;
+  background-color: orange;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   align-items: center;
-  justify-content: space-around;
-  border-bottom: 2px solid #212529;
+  float: right;
+  margin: 10px;
 }
 
 .profile {
@@ -329,6 +363,8 @@ header ul li #book2 {
 #booking2 select {
   display: inline;
   margin-top: 0.25rem;
+  height: 2rem;
+  font-size: large;
 }
 
 #next1,
