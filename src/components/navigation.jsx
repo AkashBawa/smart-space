@@ -17,6 +17,7 @@ const Navigation = () => {
       <header className="navigation">
         <img src={siteLogo} className="logo" alt="" onClick={logoHome} />
         <nav>
+          
           <ul className="nav-bar">
             <li>
               {" "}
@@ -26,10 +27,10 @@ const Navigation = () => {
               {" "}
               <Link to="/booking">Booking</Link>
             </li>
-            {/* <li>
+            <li>
               {" "}
               <Link to="/reschedule">Reschedule</Link>
-            </li> */}
+            </li>
             <li>
               {" "}
               <Link to="./contact-us">Contact Us</Link>

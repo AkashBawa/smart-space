@@ -15,10 +15,12 @@ import Reschedule from './pages/booking/reschedule';
 import AddLocation from './pages/admin/addLocation';
 import AddTables from './pages/admin/addTables';
 import ContactUs from './pages/contact-us';
-import BookingList from './pages/booking/steps/booking-list';
+// import BookingList from './pages/booking/steps/booking-list';
 import BookingMonth from './pages/booking/steps/booking-month';
 import BookingListDemo from './pages/booking/steps/bookig-list-demo';
 import BookingWeek from './pages/booking/steps/booking-week';
+import LandingPage from './pages/landingPage';
+
 function App() {
 
   // const implementQuery = async () => {
@@ -67,6 +69,7 @@ function App() {
           <Route path='admin/addLocation' element={ <AddLocation/>}/>
           <Route path='admin/addTable' element={ <AddTables/>}/>
           <Route path='signup' element={ <Signup/>}/>
+          <Route path='landingpage' element={<LandingPage/>}/>
           <Route path='*' element={<Navigation/>}>
           <Route path='contact-us' element={<ContactUs/>}/>
             <Route path='home' element={<Home/>}/>
@@ -76,7 +79,7 @@ function App() {
             <Route path='booking/:id' element={<NewBooking/>}/>
             <Route path='reschedule' element={<Reschedule/>}/>
             <Route path='booking-month' element={<BookingMonth/>}/>
-            <Route path='booking-week' element={<BookingWeek/>}/>
+            {/* <Route path='booking-week' element={<BookingWeek/>}/> */}
             <Route path='*' element={ <Login/>}/>
           <Route path='booking-list' element={ <BookingListDemo/>}/>
           <Route path='booking-list-demo' element={ <BookingListDemo/>}/>

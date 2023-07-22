@@ -1,35 +1,43 @@
-.home-description {
-  text-align: center;
-  background-color: white;
-  width: 592px;
-  height: 379px;
-  margin: auto;
+@use './../_variables/colors' as c;
+
+.shadow {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .6);
+  font-size: 2rem;
   display: flex;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-
-  h2{
-    width: 50%;
-    margin-bottom: 0px;
-
-  }
-  p{
-    margin: 20px 0px 30px;
-  }
+  text-align: center;
+  margin: auto;
 }
+
+.home-description {
+  text-align: center;
+  margin: auto 1rem;
+  padding: 2rem;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+h2 {
+  width: 50%;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 20px 0px 30px;
+}
+
 
 .booking-btn {
   width: 180px;
   height: 48px;
-  background-color: #ee5922;
+  background-color: c.$accent-m;
   border-radius: 10px;
-  border:0px;
+  border: 0px;
   font-size: 16px;
   font-weight: 600;
   color: white;
@@ -38,13 +46,18 @@
 
 .home-container {
   position: relative;
+}
 
   img{
     height: 700px;
     object-fit: cover;
   }
-}
+
 
 .booking-btn:hover{
   background-color: orange;
+img {
+  height: 700px;
+  object-fit: cover;
+}
 }

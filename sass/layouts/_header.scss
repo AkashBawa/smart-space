@@ -1,30 +1,72 @@
 @use '../abstracts/variables/colors' as c;
-/* header footer ================= */
 
-header {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 2px solid c.$typo-d;
+header{
+    background-color: red;
 }
 
-.profile{
+/* navigation style ================================== */
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color: white;
+    padding: 10px;
+
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.25rem;
+    background-color: red;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+}
+
+p {
+    color: white;
+    padding: 10px;
+    background-color: orange;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    align-items: center;
+    float: right;
+    margin: 10px;
+
+}
+
+
+.profile {
     height: 50px;
     width: 50px;
     background-color: c.$accent-m;
     border-radius: 50%;
     color: c.$base-l;
     display: flex;
-    flex-flow: row nowrap ;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
 }
-header span{
-font-size: xx-large;
+
+header span {
+    font-size: xx-large;
 }
-.logo{
+
+.logo {
     width: 15vw;
     height: auto;
 }
