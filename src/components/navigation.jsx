@@ -10,6 +10,7 @@ import { login as loginReducer } from './../redux/user';
 const Navigation = () => {
   const navigator = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+  const currentUrl = useSelector((state) => state.user.url)
 
   const url = useState(window.location.href)
   const [isAuthScreen, setAuthScreen] = useState(true);
@@ -17,7 +18,7 @@ const Navigation = () => {
 
   useEffect(() => {
     onAuthScreen();
-  }, [isLoggedIn])
+  }, [isLoggedIn, currentUrl])
 
   const onAuthScreen = () => {
     const spliUrl = window.location.href.split('/');

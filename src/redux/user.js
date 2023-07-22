@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isLoggedIn: false,
-  userEmail : ""
+  userEmail : "",
+  url: ""
 }
 
 export const userSlice = createSlice({
@@ -17,11 +18,14 @@ export const userSlice = createSlice({
     logout: (state, action) => { 
         state.isLoggedIn = false;
         state.userEmail = ""
+    },
+    setUrl: (state, action) => {
+      state.url = action.payload.url
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout } = userSlice.actions
+export const { login, logout, setUrl } = userSlice.actions
 
 export default userSlice.reducer

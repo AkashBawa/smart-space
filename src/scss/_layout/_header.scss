@@ -3,13 +3,20 @@
 
 /* navigation style ================================== */
 .navigation {
-    display: grid;
-    grid-template-columns: 1fr 3fr .5fr;
+    // display: grid;
+    // grid-template-columns: 1fr 3fr .5fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     text-align: center;
     border-bottom: 1px solid black;
     background-color: white;
     padding: 10px;
+
+    div {
+        margin: 25px;
+    }
 }
 
 .nav-bar {

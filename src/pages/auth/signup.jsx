@@ -5,12 +5,17 @@ import fireStore from "../../utils/fireStore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import LocalStorage from './../../utils/localStorage';
 
+import { useSelector, useDispatch } from 'react-redux'
+import {setUrl} from './../../redux/user';
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [lName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigator = useNavigate();
+  const dispatch = useDispatch();
 
   const signup = (event) => {
     event.preventDefault();
@@ -90,7 +95,7 @@ const Signup = () => {
             <button id="log-in-btn" onClick={signup}>
               Signup
             </button>
-            <button onClick={(e) => { navigator("/login") }}>
+            <button onClick={(e) => {  dispatch(setUrl({url: 'login'})); navigator("/login") }}>
                 Login
             </button>
           </form>

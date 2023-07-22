@@ -77,6 +77,7 @@ function App() {
           {/* Below routes require login to proceed */}
           
           <Route path="/" element={<ProtectedRoute/>}>
+            
             <Route path='/home' element={<Home/>}/>
             <Route path='/contact-us' element={<ContactUs/>}/>
             <Route path='/booking-month' element={<BookingMonth/>}/>
@@ -91,6 +92,7 @@ function App() {
             <Route path='booking-list' element={<BookingListDemo />} />
             <Route path='booking-list-demo' element={<BookingListDemo />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
+
           </Route>
 
           
