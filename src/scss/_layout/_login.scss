@@ -1,85 +1,58 @@
-@use './../_variables/colors' as c;
-
-
 .main-content {
+  //   display: grid;
+  //   grid-template-columns: 1fr 1fr;
+  //   gap: 1rem;
   position: relative;
-}
 
-img {
-  height: 700px;
-  object-fit: cover;
-}
-
-
-
-.shadow {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, .6);
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: auto;
+  img{
+    height: 700px;
+    object-fit: cover;
+  }
 }
 
 .formDiv {
   text-align: center;
-  margin: auto 1rem;
-  padding: 2rem;
-
+  padding: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 492px;
   height: auto;
   background-color: white;
   border-radius: 10px;
+
+  form {
+    width: 80%;
+    margin: auto;
+
+    #log-in-btn{
+      background-color: orangered;
+      color: white;
+    }
+  }
+
+  
 }
 
 .formDiv h1 {
+  color: orange;
   margin: 0;
-  padding: 0;
-  margin-bottom: 1rem;
-  font-size: 1em;
-}
-
-form {
-  width: 80%;
-  margin: auto;
-}
-
-#log-in-btn {
-  background-color: c.$accent-m;
-  color: white;
 }
 
 form {
   display: grid;
 }
 
-form input,
-form button {
+form input {
   padding: 10px;
-  margin-bottom: 1rem;
-  border-radius: 10px;
+  margin: 10px 0;
 }
 
-
-
-@media screen and (max-width: 500px) {
-  .formDiv {
-    margin: 0;
-    width: 100%;
-    height: auto;
-  }
-
+button {
+  padding: 10px 0;
 }
 
 #log-in-btn{
   margin-bottom: 5px;
-}
-@media screen and (min-width: 501px) {
-  .formDiv {
-    min-width: 350px;
-    max-width: 60%;
-  }
-
 }
