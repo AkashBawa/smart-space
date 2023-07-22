@@ -48,7 +48,16 @@ p {
   position: relative;
 }
 
+  img{
+    height: 700px;
+    object-fit: cover;
+  }
+
+
+.booking-btn:hover{
+  background-color: orange;
 img {
   height: 700px;
   object-fit: cover;
+}
 }
