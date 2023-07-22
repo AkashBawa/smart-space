@@ -66,7 +66,7 @@ const Navigation = () => {
         }
 
 
-        <div>
+        <div className="mobAuth">
           {
             // Add drop down below A Icon
             isLoggedIn && <p>A</p>

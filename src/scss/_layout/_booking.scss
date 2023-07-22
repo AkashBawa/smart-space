@@ -335,7 +335,25 @@ span {
     flex: 0 0 calc(20% - 1rem);
     margin-bottom: .5rem;
   }
-
+  .formOuter{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    form{
+      label{
+        font-size: 18px;
+      }
+      width: 33% !important;
+      margin: 0 !important;
+      flex: 0 0 auto !important;
+      .check-box{
+        transform: unset !important;
+        input{
+          margin: 0;
+        }
+      }
+    }
+  }
   #filterSection {
     display: flex;
     flex-flow: row nowrap;
