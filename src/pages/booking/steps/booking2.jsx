@@ -371,26 +371,30 @@ const Booking2 = (props) => {
                             </div>
                         </form>
                         <form>
-                            <label htmlFor="filter2">Power Outlet</label>
-                            <section className="bookingFilter" id="filter2">
-                                <label className="switch" htmlFor='powerOutlet'>
-                                    <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked) }} />
-                                    <span className="slider round"></span>
-                                </label>
-                            </section>
+                            <label htmlFor="powerOutlet" >Power Outlet</label>
+                            <div class="check-box">
+                                <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked) }} />
+                            </div>
+                            
                         </form>
                         <form>
-                            <label htmlFor="filter3">Monitor</label>
-                            <section className="bookingFilter" id="filter3">
+                            <label htmlFor="monitor">Monitor</label>
+                            <div class="check-box">
+                                <input type="checkbox" id='monitor' checked={monitor} value={monitor} onChange={(e) => { setMonitor(e.target.checked) }} />
+                            </div>
+                            {/* <section className="bookingFilter" id="filter3">
                                 <label className="switch">
                                     <input type="checkbox" checked={monitor} value={monitor} onChange={(e) => { setMonitor(e.target.checked) }} />
                                     <span className="slider round"></span>
                                 </label>
-                            </section>
+                            </section> */}
                         </form>
                         <form>
-                            <label htmlFor="filter4">Projector</label>
-                            <section className="bookingFilter" id="filter4">
+                            <label htmlFor="projector">Projector</label>
+                            <div class="check-box">
+                                <input type="checkbox" id='projector' checked={projector} value={projector} onChange={(e) => { setProjector(e.target.checked) }} />
+                            </div>
+                            {/* <section className="bookingFilter" id="filter4">
                                 <label className="switch">
                                     <input type="checkbox" checked={projector} value={projector} onChange={(e) => {
                                         console.log(e.target.checked);
@@ -398,7 +402,7 @@ const Booking2 = (props) => {
                                     }} />
                                     <span className="slider round"></span>
                                 </label>
-                            </section>
+                            </section> */}
                         </form>
                     </div>
                 </section>

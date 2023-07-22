@@ -47,7 +47,7 @@ const Navigation = () => {
             <nav>
 
               <ul className="nav-bar">
-                <li>
+                <li className="list-active">
             
                   <Link to="/home">Home</Link>{" "}
                 </li>

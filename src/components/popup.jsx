@@ -1,5 +1,13 @@
-const PopUps = () => {
-    return  (
-        <h1>This is pop up</h1>
+const PopUps = (props) => {
+
+
+    return (
+        <div class="overlay">
+            <div class="modalContent">
+                <h2>
+                    Title
+                </h2>
+            </div>
+        </div>
     )
 }
