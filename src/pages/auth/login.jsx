@@ -5,7 +5,14 @@ import fireStore from './../../utils/fireStore'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import LocalStorage from './../../utils/localStorage';
 
+// redux setup
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer } from './../../redux/user';
+
 function Login() {
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn );
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigator = useNavigate();
@@ -13,6 +20,7 @@ function Login() {
   const login = async (event) => {
     event.preventDefault();
     try {
+      dispatch(loginReducer({userEmail: email}))
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
       const user = userCredential.user;
       // Get the current date and time

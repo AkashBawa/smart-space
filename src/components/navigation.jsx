@@ -1,11 +1,35 @@
 import { Link, Outlet } from "react-router-dom";
 import siteLogo from "./../public/Images/Logo/logo-Orange.png";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer } from './../redux/user';
 
 
 const Navigation = () => {
   const navigator = useNavigate();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+
+  const url = useState(window.location.href)
+  const [isAuthScreen, setAuthScreen] = useState(true);
+  const [last, setLast] = useState("Login");
+
+  useEffect(() => {
+    onAuthScreen();
+  }, [isLoggedIn])
+
+  const onAuthScreen = () => {
+    const spliUrl = window.location.href.split('/');
+    const last = spliUrl[spliUrl.length - 1];
+    setLast(last);
+    if (last == 'login' || last == "signup") {
+      setAuthScreen(true);
+    } else {
+      setAuthScreen(false);
+    }
+  }
+
 
   // functon to go home
   const logoHome = () => {
@@ -16,34 +40,39 @@ const Navigation = () => {
     <div>
       <header className="navigation">
         <img src={siteLogo} className="logo" alt="" onClick={logoHome} />
-        <nav>
-          
-          <ul className="nav-bar">
-            <li>
-              {" "}
-              <Link to="/home">Home</Link>{" "}
-            </li>
-            <li>
-              {" "}
-              <Link to="/booking">Booking</Link>
-            </li>
-            <li>
-              {" "}
-              <Link to="/reschedule">Reschedule</Link>
-            </li>
-            <li>
-              {" "}
-              <Link to="./contact-us">Contact Us</Link>
-            </li>
+
+        {
+          isLoggedIn && (
+            <nav>
+
+              <ul className="nav-bar">
+                <li>
             
-            {/* <li>  <Link to="/login">login</Link></li>
-                  <li>  <Link to="/signup">signup</Link></li>
-                  <li>  <Link to="/qr-page">QR-SCAN</Link></li> */}
-          </ul>
-        </nav>
+                  <Link to="/home">Home</Link>{" "}
+                </li>
+                <li>
+            
+                  <Link to="/booking">Booking</Link>
+                </li>
+                <li>
+            
+                  <Link to="./contact-us">Contact Us</Link>
+                </li>
+
+              </ul>
+            </nav>
+          )
+        }
+
 
         <div>
-          <p>A</p>
+          {
+            isLoggedIn && <p>A</p>
+          }
+          {
+           !isLoggedIn  ? (last == "signup" ? <button>Login</button> : <button>Signup</button> ) : ""
+          }
+          
         </div>
       </header>
 
