@@ -68,6 +68,7 @@ const Navigation = () => {
 
         <div>
           {
+            // Add drop down below A Icon
             isLoggedIn && <p>A</p>
           }
           {
