@@ -52,7 +52,7 @@ const Home = () => {
         bookingList.length === 0 ? (
 
           <div className="Home">
-            <div className="shadow">
+            {/* <div className="shadow"> */}
               <div className="home-container">
                 <img src={topView} alt="Langara" />
                 <div className="home-description">
@@ -62,7 +62,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </div>
+          // </div>
 
         ) : (
           <BookingListDemo bookingList={bookingList} />
