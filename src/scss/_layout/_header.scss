@@ -1,54 +1,60 @@
-header{
-    display: grid;
-    grid-template-columns: 1fr 1fr .5fr;
-    align-items: center;
-}
+@use './../_variables/colors' as c;
 
 
 /* navigation style ================================== */
-.navigation{
+.navigation {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr .5fr;
     gap: 1rem;
     text-align: center;
     border-bottom: 1px solid black;
     background-color: white;
     padding: 10px;
-    
+}
 
-    .nav-bar{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 0.5rem;
-    }
+.nav-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
 
-    ul{
-        padding: 0;
-    }
+ul {
+    padding: 0;
+}
 
-    li{
-        list-style: none;
-    }
+li {
+    list-style: none;
+}
 
-    li a{
-        text-decoration: none;
-        color: black;    
-    }
+li a {
+    text-decoration: none;
+    color: black;
+}
 
-    p{
-        color: white;
-        padding: 10px;
-        background-color: orange;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        align-items: center;
-        float: right;
-        margin: 10px;
-
-    }
-
-
+header p {
+    color: white;
+    padding: 10px;
+    background-color: c.$accent-m;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    align-items: center;
+    float: right;
+    margin: 10px;
 
 }
 
+
+@media screen and (max-width: 600px) {
+    .navigation {
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+    }
+
+    .nav-bar {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+}

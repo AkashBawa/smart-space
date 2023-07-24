@@ -35,40 +35,43 @@ function Login() {
 
   return (
     <div className="login">
-      
+
       <div className="main-content">
         <img src={topView} alt="" />
+        <div className="shadow">
 
-        <div className="formDiv">
-          <h1>User Log in</h1>
-          <form action="" className="form">
-            <input
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              type="email"
-              id="login-email"
-              placeholder="email address"
-              required
-            />
-            <input
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              type="password"
-              id="login-password"
-              required
-              placeholder="password"
-            />
-            <button id="log-in-btn" onClick={login}>
-              Login
-            </button>
-            <button onClick={(e) => { navigator("/signup") }}>
-                Signup
-            </button>
-          </form>
+          <div className="formDiv">
+            <h1>User Log in</h1>
+            <form action="" className="form">
+              <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                type="email"
+                id="login-email"
+                placeholder="email address"
+                required
+              />
+              <input
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                type="password"
+                id="login-password"
+                required
+                placeholder="password"
+              />
+              <button id="log-in-btn" onClick={login}>
+                Log in
+              </button>
+              <button onClick={(e) => { navigator("/signup") }}>
+                Sign up
+              </button>
+            </form>
+          </div>
+
         </div>
       </div>
     </div>

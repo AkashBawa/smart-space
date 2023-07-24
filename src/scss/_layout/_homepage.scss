@@ -1,0 +1,165 @@
+@use './../_variables/colors' as c;
+
+.BookingList {
+    padding: 1rem;
+}
+
+.bookingListHeader h1 {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.bookingListHeader {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.btnBookingList {
+    background-color: c.$accent-m;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 0px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#dateDiv {
+    width: 80%;
+    margin: 0;
+    color: red;
+}
+
+.ant-picker-calendar-header {
+    padding-inline-end: 0;
+}
+
+.ant-collapse-header {
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+.calender-button {
+    border: 1px solid c.$accent-m;
+    background: #fff;
+    color: c.$accent-m;
+    border-radius: 10px;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.newBooking-page {
+    border: 1px solid c.$accent-m;
+    background: c.$accent-m;
+    color: white;
+    border-radius: 10px;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ant-collapse-header {
+    width: 100%;
+}
+
+.bookingPage {
+    padding: 50px 0px;
+}
+
+
+.mainBookingList h3 {
+    text-align: center;
+}
+
+
+.dateMonth {
+    text-align: center;
+    margin: 1rem 0;
+    background: c.$base-l;
+    border-radius: 20px;
+}
+
+.dateMonth button {
+    padding: 10px 20px;
+    margin: 5px;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.monthview {
+    background-color: c.$accent-m !important;
+    border-radius: 10px;
+    color: white;
+}
+
+.active {
+    background: #eb5a33;
+    color: #fff;
+    border-radius: 8px;
+}
+
+
+
+
+.btnDivBookingList {
+    text-align: center;
+}
+
+.mainTitle {
+    color: #000;
+    font-size: 36px;
+}
+
+#people,
+#bookDate {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 4px 6px;
+}
+
+#spaceType,
+#building,
+#level {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 4px 6px;
+    height: 40px !important;
+}
+
+
+
+.message-div {
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0px 6px;
+}
+
+@media screen and (min-width:600px) {
+
+    .calender-button,
+    .newBooking-page {
+        max-width: 300px;
+    }
+
+}
