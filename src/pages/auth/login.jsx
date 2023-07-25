@@ -33,8 +33,7 @@ function Login() {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage)
-      // Handle error
+      alert(errorMessage);
     }
   };
 
@@ -71,21 +70,14 @@ function Login() {
               <button id="log-in-btn" onClick={login}>
                 Log in
               </button>
-              <button onClick={(e) => {  dispatch(setUrl({url: 'signup'})); navigator("/signup") }}>
+              {/* <button onClick={(e) => {  dispatch(setUrl({url: 'signup'})); navigator("/signup") }}>
                 Sign up
-              </button>
+              </button> */}
             </form>
           </div>
 
         </div>
       </div>
-      {/* <div class="overlay">
-        <div class="modalContent">
-          <h2>
-          Title
-          </h2>
-        </div>
-      </div> */}
     </div>
   );
 }
