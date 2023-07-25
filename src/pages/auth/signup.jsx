@@ -36,64 +36,65 @@ const Signup = () => {
     console.log(email);
     console.log(lName);
     console.log(name)
-   
+
   };
 
   return (
     <div className="signup">
       <div className="main-content">
         <img src={topView} alt="" />
-
-        <div className="formDiv">
-          <h1>User Sign Up</h1>
-          <form action="#" className="form">
-            <input
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              type="text"
-              id="signup-name"
-              placeholder="Name"
-              required
-            />
-            <input
-              value={lName}
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-              type="text"
-              id="signup-lastname"
-              placeholder="Last Name"
-              required
-            />
-            <input
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              type="email"
-              id="signup-email"
-              placeholder="email address"
-              required
-            />
-            <input
-              type="password"
-              id="login-password"
-              required
-              placeholder="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <button id="log-in-btn" onClick={signup}>
-              Signup
-            </button>
-            <button onClick={(e) => { navigator("/login") }}>
+        <div className="shadow">
+          <div className="formDiv">
+            <h1>User Sign Up</h1>
+            <form action="#" className="form">
+              <input
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                type="text"
+                id="signup-name"
+                placeholder="Name"
+                required
+              />
+              <input
+                value={lName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+                type="text"
+                id="signup-lastname"
+                placeholder="Last Name"
+                required
+              />
+              <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                type="email"
+                id="signup-email"
+                placeholder="email address"
+                required
+              />
+              <input
+                type="password"
+                id="login-password"
+                required
+                placeholder="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <button id="log-in-btn" onClick={signup}>
+                Signup
+              </button>
+              <button onClick={(e) => { navigator("/login") }}>
                 Login
-            </button>
-          </form>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

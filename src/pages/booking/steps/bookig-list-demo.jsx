@@ -152,8 +152,15 @@ const BookingListDemo = () => {
           </div>
         </div>
 
-        <div>
+        <div className="displaybooking">
           <>
+
+            <div className="bookingstatus">
+              <button className="statusall">All</button>
+              <button className="statusbooked">Booked</button>
+              <button className="statuscheckinout">Check in/out </button>
+              <button className="statuscancelled">Cancelled</button>
+            </div>
 
             <Collapse
               size="large"

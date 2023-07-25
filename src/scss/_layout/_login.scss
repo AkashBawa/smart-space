@@ -5,11 +5,10 @@
   position: relative;
 }
 
-img {
+.main-content img {
   height: 700px;
   object-fit: cover;
 }
-
 
 
 .shadow {
@@ -28,7 +27,6 @@ img {
   text-align: center;
   margin: auto 1rem;
   padding: 2rem;
-
   height: auto;
   background-color: white;
   border-radius: 10px;
