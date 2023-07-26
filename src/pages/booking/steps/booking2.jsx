@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import localStorage from '../../../utils/localStorage';
 import Popup from './../../../components/popup';
 
+
+// redux setup
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer, setUrl, setNotification } from './../../../redux/user';
+
 // logoImages;
 import singleLogo from './../../../Images/icon_png_map/ICON2-23.png';
 import TwoLogo from './../../../Images/icon_png_map/ICON2-21.png';
@@ -25,6 +30,8 @@ const Booking2 = (props) => {
     const [showPopUp, setPopUp] = useState(false); 
     const [finalDetails, setFinalDetails] = useState(null);
     const existingBooking = props.existingBooking;
+
+    const dispatch = useDispatch();
 
     const [timeSlotes, setTimeSlotes] = useState([
         { startTime: 8, display: '8am - 9am' },
@@ -266,7 +273,11 @@ const Booking2 = (props) => {
 
     const spaceSelected = (e, id, index) => {
         if (bookingTime.length == 0) {
-            return alert("Please choose the time slot")
+            // return alert("Please choose the time slot");
+            return dispatch(setNotification({
+                type: 'error',
+                message: `Please choose all value`
+              }))
         }
         if (currentTables[index] && currentTables[index].disabled && currentTables[index].disabled == true) {
             return;
@@ -356,11 +367,19 @@ const Booking2 = (props) => {
 
     const validateSubmit = () => {
         if (!bookingTime) {
-            alert('Please select Booking Time');
-            return false;
+            // alert('Please select Booking Time');
+        dispatch(setNotification({
+            type: 'error',
+            message: `Please select Booking Time`
+        }))
+        return false;
         }
         if (!selectedTable) {
-            alert('Please select the Space');
+            // alert('Please select the Space');
+            dispatch(setNotification({
+                type: 'error',
+                message: `Please select the Space`
+            }))
             return false;
         }
         return true;
