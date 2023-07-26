@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import {spaceType as SpaceTypeConstant} from './../../../constants/booking'
+import { useSelector, useDispatch } from 'react-redux'
+import { spaceType as SpaceTypeConstant } from './../../../constants/booking';
+
+
+import { setNotification } from './../../../redux/user';
+
 const BookingS1 = (props) => {
 
     const existingBooking = props.existingBooking;
     const bookingId = props.bookingId;
-    
-    const submit = () => {
-        if(!people || !bookingDate || !spaceType || !building || !level) {
-            alert("Please choose all value");
-            return;
-        }
-        const finalValues = {
-            people: parseInt(people),
-            bookingDate,
-            spaceType,
-            building,
-            level
-        }
-        console.log(finalValues)
-        props.changePage(2, finalValues);
-    };
+    const dispatch = useDispatch();
 
     const [people, setPeople] = useState(1);
     const [bookingDate, setbookingDate] = useState('');
     const [spaceType, setspaceType] = useState();
     const [building, setbuilding] = useState();
     const [level, setlevel] = useState();
+
+
 
     useEffect(() => {
         const spaceTypeSelect = document.getElementById('spaceType');
@@ -76,6 +68,25 @@ const BookingS1 = (props) => {
             })
         }
     }, [existingBooking]);
+
+    const submit = () => {
+        if (!people || !bookingDate || !spaceType || !building || !level) {
+            dispatch(setNotification( {
+                type: 'error',
+                message: `Please choose all Value`
+              }))
+            return;
+        }
+        const finalValues = {
+            people: parseInt(people),
+            bookingDate,
+            spaceType,
+            building,
+            level
+        }
+        console.log(finalValues)
+        props.changePage(2, finalValues);
+    };
 
     const handleSpaceTypeChange = () => {
         const spaceTypeSelect = document.getElementById('spaceType');
@@ -128,15 +139,15 @@ const BookingS1 = (props) => {
                 <section id="booking1">
                     <h2>Basic Information</h2>
                     <label htmlFor="people">No. of People</label>
-                    <input type="number" id="people" min="1" max="8" value={people} onChange={(e) => {setPeople(e.target.value)}} />
+                    <input type="number" id="people" min="1" max="8" value={people} onChange={(e) => { setPeople(e.target.value) }} />
                     <label htmlFor="bookDate">Booking Date</label>
-                    <input type="date" value={bookingDate} id="bookDate" onChange={(e) => {setbookingDate(e.target.value)}} />
+                    <input type="date" value={bookingDate} id="bookDate" onChange={(e) => { setbookingDate(e.target.value) }} />
                 </section>
                 <section id="booking2">
                     <h2>Space Information</h2>
                     <label htmlFor="spaceType">Space Type</label>
                     <select name="spaceType" id="spaceType" defaultValue={'default'}
-                        value={spaceType} onChange={(e) => {setspaceType(e.target.value)}}
+                        value={spaceType} onChange={(e) => { setspaceType(e.target.value) }}
                     >
                         <option disabled value={'default'}>Choose Space Type</option>
                         <option value="singleSpace">Single Space</option>
@@ -148,19 +159,19 @@ const BookingS1 = (props) => {
                         <option value="comLab">Computer Lab</option>
                     </select>
                     <label htmlFor="building">Building</label>
-                    <select value={building} defaultValue={'default'} onChange={ (e) => { handleBuildingChange(e); setbuilding(e.target.value) }} name="building" id="building">
+                    <select value={building} defaultValue={'default'} onChange={(e) => { handleBuildingChange(e); setbuilding(e.target.value) }} name="building" id="building">
                         <option disabled value={'default'}>Choose  Building</option>
 
                     </select>
                     <label htmlFor="level">Level</label>
-                    <select name="level" id="level" defaultValue={'default'} value={level} onChange={(e) => {setlevel(e.target.value)}}>
+                    <select name="level" id="level" defaultValue={'default'} value={level} onChange={(e) => { setlevel(e.target.value) }}>
                         <option disabled value={'default'}>Choose  Level</option>
                         {/* <option value="l1">Level 1</option>
                         <option value="l2">Level 2</option>
                         <option value="l3">Level 3</option> */}
                     </select>
                 </section>
-                
+
                 <section className="buttons">
                     <button id="cancel1">Cancel</button>
                     <button id="next1" onClick={submit}>Next</button>

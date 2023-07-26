@@ -91,12 +91,13 @@ form button {
 
 }
 
-.login {
+.login, .signup {
   input {
     border: 1px solid black;
   }
 
   button {
     border: none;
+    cursor: pointer;
   }
 }

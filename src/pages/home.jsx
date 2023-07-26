@@ -4,6 +4,7 @@ import fireStore from "../utils/fireStore";
 import { useEffect, useState } from "react";
 // import BookingList from "./booking/steps/booking-list";
 import BookingListDemo from "./booking/steps/bookig-list-demo";
+import LocaStorage from './../utils/localStorage';
 
 const Home = () => {
 
@@ -22,24 +23,15 @@ const Home = () => {
   }, []);
 
   const fetchBookingList = async () => {
-    const locationRes = await fireStore.getByQuery("locations", []);
-    const tableRes = await fireStore.getByQuery("tables", []);
-    const res = await fireStore.getByQuery("bookings", []);
 
+    const res = await fireStore.getByQuery("bookings", [{
+      propertyName: "userId",
+      operation: "==",
+      value: LocaStorage.getItem('userId')
+    }])
     let responseBookingList = res.docs.map((doc) => {
       const bookingData = doc.data();
-      const location = locationRes.docs
-        .find((loc) => loc.id === bookingData.locationId)
-        .data();
-      const table = tableRes.docs
-        .find((tbl) => tbl.id === bookingData.tableId)
-        .data();
-      return {
-        data: bookingData,
-        bookingId: doc.id,
-        location: location,
-        table: table,
-      };
+      return bookingData;
     });
 
     console.log("responseBookingList", responseBookingList);

@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from 'react-redux'
-import { login as loginReducer } from './../redux/user';
+import { login as loginReducer, setUrl } from './../redux/user';
 
+import Notification from "./../components/notification";
 
 const Navigation = () => {
   const navigator = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
   const currentUrl = useSelector((state) => state.user.url)
 
+  const dispatch = useDispatch();
   const url = useState(window.location.href)
   const [isAuthScreen, setAuthScreen] = useState(true);
   const [last, setLast] = useState("Login");
@@ -39,6 +41,7 @@ const Navigation = () => {
 
   return (
     <div>
+      <Notification/>
       <header className="navigation">
         <img src={siteLogo} className="logo" alt="" onClick={logoHome} />
 
@@ -72,7 +75,7 @@ const Navigation = () => {
             isLoggedIn && <p>A</p>
           }
           {
-           !isLoggedIn  ? (last == "signup" ? <button>Login</button> : <button>Signup</button> ) : ""
+           !isLoggedIn  ? (last == "signup" ? <button onClick={(e) => {  dispatch(setUrl({url: 'login'})); navigator("/login") }}>Login</button> : <button onClick={(e) => {  dispatch(setUrl({url: 'signup'})); navigator("/signup") }}>Signup</button> ) : ""
           }
           
         </div>

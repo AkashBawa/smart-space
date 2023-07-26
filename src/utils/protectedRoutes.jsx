@@ -13,7 +13,12 @@ const ProtectedRoute = ( {children} ) => {
         return <Navigate to={"/login"} replace />;
     }
 
-    return <Outlet />;
+    return (
+    <div>
+        {/* <Notification/> */}
+        <Outlet />
+    </div>
+    );
 
 }
 

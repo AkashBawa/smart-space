@@ -338,8 +338,11 @@ span {
   .formOuter{
     display: flex;
     gap: 10px;
-    width: 100%;
     form{
+      select {
+        padding: 0.4rem;
+        margin: 0;
+      }
       label{
         font-size: 18px;
       }

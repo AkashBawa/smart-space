@@ -5,8 +5,9 @@ import fireStore from "../../utils/fireStore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import LocalStorage from './../../utils/localStorage';
 
-import { useSelector, useDispatch } from 'react-redux'
-import {setUrl} from './../../redux/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { login as loginReducer, setUrl, setNotification } from './../../redux/user';
+
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -28,19 +29,21 @@ const Signup = () => {
         // debugger;
         LocalStorage.setItem('userId', newUser.id);
         console.log("get value from local Storage ", LocalStorage.getItem("userId"))
-        alert("Sign up successful");
+        // alert("Sign up successful");
+        dispatch(setNotification({
+          type: "success",
+          message: "Signup success"
+        }))
         navigator("/login");
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
-        alert(errorCode)
+        dispatch(setNotification({
+          type: "error",
+          message: "Something went wrong"
+        }))
       });
-    console.log(email);
-    console.log(lName);
-    console.log(name)
    
   };
 

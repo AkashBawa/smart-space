@@ -5,9 +5,12 @@ import fireStore from './../../utils/fireStore'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import LocalStorage from './../../utils/localStorage';
 
+// Components
+import Loader from './../../components/loader';
+
 // redux setup
 import { useSelector, useDispatch } from 'react-redux'
-import { login as loginReducer, setUrl } from './../../redux/user';
+import { login as loginReducer, setUrl, setNotification } from './../../redux/user';
 
 function Login() {
 
@@ -15,6 +18,7 @@ function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false);
   const navigator = useNavigate();
 
   const login = async (event) => {
@@ -22,24 +26,37 @@ function Login() {
 
     try {
 
-      dispatch(loginReducer({userEmail: email}))
+      setLoader(true);
+
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
-      const user = userCredential.user;
-      const currentDate = new Date();
-      const timestamp = currentDate.getTime();
-      LocalStorage.setItem('userId', user.uid)
-      navigator("/home");
+      
+      setTimeout(() => {
+        
+        dispatch(loginReducer({userEmail: email}))
+        const user = userCredential.user;
+        const currentDate = new Date();
+        const timestamp = currentDate.getTime();
+        LocalStorage.setItem('userId', user.uid)
+        navigator("/home");
+      }, 2000)
+      
 
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+      setLoader(false);
+      dispatch(setNotification({
+        type: 'error',
+        message: `Wrong ID or Password`
+      }))
     }
   };
 
   return (
     <div className="login">
 
+      { 
+        loader && <Loader/>
+      }
+      
       <div className="main-content">
         <img src={topView} alt="" />
         <div className="shadow">

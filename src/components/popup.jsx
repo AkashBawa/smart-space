@@ -2,8 +2,8 @@ const PopUps = (props) => {
 
 
     return (
-        <div class="overlay">
-            <div class="modalContent">
+        <div className="popups overlay">
+            <div className="modalContent">
                 <h2>
                     Title
                 </h2>
@@ -11,3 +11,5 @@ const PopUps = (props) => {
         </div>
     )
 }
+
+export default PopUps

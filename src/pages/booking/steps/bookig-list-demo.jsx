@@ -19,7 +19,7 @@ const BookingListDemo = () => {
   const [bookingList, setBookingList] = useState([]);
   const [locationList, setLocationList] = useState([]);
   const [tableList, setTableList] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState();
 
   useEffect(() => {
     fetchLocationList();
@@ -68,16 +68,26 @@ const BookingListDemo = () => {
   }
 
   const fetchBookingList = async () => {
-    if (locationList.length && tableList.length && selectedDate) {
-      const res = await fireStore.getByQuery("bookings", [{
-        propertyName: "userId",
-        operation: "==",
-        value: LocaStorage.getItem('userId')
-      }, {
-        propertyName: "date",
-        operation: "==",
-        value: selectedDate.format('YYYY-MM-DD')
-      }]);
+    if (locationList.length && tableList.length) {
+      let query;
+      if (selectedDate ) {
+        query =  [{
+          propertyName: "userId",
+          operation: "==",
+          value: LocaStorage.getItem('userId')
+        }, {
+          propertyName: "date",
+          operation: "==",
+          value: selectedDate.format('YYYY-MM-DD')
+        }]
+      } else {
+        query =  [{
+          propertyName: "userId",
+          operation: "==",
+          value: LocaStorage.getItem('userId')
+        }]
+      }
+      const res = await fireStore.getByQuery("bookings", query);
 
       let responseBookingList = res.docs.map((doc) => {
         const bookingData = doc.data();
@@ -186,7 +196,7 @@ const BookingListDemo = () => {
             </div>
             {/* <input type="date" /> */}
           </div>
-          <div>
+          {/* <div>
             <h3>Message</h3>
           </div>
           <div>
@@ -194,7 +204,7 @@ const BookingListDemo = () => {
               <li>type the messge here</li>
               <li>the library will be close on sunday</li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div>
