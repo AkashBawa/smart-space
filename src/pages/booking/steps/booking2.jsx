@@ -3,6 +3,7 @@ import fireStore from '../../../utils/fireStore';
 import { useNavigate } from "react-router-dom";
 import localStorage from '../../../utils/localStorage';
 import Popup from './../../../components/popup';
+import Loader from './../../../components/loader';
 
 
 // redux setup
@@ -29,6 +30,7 @@ const Booking2 = (props) => {
     const [previousBooking, setPreviousBooking] = useState([]);
     const [showPopUp, setPopUp] = useState(false); 
     const [finalDetails, setFinalDetails] = useState(null);
+    const [loader, setLoader] = useState(false);
     const existingBooking = props.existingBooking;
 
     const dispatch = useDispatch();
@@ -314,55 +316,66 @@ const Booking2 = (props) => {
     }
 
     const bookingSubmit = async () => {
-        console.log('props', props);
-        if (validateSubmit()) {
-            const userId = localStorage.getItem('userId');
-            const obj = {
-                userId: userId ? userId : 'abcd',
-                tableId: selectedTable,
-                date: props.userOptions.bookingDate,
-                locationId: props.userOptions.building,
-                level: props.userOptions.level,
-                people: props.userOptions.people,
-                spaceType: props.userOptions.spaceType,
-                hours: bookingTime.sort((a, b) => a - b),
-                computers: computers,
-                powerOutlet: powerOutlet,
-                monitor: monitor,
-                projector: projector,
-                status: 'Booked',
-                createdAt: new Date(),
-                updatedAt: new Date(),
+        try {
+            console.log('props', props);
+            if (validateSubmit()) {
+                const userId = localStorage.getItem('userId');
+                const obj = {
+                    userId: userId ? userId : 'abcd',
+                    tableId: selectedTable,
+                    date: props.userOptions.bookingDate,
+                    locationId: props.userOptions.building,
+                    level: props.userOptions.level,
+                    people: props.userOptions.people,
+                    spaceType: props.userOptions.spaceType,
+                    hours: bookingTime.sort((a, b) => a - b),
+                    computers: computers,
+                    powerOutlet: powerOutlet,
+                    monitor: monitor,
+                    projector: projector,
+                    status: 'Booked',
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                }
+                const finObj = {
+                    heading : "Congratulations",
+                    details : "You have successfully booked the study space",
+                    description : [
+                        {
+                            property: 'No. of people',
+                            value: obj.people
+                        },
+                        {
+                            property: 'Date',
+                            value: obj.date
+                        },
+                        {
+                            property: 'time',
+                            value: obj.hours
+                        }
+                    ]
+                }
+                console.log('obj', obj);
+                if (props.existingBooking) {
+                    const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
+                } else {
+                    const saveData = await fireStore.addDataToCollection('bookings', obj);
+                }
+                setLoader(true);
+                setTimeout(() => {
+                    setLoader(false);
+                    setPopUp(true)
+                    setFinalDetails(finObj);
+                }, 2000)
+                
+                // navigator("/home");
+                // navigator("/booking-list-demo");
             }
-            const finObj = {
-                heading : "Congratulations",
-                details : "You have successfully booked the study space",
-                description : [
-                    {
-                        property: 'No. of people',
-                        value: obj.people
-                    },
-                    {
-                        property: 'Date',
-                        value: obj.date
-                    },
-                    {
-                        property: 'time',
-                        value: obj.hours
-                    }
-                ]
-            }
-            console.log('obj', obj);
-            if (props.existingBooking) {
-                const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
-            } else {
-                const saveData = await fireStore.addDataToCollection('bookings', obj);
-            }
-            setPopUp(true)
-            setFinalDetails(finObj);
-            // navigator("/home");
-            // navigator("/booking-list-demo");
+        } catch (err) {
+            setLoader(false);
+            setPopUp(false);
         }
+       
     }
 
     const validateSubmit = () => {
@@ -389,6 +402,10 @@ const Booking2 = (props) => {
         <div>
             {
                 showPopUp && <Popup data={finalDetails}/>
+            }
+
+            {
+                loader && <Loader/>
             }
             <div id="secondBooking">
                 <h2>Available Options</h2>
