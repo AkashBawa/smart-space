@@ -300,7 +300,7 @@ const Booking2 = (props) => {
         const previousIndex = bookingTime.indexOf(startTIme);
         const newArray = [...bookingTime];
         if (previousIndex != -1) {
-            newArray.splice(previousIndex);
+            newArray.splice(previousIndex, 1);
             e.currentTarget.classList.toggle('selectedTime');
             setBookingTime(newArray);
         } else {
