@@ -23,7 +23,7 @@ const Booking2 = (props) => {
     const [selectedTable, setSelectedTable] = useState(null);
     const [previousBooking, setPreviousBooking] = useState([]);
     const [showPopUp, setPopUp] = useState(true); 
-
+    const [finalDetails, setFinalDetails] = useState(null);
     const existingBooking = props.existingBooking;
 
     const [timeSlotes, setTimeSlotes] = useState([
@@ -314,7 +314,7 @@ const Booking2 = (props) => {
                 level: props.userOptions.level,
                 people: props.userOptions.people,
                 spaceType: props.userOptions.spaceType,
-                hours: bookingTime,
+                hours: bookingTime.sort(),
                 computers: computers,
                 powerOutlet: powerOutlet,
                 monitor: monitor,
@@ -323,13 +323,32 @@ const Booking2 = (props) => {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             }
+            const finObj = {
+                heading : "Congratulations",
+                details : "You have successfully booked the study space",
+                description : [
+                    {
+                        property: 'No. of people',
+                        value: obj.people
+                    },
+                    {
+                        property: 'Date',
+                        value: obj.date
+                    },
+                    {
+                        property: 'time',
+                        value: obj.hours
+                    }
+                ]
+            }
             console.log('obj', obj);
             if (props.existingBooking) {
                 const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
             } else {
                 const saveData = await fireStore.addDataToCollection('bookings', obj);
             }
-
+            setPopUp(true)
+            setFinalDetails(finObj);
             navigator("/home");
             // navigator("/booking-list-demo");
         }
@@ -349,10 +368,9 @@ const Booking2 = (props) => {
 
     return (
         <div>
-            { 
-                showPopUp && <Popup/>
-            }
-            
+            {/* {
+                showPopUp && <Popup data={finalDetails}/>
+            } */}
             <div id="secondBooking">
                 <h2>Available Options</h2>
                 <section id="filters">

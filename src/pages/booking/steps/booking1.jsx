@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { spaceType as SpaceTypeConstant } from './../../../constants/booking';
-
+import Popup from './../../../components/popup';
 
 import { setNotification } from './../../../redux/user';
 
@@ -16,8 +16,7 @@ const BookingS1 = (props) => {
     const [spaceType, setspaceType] = useState();
     const [building, setbuilding] = useState();
     const [level, setlevel] = useState();
-
-
+    const [showPopUp, setPopUp] = useState(true); 
 
     useEffect(() => {
         const spaceTypeSelect = document.getElementById('spaceType');
@@ -71,10 +70,10 @@ const BookingS1 = (props) => {
 
     const submit = () => {
         if (!people || !bookingDate || !spaceType || !building || !level) {
-            dispatch(setNotification( {
+            dispatch(setNotification({
                 type: 'error',
                 message: `Please choose all Value`
-              }))
+            }))
             return;
         }
         const finalValues = {
@@ -135,6 +134,9 @@ const BookingS1 = (props) => {
 
     return (
         <div>
+            {/* {
+                showPopUp && <Popup />
+            } */}
             <div id="stepOne">
                 <section id="booking1">
                     <h2>Basic Information</h2>
