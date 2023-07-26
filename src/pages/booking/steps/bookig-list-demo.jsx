@@ -20,7 +20,7 @@ const BookingListDemo = () => {
   const [locationList, setLocationList] = useState([]);
   const [tableList, setTableList] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
-
+  const [currentView, setCurrentView] = useState();
   useEffect(() => {
     fetchLocationList();
     fetchTableList();
@@ -57,6 +57,9 @@ const BookingListDemo = () => {
     };
   }, [bookingList]);
 
+  useEffect(() => {
+    setCurrentView('day')
+  }, [])
   const fetchLocationList = async () => {
     const locationRes = await fireStore.getByQuery("locations", []);
     setLocationList(locationRes.docs);
@@ -185,9 +188,9 @@ const BookingListDemo = () => {
       <div className="mainBookingList">
         <div className="message-div">
           <div className="dateMonth">
-            <button className="dayview" >Day</button>
+            <button className={"dayview" + " " + (currentView == "day" ? "activeView": "")} >Day</button>
             {/* <button className="weekview">Week</button> */}
-            <button className="monthview" onClick={navigateToMonth}>Month</button>
+            <button className={"monthview" + " " + (currentView == "month" ? "activeView": "")} onClick={navigateToMonth}>Month</button>
           </div>
 
           <div className="calender">
