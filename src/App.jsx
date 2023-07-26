@@ -64,41 +64,44 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
+      <div className='upperView'>
+        <Routes>
 
-        <Route path='admin/addLocation' element={<AddLocation />} />
-        <Route path='admin/addTable' element={<AddTables />} />
-        
-        <Route path='/' element={<Navigation />}>
-          <Route path='landingpage' element={<LandingPage />} />
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
+          <Route path='admin/addLocation' element={<AddLocation />} />
+          <Route path='admin/addTable' element={<AddTables />} />
 
-          {/* Below routes require login to proceed */}
-          
-          <Route path="/" element={<ProtectedRoute/>}>
-            
-            <Route path='/home' element={<Home/>}/>
-            <Route path='/contact-us' element={<ContactUs/>}/>
-            <Route path='/booking-month' element={<BookingMonth/>}/>
-            <Route path='contact-us' element={<ContactUs />} />
-            <Route path='booking-month' element={<BookingMonth />} />
-            <Route path='qr-page/:id' element={<Qrpage />} />
-            <Route path='booking' element={<NewBooking />} />
-            <Route path='booking/:id' element={<NewBooking />} />
-            <Route path='reschedule' element={<Reschedule />} />
-            <Route path='booking-month' element={<BookingMonth />} />
-            <Route path='booking-week' element={<BookingWeek/>}/>
-            <Route path='booking-list' element={<BookingListDemo />} />
-            <Route path='booking-list-demo' element={<BookingListDemo />} />
-            <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path='/' element={<Navigation />}>
+            <Route path='landingpage' element={<LandingPage />} />
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+
+            {/* Below routes require login to proceed */}
+
+            <Route path="/" element={<ProtectedRoute />}>
+
+              <Route path='/home' element={<Home />} />
+              <Route path='/contact-us' element={<ContactUs />} />
+              <Route path='/booking-month' element={<BookingMonth />} />
+              <Route path='contact-us' element={<ContactUs />} />
+              <Route path='booking-month' element={<BookingMonth />} />
+              <Route path='qr-page/:id' element={<Qrpage />} />
+              <Route path='booking' element={<NewBooking />} />
+              <Route path='booking/:id' element={<NewBooking />} />
+              <Route path='reschedule' element={<Reschedule />} />
+              <Route path='booking-month' element={<BookingMonth />} />
+              <Route path='booking-week' element={<BookingWeek />} />
+              <Route path='booking-list' element={<BookingListDemo />} />
+              <Route path='booking-list-demo' element={<BookingListDemo />} />
+              <Route path="*" element={<Navigate to="/login" replace />} />
+
+            </Route>
+
+
 
           </Route>
+        </Routes>
+      </div>
 
-          
-          
-        </Route>
-      </Routes>
 
       <Footer></Footer>
     </div>
