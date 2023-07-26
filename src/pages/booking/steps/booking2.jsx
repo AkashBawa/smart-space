@@ -22,7 +22,7 @@ const Booking2 = (props) => {
     const [currentTables, setCurrentTables] = useState([])
     const [selectedTable, setSelectedTable] = useState(null);
     const [previousBooking, setPreviousBooking] = useState([]);
-    const [showPopUp, setPopUp] = useState(true); 
+    const [showPopUp, setPopUp] = useState(false); 
     const [finalDetails, setFinalDetails] = useState(null);
     const existingBooking = props.existingBooking;
 
@@ -314,7 +314,7 @@ const Booking2 = (props) => {
                 level: props.userOptions.level,
                 people: props.userOptions.people,
                 spaceType: props.userOptions.spaceType,
-                hours: bookingTime.sort(),
+                hours: bookingTime.sort((a, b) => a - b),
                 computers: computers,
                 powerOutlet: powerOutlet,
                 monitor: monitor,
@@ -349,7 +349,7 @@ const Booking2 = (props) => {
             }
             setPopUp(true)
             setFinalDetails(finObj);
-            navigator("/home");
+            // navigator("/home");
             // navigator("/booking-list-demo");
         }
     }
@@ -368,9 +368,9 @@ const Booking2 = (props) => {
 
     return (
         <div>
-            {/* {
+            {
                 showPopUp && <Popup data={finalDetails}/>
-            } */}
+            }
             <div id="secondBooking">
                 <h2>Available Options</h2>
                 <section id="filters">

@@ -6,9 +6,10 @@ const PopUps = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(props)
+        debugger;
+        console.log(props.data)
     }, [])
-    // props.description
+    // props.data.description
     const [data, setDate] = useState([
         {property: "No. of people", value: 4},
         {property: "No. of people", value: 4}
@@ -20,18 +21,30 @@ const PopUps = (props) => {
     return (
         <div className="popups overlay">
             <div className="modalContent">
-                <h2 className="headers">
-                    Congratulations
-                </h2>
+                {
+                    props.data.heading && (
+                        <h2 className="headers">
+                            {props.data.heading}
+                        </h2>
+                    )
+                }
                 
-                <h2 className="details">
-                    You have successfully booked the study space
-                </h2>
-                <div className="description">
+                {
+                    props.data.details && (
+                        <h2 className="details">
+                            {
+                                props.data.details
+                            }
+                        </h2>
+                    )
+                }
+                
+                {
+                    props.data.description &&   <div className="description">
                     <table>
                         <tbody>
                             {
-                                data.map((row) => {
+                                props.data.description.map((row) => {
                                     return <tr>
                                         <td>{row.property}</td>
                                         <td>{row.value}</td>
@@ -42,6 +55,8 @@ const PopUps = (props) => {
                     </table>
                 </div>
 
+                }
+                
                 <div>
                     <button onClick={backToHome}>
                         Back to Home
