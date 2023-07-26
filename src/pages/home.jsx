@@ -47,11 +47,12 @@ const Home = () => {
             {/* <div className="shadow"> */}
               <div className="home-container">
                 <img src={topView} alt="Langara" />
-                <div className="home-description">
-                  <h2>Welcome to <br /> Our “Book a Smart Space” Service!</h2>
-                  <p>We are delighted to assist you with your booking.</p>
-                  <button className="booking-btn" onClick={navigateToBooking}>New Booking</button>
-                </div>
+                <div className="shadow">
+                  <div className="home-description">
+                    <h2>Welcome to <br /> Our “Book a Smart Space” Service!</h2>
+                    <p>We are delighted to assist you with your booking.</p>
+                    <button className="booking-btn" onClick={navigateToBooking}>New Booking</button>
+                  </div>
               </div>
             </div>
           // </div>

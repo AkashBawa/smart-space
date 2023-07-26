@@ -44,7 +44,7 @@ const Signup = () => {
           message: "Something went wrong"
         }))
       });
-   
+
   };
 
   return (
@@ -98,9 +98,9 @@ const Signup = () => {
             <button id="log-in-btn" onClick={signup}>
               Signup
             </button>
-            <button onClick={(e) => {  dispatch(setUrl({url: 'login'})); navigator("/login") }}>
-                Login
-            </button>
+            {/* <button onClick={(e) => { dispatch(setUrl({ url: 'login' })); navigator("/login") }}>
+              Login
+            </button> */}
           </form>
         </div>
       </div>
