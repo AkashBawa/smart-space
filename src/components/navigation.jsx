@@ -50,13 +50,13 @@ const Navigation = () => {
             <nav>
 
               <ul className="nav-bar">
-                <li className="list-active">
+                <li className= { currentUrl == "home" ? "list-active" : ""}>
             
                   <Link to="/home">Home</Link>{" "}
                 </li>
-                <li>
+                <li className= { currentUrl == "booking" ? "list-active": ""}>
             
-                  <Link to="/booking">Booking</Link>
+                  <Link to="/booking" >Booking</Link>
                 </li>
                 {/* <li>
             

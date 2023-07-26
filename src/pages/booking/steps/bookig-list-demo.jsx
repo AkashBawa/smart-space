@@ -186,7 +186,7 @@ const BookingListDemo = () => {
         <div className="message-div">
           <div className="dateMonth">
             <button className="dayview" >Day</button>
-            <button className="weekview">Week</button>
+            {/* <button className="weekview">Week</button> */}
             <button className="monthview" onClick={navigateToMonth}>Month</button>
           </div>
 

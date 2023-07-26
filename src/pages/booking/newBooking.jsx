@@ -25,6 +25,9 @@ const NewBooking = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(setUrl({url: 'booking'}));
+  }, [])
   const setPage = (pageNumber, userOptions) => {
     if(pageNumber == 2) {
       if(!userOptions || !userOptions.people || !userOptions.bookingDate || !userOptions.spaceType || !userOptions.building || !userOptions.level) {

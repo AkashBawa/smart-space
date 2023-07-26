@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 import BookingListDemo from "./booking/steps/bookig-list-demo";
 import LocaStorage from './../utils/localStorage';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer, setUrl, setNotification } from './../redux/user';
+
 const Home = () => {
 
   const [bookingList, setBookingList] = useState([]);
 
   const navigator = useNavigate();
+  const dispatch = useDispatch();
 
   const navigateToBooking = () => {
     navigator("/booking")
@@ -20,6 +24,8 @@ const Home = () => {
     //const res = await fireStore.getByQuery('booking', []);
     ///console.log('bookingList',res);
     fetchBookingList();
+
+    dispatch(setUrl({url: 'home'}));
   }, []);
 
   const fetchBookingList = async () => {
