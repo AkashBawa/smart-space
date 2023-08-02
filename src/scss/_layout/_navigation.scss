@@ -2,6 +2,18 @@
     color: orange;
     text-decoration: underline;
 }
+.list-active a {
+  font-weight: bold;
+  color: #EE5922;
+  text-decoration: underline 5px;
+   padding-bottom: 10px; 
+}
+
+li a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
 
 *{
     margin: 0;

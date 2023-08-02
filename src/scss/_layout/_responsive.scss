@@ -1,16 +1,25 @@
-@media (max-width: 768px){
-    .formDiv{
+@media (max-width: 600px) {
+    .formDiv {
         width: 90%;
     }
-    .navigation{
-        grid-template-columns: 1fr 1fr;
-        nav{
+
+    .navigation {
+        grid-template-columns: 1fr 1fr 1fr;
+
+        .humb img {
+            width: 100%;
+            height: auto;
+        }
+
+        nav {
             display: none;
         }
-        .mobAuth{
+
+        .mobAuth {
             text-align: right;
             margin: 0px;
-            button{
+
+            button {
                 background: $accent-m;
                 border: 0px;
                 color: #fff;
@@ -19,7 +28,8 @@
                 font-weight: 600;
                 border-radius: 8px;
             }
-            p{
+
+            p {
                 width: 40px;
                 height: 40px;
                 display: flex;
@@ -29,17 +39,20 @@
             }
         }
     }
-    .main{
-        .Home{
-            .shadow{
-                .home-container{
-                    .home-description{
+
+    .main {
+        .Home {
+            .shadow {
+                .home-container {
+                    .home-description {
                         width: 90%;
-                        h2{
+
+                        h2 {
                             width: 70%;
                             font-size: 18px;
                         }
-                        p{
+
+                        p {
                             line-height: 24px;
                             margin: 20px 60px;
                         }
@@ -47,11 +60,15 @@
                 }
             }
         }
-        .bookingPage{
+
+        .bookingPage {
             padding: 50px 20px;
-            .NewBooking{
-                #step1, #step2{
-                    p{
+
+            .NewBooking {
+
+                #step1,
+                #step2 {
+                    p {
                         font-size: 22px;
                         width: 100%;
                         border-radius: 8px;
@@ -61,75 +78,93 @@
                         justify-content: center;
                     }
                 }
-                .option{
-                    #stepOne{
+
+                .option {
+                    #stepOne {
                         grid-template-columns: 1fr;
-                        #booking1, #booking2{
+
+                        #booking1,
+                        #booking2 {
                             width: 100%;
                             gap: 10px;
                         }
-                        .buttons{
+
+                        .buttons {
                             display: flex;
                             flex-direction: column;
-                            button{
+
+                            button {
                                 width: 100%;
                                 height: 40px;
                             }
-                            #next1{
+
+                            #next1 {
                                 order: 1;
                                 margin: 8px 0px;
                             }
+
                             #cancel1 {
                                 order: 2;
                             }
                         }
                     }
                 }
-                .booking2{
-                    #secondBooking{
-                        #filters{
+
+                .booking2 {
+                    #secondBooking {
+                        #filters {
                             width: 100%;
                             padding: 20px;
                             grid-template-columns: 1fr;
                             grid-template-rows: unset;
-                            article{
+
+                            article {
                                 grid-row: unset;
                                 width: 100%;
                                 text-align: left;
                             }
-                            #filterSection{
+
+                            #filterSection {
                                 flex-direction: column;
-                                form{
+
+                                form {
                                     width: 100%;
                                     margin: 0;
-                                    div{
+
+                                    div {
                                         width: 100%;
-                                        select{
+
+                                        select {
                                             width: 100%;
                                             height: 30px;
                                             padding: 0px 10px;
                                         }
                                     }
                                 }
-                                .formOuter{
+
+                                .formOuter {
                                     display: flex;
                                     gap: 6px;
                                     justify-content: center;
-                                    form{
+
+                                    form {
                                         width: 33%;
                                         flex: 0 0 auto;
-                                        label{
+
+                                        label {
                                             font-size: 14px;
                                         }
-                                        .check-box{
-                                            input[type=checkbox]{
+
+                                        .check-box {
+                                            input[type=checkbox] {
                                                 width: 36px;
                                                 height: 18px;
                                                 margin: 0px;
                                                 padding: 0;
                                             }
-                                            input[type=checkbox]{
-                                                &::after{
+
+                                            input[type=checkbox] {
+                                                &::after {
                                                     width: 10px;
                                                     height: 10px;
                                                     top: 4px;
@@ -140,56 +175,92 @@
                                 }
                             }
                         }
-                        #timing{
+
+                        #timing {
                             grid-template-columns: 1fr;
                             grid-template-rows: unset;
                             padding: 20px;
                             margin: 0;
                             width: 100%;
-                            div{
+
+                            div {
                                 flex-flow: unset;
                                 display: grid;
                                 grid-template-columns: 1fr 1fr;
                                 gap: 20px;
-                                p{
+
+                                p {
                                     width: 100%;
                                     margin: 0px;
                                 }
                             }
                         }
                     }
-                    .map{
+
+                    .map {
                         margin-top: 30px;
                         width: 100%;
-                        h2{
+
+                        h2 {
                             margin-bottom: 10px;
                         }
-                        .booking-content{
+
+                        .booking-content {
                             height: 380px !important;
                             padding: 20px;
                             grid-template-columns: unset;
                             grid-template-rows: unset;
                             gap: 10px;
                             overflow-x: auto;
-                            p{
+
+                            p {
                                 margin: 0px;
                                 width: 22px;
                             }
                         }
-                        .buttons{
+
+                        .buttons {
                             grid-column: unset;
                             display: flex;
                             flex-direction: column;
                             margin-top: 20px;
-                            #cancel2, #next2{
+
+                            #cancel2,
+                            #next2 {
                                 width: 100%;
                             }
-                            #next2{
+
+                            #next2 {
                                 margin: 10px 0px;
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .formDiv {}
+
+    .navigation {
+        grid-template-columns: 1fr 1fr;
+
+        .humb {
+            display: none;
+        }
+
+        .mobAuth {
+
+
+            p {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
             }
         }
     }

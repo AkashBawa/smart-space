@@ -8,6 +8,7 @@
     display: block;
     margin: 0;
     padding: 0;
+    margin-bottom: .5rem;
 }
 
 .bookingListHeader {
@@ -65,13 +66,14 @@
 
 .newBooking-page {
     border: 1px solid c.$accent-m;
-    background: c.$accent-m;
-    color: white;
+    background: white;
+    color:c.$accent-m;
     border-radius: 10px;
     padding: .5rem;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
+    // font-weight: bold;
 }
 
 .ant-collapse-header {

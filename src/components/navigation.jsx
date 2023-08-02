@@ -1,5 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
-import siteLogo from "./../public/Images/Logo/logo-Orange.png";
+import siteLogo from "./../Images/Langara-icon.jpeg";
+import humicon from "./../Images/Langara-icon.jpeg";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -70,6 +72,15 @@ const Navigation = () => {
           {
             // Add drop down below A Icon
             isLoggedIn && <p>A</p>
+          }
+          {
+           !isLoggedIn  ? (last == "signup" ? <button>Login</button> : <button>Signup</button> ) : ""
+          }
+          
+        </div>
+        <div className="humb">
+          {
+          <img src={humicon} className="humicon" alt="" onClick={logoHome} />
           }
           {
            !isLoggedIn  ? (last == "signup" ? <button>Login</button> : <button>Signup</button> ) : ""

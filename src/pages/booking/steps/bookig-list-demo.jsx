@@ -167,7 +167,7 @@ const BookingListDemo = () => {
     <div className="BookingList">
       <div className="bookingListHeader">
         <div>
-          <h1>Your booking</h1>
+          <h1>Your Booking</h1>
         </div>
       </div>
 
