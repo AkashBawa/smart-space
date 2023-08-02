@@ -13,7 +13,7 @@ span {
   width: 20px;
   height: 20px;
   background: #f2f2f2;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 8px 5px 8px 5px;
   border: 1px solid #ddd;
   display: inline-block;
@@ -27,7 +27,7 @@ span {
   text-align: center;
   font-size: 26px;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 8px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -42,7 +42,7 @@ span {
   height: 34px;
   width: 200px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #ddd;
   // margin: 10px;
   display: inline-block;
@@ -84,7 +84,7 @@ span {
   }
 
   p {
-    font-family: serif;
+    font-family: $font-Dans;
     font-size: 20px;
   }
 
@@ -98,11 +98,18 @@ span {
   }
 
   // Steps Main buttons 
+  #step2 {
+    margin-top: 5rem;
+  }
+
+  #stepOne {
+    margin: auto 5rem;
+  }
 
   #step1 p,
   #step2 p {
-    margin-top: 2rem;
-    background-color: white;
+    margin-top: 4rem;
+    background-color: c.$accent-hover;
     color: $typo-d;
     font-family: $font-Dans;
     font-weight: $fw-heavy;
@@ -112,7 +119,13 @@ span {
     align-items: center;
     font-size: 29px;
     padding: .25rem .1rem;
-    border-radius: 20px;
+    border-radius: 8px;
+    color: white;
+
+  }
+
+  .bookingPage {
+    background-color: red;
   }
 
   // Bookind step 1 and 2 style 
@@ -129,7 +142,7 @@ span {
     background: #eb5e36 !important;
     color: #fff !important;
     padding: 10px 0px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 80px !important;
   }
 
   #stepOne {
@@ -176,6 +189,8 @@ span {
     width: 80%;
     display: grid;
     grid-template-columns: 40% 60%;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.5rem;
 
   }
 
@@ -212,6 +227,10 @@ span {
     margin-top: .5rem;
     height: 2rem;
     font-size: medium;
+    display: inline;
+    margin-top: 0.5rem;
+    height: 2rem;
+    font-size: medium;
   }
 
   .spaceInformation label {
@@ -230,13 +249,41 @@ span {
     text-align: center;
     align-items: center;
     padding: .25rem .1rem;
-    border-radius: 20px;
+    border-radius: 8px;
     border: none;
+    margin-top: 2rem;
+  }
+
+  div .bookingTitle {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+
+  }
+
+  .bookingTitle p {
+    display: inline !important;
+    color: red !important;
   }
 
   #next1:hover,
   #next2:hover {
     cursor: pointer;
+    background-color: c.$accent-hover;
+  }
+
+  .map h2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  #filter1 {
+
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 4px 6px;
+    height: 40px !important;
+
+
   }
 
   #cancel1,
@@ -251,7 +298,7 @@ span {
     text-align: center;
     align-items: center;
     padding: .25rem .1rem;
-    border-radius: 20px;
+    border-radius: 8px;
   }
 
   #cancel2,
@@ -273,7 +320,7 @@ span {
     grid-column: 1/-1;
     width: 90%;
     align-items: center;
-    font-size: x-large;
+    font-size: x-large !important;
     margin: .5rem auto;
     padding: .25rem .1rem;
   }
@@ -308,7 +355,7 @@ span {
     grid-template-rows: repeat(1, 1fr);
     border: solid black 1px;
     padding: 2rem 2rem;
-    border-radius: .5rem;
+    border-radius: 8px;
     margin-bottom: 2rem;
   }
 
@@ -335,31 +382,42 @@ span {
     flex: 0 0 calc(20% - 1rem);
     margin-bottom: .5rem;
   }
-  .formOuter{
+
+  .formOuter {
     display: flex;
     gap: 10px;
     width: 100%;
-    form{
-      label{
+
+    form {
+      label {
         font-size: 18px;
       }
+
       width: 33% !important;
       margin: 0 !important;
       flex: 0 0 auto !important;
-      .check-box{
+
+      .check-box {
         transform: unset !important;
-        input{
+
+        input {
           margin: 0;
         }
       }
     }
   }
+
   #filterSection {
     display: flex;
     flex-flow: row nowrap;
     gap: .5rem;
     justify-content: space-between;
 
+  }
+
+  #filterSection label {
+    height: 2rem !important;
+    font-size: medium !important;
   }
 
   #filters form label {
@@ -373,7 +431,7 @@ span {
 
   .bookingFilter {
     border: 1px black solid;
-    border-radius: 20px;
+    border-radius: 8px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -456,7 +514,7 @@ span {
     grid-gap: 1rem;
     border: solid black 1px;
     padding: 2rem 2rem;
-    border-radius: .5rem;
+    border-radius: 8px;
   }
 
   #timing article {
@@ -537,7 +595,7 @@ span {
   }
 
   .booking-content P {
-    border-radius: 30px;
+    border-radius: 8px;
     margin: 40px;
     margin-left: 15px;
     margin-right: 6px;
@@ -875,7 +933,7 @@ span {
   }
 
   input:checked[type="checkbox"] {
-    background: orange;
+    background: c.$accent-m;
   }
 
   input[type="checkbox"]::after {
@@ -936,7 +994,7 @@ span {
 
     button {
       padding: 10px 5rem;
-      background-color: orange;
+      background-color: c.$accent-hover;
       border: none;
 
     }

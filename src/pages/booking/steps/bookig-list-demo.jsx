@@ -165,11 +165,14 @@ const BookingListDemo = () => {
 
   return (
     <div className="BookingList">
-      <div className="bookingListHeader">
-        <div>
-          <h1>Your Booking</h1>
-        </div>
+
+      <div className="bookingTitle">
+        <h1 >Your Booking</h1>
+        <button className="newBooking-page" onClick={handleNewBookingClick}>
+          New Booking
+        </button>
       </div>
+
 
 
       <div className="mainBookingList">
@@ -201,9 +204,7 @@ const BookingListDemo = () => {
           <div className="bookingListHeader">
 
             <div className="booking-grid">
-              <button className="newBooking-page" onClick={handleNewBookingClick}>
-                New Booking
-              </button>
+
             </div>
           </div>
           {bookingList.length > 0 &&

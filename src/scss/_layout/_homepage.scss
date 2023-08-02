@@ -5,16 +5,16 @@
 }
 
 .bookingListHeader h1 {
-    display: block;
+    // display: block;
     margin: 0;
     padding: 0;
     margin-bottom: .5rem;
 }
 
-.bookingListHeader {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-}
+// .bookingListHeader {
+//     display: grid;
+//     grid-template-columns: repeat(2, 1fr);
+// }
 
 .btnBookingList {
     background-color: c.$accent-m;
@@ -144,7 +144,7 @@
     border: 1px solid #000;
     border-radius: 8px;
     padding: 4px 6px;
-    height: 40px !important;
+    height: 2rem !important;
 }
 
 

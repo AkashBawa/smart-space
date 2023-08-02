@@ -1,3 +1,74 @@
 .ant-picker-calendar.ant-picker-calendar-full.css-dev-only-do-not-override-1m62vyb {
     padding: 2rem;
 }
+
+.ant-picker-body th {
+
+    background-color: #6C757D;
+    border-radius: 8px;
+    margin-bottom: .25rem;
+    color: white !important;
+    text-align: center;
+    font-size: large;
+}
+
+.ant-picker-body td {
+
+    border: 2px solid #6C757D;
+}
+
+.ant-picker-calendar-header {
+    justify-content: flex-start !important;
+    color: #6C757D;
+
+}
+
+
+.ant-radio-button-wrapper span:nth-last-of-type(2) {
+    background-color: #EE5922 !important;
+    color: white !important;
+    border: #EE5922 !important;
+}
+
+:where(.css-dev-only-do-not-override-1m62vyb).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    color: white !important;
+    border: #EE5922 !important;
+
+}
+
+:where(.css-dev-only-do-not-override-1m62vyb).ant-picker-calendar.ant-picker-calendar-full .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-calendar-date,
+:where(.css-dev-only-do-not-override-1m62vyb).ant-picker-calendar.ant-picker-calendar-full .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-calendar-date-today {
+    background: #f5d9d3;
+    opacity: 50%;
+}
+
+.ant-badge-status-text {
+    background: #f5d9d3;
+    opacity: 50%;
+    color: black !important;
+}
+
+// .events ul {
+//     list-style-type: none !important;
+//     list-style: none !important;
+// }
+
+// .events ul li {
+//     list-style-type: none !important;
+//     list-style: none !important;
+//     background-color: red;
+// }
+
+// .ant-picker-calendar-date-content ul,
+// .ant-picker-calendar-date-content li{
+//     list-style-type: none !important;
+//     list-style: none !important;
+//     background-color: red;
+// }
+.ant-badge-status-text {
+    font-weight: bold;
+}
+
+.ant-radio-button-wrapper .css-dev-only-do-not-override-1m62vyb {
+    display: none !important;
+}

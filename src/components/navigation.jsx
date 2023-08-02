@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import siteLogo from "./../Images/Langara-icon.jpeg";
-import humicon from "./../Images/Langara-icon.jpeg";
+import humicon from "./../public/Images/ICON-27.png";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";

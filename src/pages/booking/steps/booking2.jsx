@@ -376,7 +376,7 @@ const Booking2 = (props) => {
                                 <div class="check-box">
                                     <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked) }} />
                                 </div>
-                                
+
                             </form>
                             <form>
                                 <label htmlFor="monitor">Monitor</label>
@@ -430,7 +430,8 @@ const Booking2 = (props) => {
 
             </div>
             <div className="map">
-                <h2>Please select the space</h2>
+                <h2>Library -  Please select the space</h2>
+               
                 <div className="booking-content">
                     {
                         currentTables && currentTables.map((table, index) => {
