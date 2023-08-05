@@ -38,16 +38,20 @@ li a {
     color: black;
 }
 
-header p {
-    color: white;
-    padding: 10px;
+.mobAuth {
+    
     background-color: c.$accent-m;
-    width: 20px;
+    width: auto;
     height: 20px;
     border-radius: 50%;
-    align-items: center;
-    float: right;
-    margin: 10px;
+
+    p {
+        width: 25px;
+    }
+}
+
+header p {
+    color: white;
 
 }
 

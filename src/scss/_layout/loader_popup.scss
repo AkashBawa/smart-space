@@ -1,0 +1,39 @@
+.loader .modalContent {
+    background: none;
+
+    img {
+        height: 100px;
+    }
+}
+
+
+.popups {
+    background-color: rgba(0, 0, 0, 0.9);
+
+    .modalContent{
+        top: 20%;
+        color: white;
+        width: 400px;
+        background: none;
+        text-align: center;
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            margin-top: 2rem;
+            width: 100%;
+            text-align: left;
+        }
+        button {
+            margin-top: 3rem;
+            background: $accent-m;
+            border: 0px;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+        }
+    }
+}

@@ -9,6 +9,11 @@ import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router';
 import fireStore from '../../utils/fireStore';
 
+
+// redux setup
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer, setUrl, setNotification } from './../../redux/user';
+
 const NewBooking = () => {
 
   const { id } = useParams();
@@ -18,10 +23,19 @@ const NewBooking = () => {
   const [expanded, setExpanded] = useState('panel1');
   const [existingBooking, setExistingBooking] = useState();
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setUrl({url: 'booking'}));
+  }, [])
   const setPage = (pageNumber, userOptions) => {
     if(pageNumber == 2) {
       if(!userOptions || !userOptions.people || !userOptions.bookingDate || !userOptions.spaceType || !userOptions.building || !userOptions.level) {
-        alert("Please choose all value");
+        // alert("Please choose all value");
+        dispatch(setNotification({
+          type: 'error',
+          message: `Please choose all value`
+        }))
         setCurrentStep(1)
         return;
       }
@@ -44,7 +58,11 @@ const NewBooking = () => {
     if (id) {
       const booking = await fireStore.getById('bookings', id);
       if (!booking || !booking.data()) {
-        alert('Canot find bookin id ' + id);
+        // alert('Canot find bookin id ' + id);
+        dispatch(setNotification({
+          type: "success",
+          message: 'Canot find bookin id ' + id
+        }))
       } else {
         setExistingBooking(booking.data());
       }

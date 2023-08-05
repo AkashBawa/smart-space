@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import fireStore from '../../../utils/fireStore';
 import { useNavigate } from "react-router-dom";
 import localStorage from '../../../utils/localStorage';
+import Popup from './../../../components/popup';
+import Loader from './../../../components/loader';
+
+
+// redux setup
+import { useSelector, useDispatch } from 'react-redux'
+import { login as loginReducer, setUrl, setNotification } from './../../../redux/user';
 
 // logoImages;
 import singleLogo from './../../../Images/icon_png_map/ICON2-23.png';
@@ -21,8 +28,12 @@ const Booking2 = (props) => {
     const [currentTables, setCurrentTables] = useState([])
     const [selectedTable, setSelectedTable] = useState(null);
     const [previousBooking, setPreviousBooking] = useState([]);
-
+    const [showPopUp, setPopUp] = useState(false); 
+    const [finalDetails, setFinalDetails] = useState(null);
+    const [loader, setLoader] = useState(false);
     const existingBooking = props.existingBooking;
+
+    const dispatch = useDispatch();
 
     const [timeSlotes, setTimeSlotes] = useState([
         { startTime: 8, display: '8am - 9am' },
@@ -264,7 +275,11 @@ const Booking2 = (props) => {
 
     const spaceSelected = (e, id, index) => {
         if (bookingTime.length == 0) {
-            return alert("Please choose the time slot")
+            // return alert("Please choose the time slot");
+            return dispatch(setNotification({
+                type: 'error',
+                message: `Please choose all value`
+              }))
         }
         if (currentTables[index] && currentTables[index].disabled && currentTables[index].disabled == true) {
             return;
@@ -285,7 +300,7 @@ const Booking2 = (props) => {
         const previousIndex = bookingTime.indexOf(startTIme);
         const newArray = [...bookingTime];
         if (previousIndex != -1) {
-            newArray.splice(previousIndex);
+            newArray.splice(previousIndex, 1);
             e.currentTarget.classList.toggle('selectedTime');
             setBookingTime(newArray);
         } else {
@@ -301,45 +316,83 @@ const Booking2 = (props) => {
     }
 
     const bookingSubmit = async () => {
-        console.log('props', props);
-        if (validateSubmit()) {
-            const userId = localStorage.getItem('userId');
-            const obj = {
-                userId: userId ? userId : 'abcd',
-                tableId: selectedTable,
-                date: props.userOptions.bookingDate,
-                locationId: props.userOptions.building,
-                level: props.userOptions.level,
-                people: props.userOptions.people,
-                spaceType: props.userOptions.spaceType,
-                hours: bookingTime,
-                computers: computers,
-                powerOutlet: powerOutlet,
-                monitor: monitor,
-                projector: projector,
-                status: 'Booked',
-                createdAt: new Date(),
-                updatedAt: new Date(),
+        try {
+            console.log('props', props);
+            if (validateSubmit()) {
+                const userId = localStorage.getItem('userId');
+                const obj = {
+                    userId: userId ? userId : 'abcd',
+                    tableId: selectedTable,
+                    date: props.userOptions.bookingDate,
+                    locationId: props.userOptions.building,
+                    level: props.userOptions.level,
+                    people: props.userOptions.people,
+                    spaceType: props.userOptions.spaceType,
+                    hours: bookingTime.sort((a, b) => a - b),
+                    computers: computers,
+                    powerOutlet: powerOutlet,
+                    monitor: monitor,
+                    projector: projector,
+                    status: 'Booked',
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                }
+                const finObj = {
+                    heading : "Congratulations",
+                    details : "You have successfully booked the study space",
+                    description : [
+                        {
+                            property: 'No. of people',
+                            value: obj.people
+                        },
+                        {
+                            property: 'Date',
+                            value: obj.date
+                        },
+                        {
+                            property: 'time',
+                            value: obj.hours
+                        }
+                    ]
+                }
+                console.log('obj', obj);
+                if (props.existingBooking) {
+                    const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
+                } else {
+                    const saveData = await fireStore.addDataToCollection('bookings', obj);
+                }
+                setLoader(true);
+                setTimeout(() => {
+                    setLoader(false);
+                    setPopUp(true)
+                    setFinalDetails(finObj);
+                }, 2000)
+                
+                // navigator("/home");
+                // navigator("/booking-list-demo");
             }
-            console.log('obj', obj);
-            if (props.existingBooking) {
-                const saveData = await fireStore.updateSingleData('bookings', props.bookingId, obj);
-            } else {
-                const saveData = await fireStore.addDataToCollection('bookings', obj);
-            }
-
-            // navigator("/home");
-            navigator("/booking-list-demo");
+        } catch (err) {
+            setLoader(false);
+            setPopUp(false);
         }
+       
     }
 
     const validateSubmit = () => {
         if (!bookingTime) {
-            alert('Please select Booking Time');
-            return false;
+            // alert('Please select Booking Time');
+        dispatch(setNotification({
+            type: 'error',
+            message: `Please select Booking Time`
+        }))
+        return false;
         }
         if (!selectedTable) {
-            alert('Please select the Space');
+            // alert('Please select the Space');
+            dispatch(setNotification({
+                type: 'error',
+                message: `Please select the Space`
+            }))
             return false;
         }
         return true;
@@ -347,6 +400,13 @@ const Booking2 = (props) => {
 
     return (
         <div>
+            {
+                showPopUp && <Popup data={finalDetails}/>
+            }
+
+            {
+                loader && <Loader/>
+            }
             <div id="secondBooking">
                 <h2>Available Options</h2>
                 <section id="filters">
@@ -356,31 +416,31 @@ const Booking2 = (props) => {
                     </article>
                     <div id="filterSection">
 
-                        <form>
-                            <label htmlFor="filter1">Computers</label>
-                            <div>
 
-
-                                <select className="bookingFilter" id="filter1">
-                                    <option value="" selected disabled hidden>Select Computers</option>
-                                    <option id="c1" name="radioComputer" value={1} checked={computers == 1} onChange={changeComputers}>One Computer</option>
-                                    <option id="c2" name="radioComputer" value={2} checked={computers == 2} onChange={changeComputers}>Two Computers</option>
-                                    <option id="c4" name="radioComputer" value={4} checked={computers == 4} onChange={changeComputers}>Four Computers</option>
-                                    <option id="c8" name="radioComputer" value={8} checked={computers == 8} onChange={changeComputers}>Eight Computers</option>
-                                </select>
-                            </div>
-                        </form>
+                        
                         <div className='formOuter'>
+                        <form>
+                                <label htmlFor="filter1">Computers</label>
+                                <div>
+                                    <select className="bookingFilter" id="filter1">
+                                        <option value="" selected disabled hidden>Select Computers</option>
+                                        <option id="c1" name="radioComputer" value={1} checked={computers == 1} onChange={changeComputers}>One Computer</option>
+                                        <option id="c2" name="radioComputer" value={2} checked={computers == 2} onChange={changeComputers}>Two Computers</option>
+                                        <option id="c4" name="radioComputer" value={4} checked={computers == 4} onChange={changeComputers}>Four Computers</option>
+                                        <option id="c8" name="radioComputer" value={8} checked={computers == 8} onChange={changeComputers}>Eight Computers</option>
+                                    </select>
+                                </div>
+                            </form>
                             <form>
                                 <label htmlFor="powerOutlet" >Power Outlet</label>
-                                <div class="check-box">
+                                <div className="check-box">
                                     <input type="checkbox" id='powerOutlet' checked={powerOutlet} value={powerOutlet} onChange={(e) => { setPowerOutlets(e.target.checked) }} />
                                 </div>
 
                             </form>
                             <form>
                                 <label htmlFor="monitor">Monitor</label>
-                                <div class="check-box">
+                                <div className="check-box">
                                     <input type="checkbox" id='monitor' checked={monitor} value={monitor} onChange={(e) => { setMonitor(e.target.checked) }} />
                                 </div>
                                 {/* <section className="bookingFilter" id="filter3">
@@ -392,7 +452,7 @@ const Booking2 = (props) => {
                             </form>
                             <form>
                                 <label htmlFor="projector">Projector</label>
-                                <div class="check-box">
+                                <div className="check-box">
                                     <input type="checkbox" id='projector' checked={projector} value={projector} onChange={(e) => { setProjector(e.target.checked) }} />
                                 </div>
                                 {/* <section className="bookingFilter" id="filter4">

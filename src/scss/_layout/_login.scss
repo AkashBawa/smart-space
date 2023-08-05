@@ -5,30 +5,20 @@
   position: relative;
 }
 
-img {
+img{
   height: 700px;
   object-fit: cover;
 }
 
 
-
-.shadow {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, .6);
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: auto;
-}
-
 .formDiv {
   text-align: center;
-  margin: auto 1rem;
-  padding: 2rem;
-
+  padding: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 492px;
   height: auto;
   background-color: white;
   border-radius: 10px;
@@ -89,4 +79,15 @@ form button {
     max-width: 60%;
   }
 
+}
+
+.login, .signup {
+  input {
+    border: 1px solid black;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
+  }
 }

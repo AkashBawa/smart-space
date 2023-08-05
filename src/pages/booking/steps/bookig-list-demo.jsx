@@ -19,8 +19,8 @@ const BookingListDemo = () => {
   const [bookingList, setBookingList] = useState([]);
   const [locationList, setLocationList] = useState([]);
   const [tableList, setTableList] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-
+  const [selectedDate, setSelectedDate] = useState();
+  const [currentView, setCurrentView] = useState();
   useEffect(() => {
     fetchLocationList();
     fetchTableList();
@@ -57,6 +57,9 @@ const BookingListDemo = () => {
     };
   }, [bookingList]);
 
+  useEffect(() => {
+    setCurrentView('day')
+  }, [])
   const fetchLocationList = async () => {
     const locationRes = await fireStore.getByQuery("locations", []);
     setLocationList(locationRes.docs);
@@ -68,16 +71,26 @@ const BookingListDemo = () => {
   }
 
   const fetchBookingList = async () => {
-    if (locationList.length && tableList.length && selectedDate) {
-      const res = await fireStore.getByQuery("bookings", [{
-        propertyName: "userId",
-        operation: "==",
-        value: LocaStorage.getItem('userId')
-      }, {
-        propertyName: "date",
-        operation: "==",
-        value: selectedDate.format('YYYY-MM-DD')
-      }]);
+    if (locationList.length && tableList.length) {
+      let query;
+      if (selectedDate ) {
+        query =  [{
+          propertyName: "userId",
+          operation: "==",
+          value: LocaStorage.getItem('userId')
+        }, {
+          propertyName: "date",
+          operation: "==",
+          value: selectedDate.format('YYYY-MM-DD')
+        }]
+      } else {
+        query =  [{
+          propertyName: "userId",
+          operation: "==",
+          value: LocaStorage.getItem('userId')
+        }]
+      }
+      const res = await fireStore.getByQuery("bookings", query);
 
       let responseBookingList = res.docs.map((doc) => {
         const bookingData = doc.data();
@@ -178,9 +191,9 @@ const BookingListDemo = () => {
       <div className="mainBookingList">
         <div className="message-div">
           <div className="dateMonth">
-            <button className="dayview" >Day</button>
-            <button className="weekview">Week</button>
-            <button className="monthview" onClick={navigateToMonth}>Month</button>
+            <button className={"dayview" + " " + (currentView == "day" ? "activeView": "")} >Day</button>
+            {/* <button className="weekview">Week</button> */}
+            <button className={"monthview" + " " + (currentView == "month" ? "activeView": "")} onClick={navigateToMonth}>Month</button>
           </div>
 
           <div className="calender">
@@ -189,7 +202,7 @@ const BookingListDemo = () => {
             </div>
             {/* <input type="date" /> */}
           </div>
-          <div>
+          {/* <div>
             <h3>Message</h3>
           </div>
           <div>
@@ -197,7 +210,7 @@ const BookingListDemo = () => {
               <li>type the messge here</li>
               <li>the library will be close on sunday</li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div>

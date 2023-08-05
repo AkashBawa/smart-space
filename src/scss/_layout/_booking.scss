@@ -71,6 +71,9 @@ span {
 
 // Styling Booking Step 1 and 2 ==========
 
+.NewBooking {
+  min-height: 100vh;
+}
 .NewBooking,
 .booking2 {
 
@@ -131,7 +134,7 @@ span {
   // Bookind step 1 and 2 style 
   #step1 p:hover,
   #step2 p:hover {
-    background-color: c.$contrast-l;
+    background-color: c.$accent-m;
     color: c.$base-l;
     cursor: pointer;
     // margin-bottom: 1rem;
@@ -387,9 +390,8 @@ span {
     display: flex;
     gap: 10px;
     width: 100%;
-
-    form {
-      label {
+    form{
+      label{
         font-size: 18px;
       }
 

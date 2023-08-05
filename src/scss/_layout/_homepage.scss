@@ -1,5 +1,42 @@
 @use './../_variables/colors' as c;
 
+.home-container {
+    position: relative;
+}
+
+.home-container img {
+    height: 700px;
+    object-fit: cover;
+}
+
+.shadow {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .6);
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+.home-description {
+    text-align: center;
+    margin: auto 1rem;
+    padding: 2rem;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.home-description h2 {
+    display: block;
+    text-align: center;
+    font-size: larger;
+    width: 100%;
+}
+
 .BookingList {
     padding: 1rem;
 }
@@ -30,16 +67,33 @@
 }
 
 .booking-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    text-align: right;
+    // display: grid;
+    // grid-template-columns: repeat(2, 1fr);
+    // gap: 0.5rem;
     margin-bottom: 1rem;
+    justify-content: space-around;
+}
+
+.booking-grid button {
+    min-width: 200px;
+}
+
+.bookingstatus button {
+    line-height: 1.5rem;
+    font: 1em sans-serif;
+    margin-right: 0.25rem;
 }
 
 #dateDiv {
     width: 80%;
     margin: 0;
-    color: red;
+    color: c.$accent-d;
+}
+
+.displaybooking {
+    border-radius: 10px;
+
 }
 
 .ant-picker-calendar-header {
@@ -86,7 +140,7 @@
 
 
 .mainBookingList h3 {
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -107,10 +161,13 @@
     font-weight: 500;
 }
 
-.monthview {
+.activeView {
     background-color: c.$accent-m !important;
     border-radius: 10px;
     color: white;
+}
+.upperView {
+    min-height: 100vh;
 }
 
 .active {
@@ -150,7 +207,7 @@
 
 
 .message-div {
-    width: 280px;
+width: 300px;
     height: 100%;
     background-color: #fff;
     border-radius: 8px;
