@@ -18,12 +18,25 @@
         text-align: center;
         h2 {
             margin-bottom: 1rem;
+            font-size: xxx-large;
+            margin-bottom: 3rem;
+        }
+        h3 {
+            font-size: x-large;
         }
 
         table {
             margin-top: 2rem;
             width: 100%;
             text-align: left;
+
+            tr {
+
+                td {
+                    font-size: large;
+                    padding-bottom: 0.5rem;
+                }
+            }
         }
         button {
             margin-top: 3rem;

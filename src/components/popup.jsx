@@ -9,7 +9,6 @@ const PopUps = (props) => {
     }, [])
     
     useEffect(() => {
-        debugger;
         console.log(props.data)
     }, [])
     // props.data.description
@@ -34,11 +33,11 @@ const PopUps = (props) => {
                 
                 {
                     props.data.details && (
-                        <h2 className="details">
+                        <h3 className="details">
                             {
                                 props.data.details
                             }
-                        </h2>
+                        </h3>
                     )
                 }
                 
