@@ -68,12 +68,30 @@ span {
   gap: 5px;
 }
 
+.bookingTitle {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+}
+
+.bookingTitle h1 {
+  grid-column: 2/3;
+  height: 3rem;
+
+}
+
+.newBooking-page {
+  grid-column: 3/4;
+  height: 3rem;
+
+}
+
 
 // Styling Booking Step 1 and 2 ==========
 
 .NewBooking {
   min-height: 100vh;
 }
+
 .NewBooking,
 .booking2 {
 
@@ -389,9 +407,10 @@ span {
   .formOuter {
     display: flex;
     gap: 10px;
-    width: 100%;
-    form{
-      label{
+
+    // width: 100%;
+    form {
+      label {
         font-size: 18px;
       }
 
