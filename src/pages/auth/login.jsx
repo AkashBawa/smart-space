@@ -9,7 +9,7 @@ import LocalStorage from './../../utils/localStorage';
 import Loader from './../../components/loader';
 
 // redux setup
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { login as loginReducer, setUrl, setNotification } from './../../redux/user';
 
 function Login() {

@@ -21,46 +21,14 @@ import BookingListDemo from './pages/booking/steps/bookig-list-demo';
 import BookingWeek from './pages/booking/steps/booking-week';
 import LandingPage from './pages/landingPage';
 import ProtectedRoute from './utils/protectedRoutes';
-
+import localStorage from './utils/localStorage';
+import { useSelector, useDispatch } from 'react-redux';
+import {  login as loginReducer } from './redux/user';
 function App() {
 
-  // const implementQuery = async () => {
-  //   const data = await fireStore.getByQuery('tables',[
-  //     {propertyName: 'locationId', operation: '==', value:'aRcQTIOekeElB2Za0Ja1'},
-  //     {propertyName: 'capacity', operation: '==', value: 4},
-  //   ]);
-  //   data.forEach((table) => {
-  //     console.log(table.data())
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   implementQuery()
-  // }, [])
-  // const test = async() => {
-  //   const month = new Date().getMonth();
-  //   const day = new Date().getDate();
-  //   const year = new Date().getFullYear();
-  //   const toDayDate = `2023-07-15`
-
-  //   console.log(toDayDate);
-
-  //   const query = {
-  //       propertyName: 'date',
-  //       operation: "==",
-  //       value: toDayDate
-  //   }
-  //   const currentBooking = await fireStore.getByQuery("bookings", [query]);
-  //   // debugger;
-  //   if(currentBooking) {
-  //     currentBooking.forEach((booking) => {
-  //       console.log(booking.data())
-  //     })
-  //   } else {
-  //     console.log("No booking found")
-  //   }
-  // }
-  // test();
+  // const dispatch = useDispatch();
+  // const userId = localStorage.getItem('userId');
+  // dispatch(loginReducer({userEmail: userId}))
 
   return (
     <div className="App">

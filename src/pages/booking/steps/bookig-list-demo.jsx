@@ -5,7 +5,7 @@ import { Collapse, Calendar, Alert } from 'antd';
 import * as dayjs from 'dayjs';
 import LocaStorage from '../../../utils/localStorage';
 import moment from "moment";
-
+import BookingMonth from "./booking-month";
 
 
 const BookingListDemo = () => {
@@ -21,6 +21,8 @@ const BookingListDemo = () => {
   const [tableList, setTableList] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
   const [currentView, setCurrentView] = useState();
+  const [isDayView, setDayView] = useState(true);
+
   useEffect(() => {
     fetchLocationList();
     fetchTableList();
@@ -173,7 +175,14 @@ const BookingListDemo = () => {
   }
 
   const navigateToMonth = () => {
-    navigate("/booking-month")
+    // navigate("/booking-month")
+    setDayView(false);
+    setCurrentView('month')
+  }
+
+  const navigateToDay = () => {
+    setDayView(true);
+    setCurrentView('day')
   }
 
   return (
@@ -188,7 +197,7 @@ const BookingListDemo = () => {
       <div className="mainBookingList">
         <div className="message-div">
           <div className="dateMonth">
-            <button className={"dayview" + " " + (currentView == "day" ? "activeView": "")} >Day</button>
+            <button className={"dayview" + " " + (currentView == "day" ? "activeView": "")} onClick={navigateToDay} >Day</button>
             {/* <button className="weekview">Week</button> */}
             <button className={"monthview" + " " + (currentView == "month" ? "activeView": "")} onClick={navigateToMonth}>Month</button>
           </div>
@@ -199,18 +208,11 @@ const BookingListDemo = () => {
             </div>
             {/* <input type="date" /> */}
           </div>
-          {/* <div>
-            <h3>Message</h3>
-          </div>
-          <div>
-            <ul>
-              <li>type the messge here</li>
-              <li>the library will be close on sunday</li>
-            </ul>
-          </div> */}
         </div>
 
-        <div>
+        
+        {
+          isDayView && <div className="right-side">
           <div className="bookingListHeader">
 
             <div className="booking-grid">
@@ -248,12 +250,13 @@ const BookingListDemo = () => {
                     <span className="updateSpan">SpaceType: </span>
                     {b.data.spaceType}
                   </p> */}
-                    <p>
+                  
+                    <p className="bold-text">
                       <span className="updateSpan">Status: </span>
                       {b.data.status}
                     </p>
                     {b.data.status === 'Confirmed' && (
-                      <p>Checkout In: <span id={`timer-${b.bookingId}`}></span></p>
+                      <p >Checkout In: <span className="" id={`timer-${b.bookingId}`}></span></p>
                     )}
                     <div className="btnDivBookingList">
                       {b.data.status === 'Booked' && (
@@ -304,6 +307,16 @@ const BookingListDemo = () => {
             />
           )}
         </div>
+        }
+
+        {
+          !isDayView && <div> 
+
+            <BookingMonth/>
+
+          </div>
+        }
+        
 
       </div>
 
