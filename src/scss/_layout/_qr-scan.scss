@@ -34,6 +34,25 @@ h1 {
     text-align: center;
 }
 
+.btnQr button{
+  padding: 10px;
+  background-color: #EE5922;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.qr-main-img{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
 @media only screen and (max-width: 600px) {
    
+
+  
+
   }
