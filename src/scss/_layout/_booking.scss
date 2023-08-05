@@ -107,8 +107,7 @@ span {
   }
 
   p {
-    font-family: $font-Dans;
-    font-size: 20px;
+        font-size: 20px;
   }
 
 
@@ -134,7 +133,7 @@ span {
     margin-top: 4rem;
     background-color: c.$accent-hover;
     color: $typo-d;
-    font-family: $font-Dans;
+    // font-family: $font-Dans;
     font-weight: $fw-heavy;
     margin: .5rem auto;
     width: 90%;
