@@ -71,6 +71,8 @@ span {
 .bookingTitle {
   display: grid;
   grid-template-columns: 30% 40% 30%;
+  min-width: 90%;
+  margin: auto;
 }
 
 .bookingTitle h1 {
@@ -994,7 +996,14 @@ span {
   max-width: 1300px;
   margin: auto;
   justify-content: center;
+  min-width: 90%;
 }
+
+.bold-large {
+  font-weight: bold;
+  font-size: larger;
+}
+
 
 
 .dateUpadte {
@@ -1024,4 +1033,13 @@ span {
   // #stepOne {
 
   // }
+}
+
+@media (max-width: 600px) { 
+
+  .mainBookingList {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+  }
 }

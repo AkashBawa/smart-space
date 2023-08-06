@@ -29,7 +29,7 @@ function Login() {
       setLoader(true);
 
       const userCredential = await signInWithEmailAndPassword(fireStore.firebaseAuth, email, password);
-      
+      debugger;
       setTimeout(() => {
         
         dispatch(loginReducer({userEmail: email}))

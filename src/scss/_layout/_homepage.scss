@@ -39,6 +39,9 @@
 
 .BookingList {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bookingListHeader h1 {
@@ -46,6 +49,7 @@
     margin: 0;
     padding: 0;
     margin-bottom: .5rem;
+    
 }
 
 // .bookingListHeader {

@@ -22,6 +22,7 @@ const BookingListDemo = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [currentView, setCurrentView] = useState();
   const [isDayView, setDayView] = useState(true);
+  const [showCalender, setShowCalender] = useState(true);
 
   useEffect(() => {
     fetchLocationList();
@@ -190,9 +191,16 @@ const BookingListDemo = () => {
 
       <div className="bookingTitle">
         <h1 >Your Booking</h1>
-        <button className="newBooking-page" onClick={handleNewBookingClick}>
-          New Booking
-        </button>
+
+        <div className="list-buttons">
+          <button className="newBooking-page hiddden-large" onClick={handleNewBookingClick}>
+            Calendar
+          </button>
+          <button className="newBooking-page" onClick={handleNewBookingClick}>
+            New Booking
+          </button>
+        </div>
+        
       </div>
 
 
@@ -205,12 +213,17 @@ const BookingListDemo = () => {
             <button className={"monthview" + " " + (currentView == "month" ? "activeView": "")} onClick={navigateToMonth}>Month</button>
           </div>
 
-          <div className="calender">
-            <div style={wrapperStyle}>
-              <Calendar fullscreen={false} onPanelChange={onPanelChange} defaultValue={selectedDate} value={selectedDate} onChange={onSelectedDateChange} />
+          {
+            showCalender &&
+              <div className="calender">
+              
+              <div style={wrapperStyle} classNam >
+                <Calendar fullscreen={false} onPanelChange={onPanelChange} defaultValue={selectedDate} value={selectedDate} onChange={onSelectedDateChange} />
+              </div>
+              {/* <input type="date" /> */}
             </div>
-            {/* <input type="date" /> */}
-          </div>
+          }
+          
         </div>
 
         
@@ -257,7 +270,7 @@ const BookingListDemo = () => {
                       {b.data.status}
                     </p>
                     {b.data.status === 'Confirmed' && (
-                      <p >Checkout In: <span className="" id={`timer-${b.bookingId}`}></span></p>
+                      <p >Checkout In: <span className="bold-large" id={`timer-${b.bookingId}`}></span></p>
                     )}
                     <div className="btnDivBookingList">
                       {b.data.status === 'Booked' && (
