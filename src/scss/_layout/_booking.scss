@@ -1,5 +1,10 @@
 @use './../_variables/colors' as c;
 
+.timerIcon {
+  width: 100%;
+  height: auto;
+}
+
 span {
   cursor: pointer;
 }
@@ -107,7 +112,7 @@ span {
   }
 
   p {
-        font-size: 20px;
+    font-size: 20px;
   }
 
 
@@ -133,7 +138,7 @@ span {
     margin-top: 4rem;
     background-color: c.$accent-hover;
     color: $typo-d;
-    font-family:  'DM Sans', sans-serif !important;
+    font-family: 'DM Sans', sans-serif !important;
     font-weight: $fw-heavy;
     margin: .5rem auto;
     width: 90%;
@@ -1034,7 +1039,7 @@ span {
   // }
 }
 
-@media (max-width: 600px) { 
+@media (max-width: 600px) {
 
   .mainBookingList {
     display: flex;
