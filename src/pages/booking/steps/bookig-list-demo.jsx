@@ -6,14 +6,14 @@ import * as dayjs from 'dayjs';
 import LocaStorage from '../../../utils/localStorage';
 import moment from "moment";
 import BookingMonth from "./booking-month";
-
+import timerIcon from "./../../../Images/timerIcon.jpeg";
 
 const BookingListDemo = () => {
   const wrapperStyle = {
     // width: 250,
     border: '1px solid #ccc',
     borderRadius: '6px',
-  };
+  }; 
 
   const navigate = useNavigate();
   const [bookingList, setBookingList] = useState([]);
@@ -270,7 +270,11 @@ const BookingListDemo = () => {
                       {b.data.status}
                     </p>
                     {b.data.status === 'Confirmed' && (
+                      <div>
+                        <img src={timerIcon} className="timerIcon" alt=""  />
                       <p >Checkout In: <span className="bold-large" id={`timer-${b.bookingId}`}></span></p>
+                      </div>
+                      
                     )}
                     <div className="btnDivBookingList">
                       {b.data.status === 'Booked' && (
